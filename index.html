@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
+<title>PhotoFlow — Recherche intelligente de photos de course | Maquette Numezis A&amp;E</title>
+<meta name="description" content="Maquette conceptuelle Numezis Advisory &amp; Engineering — non affiliée à Alpha Foto. Démonstration de recherche intelligente de photos de course." />
+<style>
+:root {
+  --bg: #0b1220;
+  --bg-elev: #121a2b;
+  --bg-card: #162033;
+  --bg-soft: #1c2740;
+  --line: #2a3650;
+  --text: #eef2ff;
+  --muted: #9aa8c7;
+  --faint: #6b7a99;
+  --accent: #3b82f6;
+  --accent-2: #22d3ee;
+  --good: #34d399;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --hyp: #c084fc;
+  --orange: #fb923c;
+  --radius: 14px;
+  --shadow: 0 10px 40px rgba(0,0,0,.35);
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --max: 1120px;
+  --focus: 0 0 0 3px rgba(59,130,246,.55);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: radial-gradient(1200px 600px at 10% -10%, #1e3a5f 0%, transparent 55%),
+              radial-gradient(900px 500px at 90% 0%, #163246 0%, transparent 50%),
+              var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+a { color: var(--accent-2); }
+button, input, select { font: inherit; }
+:focus-visible { outline: none; box-shadow: var(--focus); }
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--accent); color: #fff; padding: .6rem 1rem; z-index: 100;
+}
+.skip:focus { left: .5rem; top: .5rem; }
+.banner {
+  background: linear-gradient(90deg, #7c2d12, #9a3412);
+  color: #fff7ed;
+  text-align: center;
+  padding: .65rem 1rem;
+  font-size: .92rem;
+  font-weight: 600;
+  border-bottom: 1px solid #c2410c;
+}
+.banner span { font-weight: 400; opacity: .95; }
+.topbar {
+  position: sticky; top: 0; z-index: 40;
+  backdrop-filter: blur(12px);
+  background: rgba(11,18,32,.85);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; align-items: center; gap: .75rem;
+  padding: .75rem 1.1rem; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: .7rem; min-width: 180px; }
+.logo {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: grid; place-items: center; font-weight: 800; color: #031018;
+  box-shadow: 0 4px 16px rgba(34,211,238,.25);
+}
+.brand h1 { font-size: 1.05rem; margin: 0; letter-spacing: .02em; }
+.brand small { display: block; color: var(--muted); font-size: .72rem; font-weight: 500; }
+.nav {
+  display: flex; gap: .35rem; flex: 1; flex-wrap: wrap; justify-content: center;
+}
+.nav button {
+  background: transparent; border: 1px solid transparent; color: var(--muted);
+  padding: .45rem .7rem; border-radius: 999px; cursor: pointer; font-size: .86rem;
+}
+.nav button:hover { color: var(--text); background: var(--bg-soft); }
+.nav button[aria-selected="true"] {
+  color: #fff; background: rgba(59,130,246,.2); border-color: rgba(59,130,246,.45);
+}
+.lang {
+  display: flex; gap: .25rem; align-items: center;
+}
+.lang button {
+  background: var(--bg-soft); border: 1px solid var(--line); color: var(--muted);
+  border-radius: 8px; padding: .3rem .5rem; cursor: pointer; font-size: .78rem; font-weight: 700;
+}
+.lang button[aria-pressed="true"] { color: #fff; border-color: var(--accent); background: rgba(59,130,246,.25); }
+.lang .partial { font-size: .65rem; color: var(--hyp); margin-left: .15rem; }
+main { max-width: var(--max); margin: 0 auto; padding: 1.25rem 1.1rem 4rem; }
+.panel { display: none; animation: fade .25s ease; }
+.panel.active { display: block; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.hero {
+  display: grid; grid-template-columns: 1.2fr .8fr; gap: 1.25rem; margin-bottom: 1.25rem;
+}
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  .nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+  .nav button { white-space: nowrap; }
+}
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,.03), transparent 40%), var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.15rem 1.2rem;
+}
+.card h2 { margin: 0 0 .35rem; font-size: 1.35rem; }
+.card h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+.lead { color: var(--muted); margin: 0 0 1rem; }
+.tag {
+  display: inline-flex; align-items: center; gap: .3rem;
+  font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  padding: .2rem .5rem; border-radius: 999px; border: 1px solid;
+}
+.tag-hyp { color: #f3e8ff; background: rgba(192,132,252,.15); border-color: rgba(192,132,252,.45); }
+.tag-src { color: #d1fae5; background: rgba(52,211,153,.12); border-color: rgba(52,211,153,.4); }
+.tag-fic { color: #ffedd5; background: rgba(251,146,60,.12); border-color: rgba(251,146,60,.4); }
+.tag-ok { color: #dbeafe; background: rgba(59,130,246,.15); border-color: rgba(59,130,246,.4); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+@media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+label { display: block; font-size: .82rem; color: var(--muted); margin-bottom: .3rem; }
+input[type="text"], input[type="email"], select {
+  width: 100%; background: var(--bg); border: 1px solid var(--line); color: var(--text);
+  border-radius: 10px; padding: .7rem .8rem;
+}
+input::placeholder { color: var(--faint); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  border: none; border-radius: 10px; padding: .7rem 1.1rem; cursor: pointer;
+  font-weight: 700; transition: transform .12s ease, background .15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: linear-gradient(135deg, #2563eb, #0891b2); color: #fff; }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { background: var(--bg-soft); color: var(--text); border: 1px solid var(--line); }
+.btn-good { background: rgba(52,211,153,.15); color: var(--good); border: 1px solid rgba(52,211,153,.4); }
+.btn-bad { background: rgba(248,113,113,.12); color: var(--bad); border: 1px solid rgba(248,113,113,.35); }
+.btn-sm { padding: .4rem .65rem; font-size: .82rem; border-radius: 8px; }
+.btn-block { width: 100%; }
+.muted { color: var(--muted); }
+.faint { color: var(--faint); font-size: .85rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: .85rem; }
+@media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+.stat {
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; padding: .9rem;
+}
+.stat .k { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.stat .v { font-size: 1.45rem; font-weight: 800; margin-top: .15rem; }
+.stat .s { font-size: .78rem; color: var(--faint); margin-top: .2rem; }
+.timeline { position: relative; padding-left: 1.2rem; margin: 1rem 0; }
+.timeline::before {
+  content: ""; position: absolute; left: .35rem; top: .2rem; bottom: .2rem; width: 2px;
+  background: linear-gradient(var(--accent), var(--accent-2));
+}
+.t-item { position: relative; margin-bottom: 1rem; padding-left: .6rem; }
+.t-item::before {
+  content: ""; position: absolute; left: -1.02rem; top: .4rem; width: 10px; height: 10px;
+  border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 3px rgba(34,211,238,.2);
+}
+.t-item.hyp::before { background: var(--hyp); box-shadow: 0 0 0 3px rgba(192,132,252,.2); }
+.t-item strong { display: block; }
+.t-meta { font-family: var(--mono); font-size: .85rem; color: var(--accent-2); }
+.photos {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .9rem;
+}
+.photo {
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.photo.rejected { opacity: .45; filter: grayscale(.6); }
+.photo.confirmed { border-color: rgba(52,211,153,.55); box-shadow: 0 0 0 1px rgba(52,211,153,.25); }
+.thumb {
+  aspect-ratio: 4/3; background: #0a1424; display: grid; place-items: center; position: relative;
+}
+.thumb svg { width: 100%; height: 100%; display: block; }
+.badge-score {
+  position: absolute; top: .5rem; right: .5rem;
+  background: rgba(3,16,24,.8); color: #fff; font-weight: 800; font-size: .8rem;
+  padding: .25rem .5rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.15);
+}
+.photo-body { padding: .75rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
+.bars { display: grid; gap: .28rem; }
+.bar-row { display: grid; grid-template-columns: 90px 1fr 36px; gap: .4rem; align-items: center; font-size: .72rem; color: var(--muted); }
+.bar {
+  height: 6px; background: #0b1220; border-radius: 999px; overflow: hidden;
+}
+.bar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+.photo-actions { display: flex; gap: .4rem; margin-top: auto; }
+.explain { font-size: .8rem; color: var(--muted); }
+.compare {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch;
+}
+@media (max-width: 720px) { .compare { grid-template-columns: 1fr; } .compare .vs { transform: rotate(90deg); margin: .2rem auto; } }
+.compare .side { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; }
+.compare .side.bad { border-color: rgba(248,113,113,.35); }
+.compare .side.good { border-color: rgba(52,211,153,.4); }
+.compare .vs { align-self: center; font-weight: 900; color: var(--faint); font-size: 1.2rem; }
+.pack {
+  border: 1px solid var(--line); border-radius: 12px; padding: 1rem; background: var(--bg-soft);
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.pack.featured { border-color: rgba(59,130,246,.55); box-shadow: 0 0 0 1px rgba(59,130,246,.2); }
+.pack .price { font-size: 1.5rem; font-weight: 800; }
+.cart-line {
+  display: flex; justify-content: space-between; gap: .75rem; align-items: center;
+  padding: .55rem 0; border-bottom: 1px solid var(--line); font-size: .92rem;
+}
+.kpi { text-align: left; }
+.slider-block { margin: .85rem 0; }
+.slider-block label { display: flex; justify-content: space-between; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.howto-step {
+  display: grid; grid-template-columns: 48px 1fr; gap: .85rem; margin-bottom: 1rem;
+}
+.step-n {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(59,130,246,.15); border: 1px solid rgba(59,130,246,.35);
+  display: grid; place-items: center; font-weight: 800; color: var(--accent-2);
+}
+.notice {
+  border-left: 3px solid var(--hyp); background: rgba(192,132,252,.08);
+  padding: .75rem .9rem; border-radius: 0 10px 10px 0; margin: .8rem 0; font-size: .9rem;
+}
+.notice.warn { border-left-color: var(--warn); background: rgba(251,191,36,.08); }
+.notice.ok { border-left-color: var(--good); background: rgba(52,211,153,.08); }
+.footer {
+  max-width: var(--max); margin: 0 auto; padding: 1.5rem 1.1rem 2.5rem;
+  color: var(--faint); font-size: .8rem; border-top: 1px solid var(--line);
+}
+.hidden { display: none !important; }
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0 1rem; }
+.chip {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 999px;
+  padding: .25rem .65rem; font-size: .78rem; color: var(--muted);
+}
+#search-modes .btn { border-radius: 999px; }
+.source-links a { color: var(--accent-2); }
+.progress {
+  height: 8px; background: #0b1220; border-radius: 999px; overflow: hidden; margin: .6rem 0 1rem;
+}
+.progress > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--good)); transition: width .6s ease; }
+.toast {
+  position: fixed; bottom: 1rem; right: 1rem; z-index: 50;
+  background: #052e1a; color: #bbf7d0; border: 1px solid rgba(52,211,153,.4);
+  padding: .7rem 1rem; border-radius: 10px; box-shadow: var(--shadow);
+  transform: translateY(120%); transition: transform .25s ease; max-width: 280px;
+}
+.toast.show { transform: none; }
+table.sim { width: 100%; border-collapse: collapse; font-size: .9rem; }
+table.sim td { padding: .4rem 0; border-bottom: 1px solid var(--line); }
+table.sim td:last-child { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Aller au contenu</a>
+<div class="banner" role="note">
+  <span data-i18n="banner">Maquette conceptuelle Numezis A&amp;E — non affiliée à Alpha Foto, données d'exemple</span>
+</div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">PF</div>
+      <div>
+        <h1>PhotoFlow</h1>
+        <small data-i18n="brand_sub">Recherche intelligente · Numezis A&amp;E</small>
+      </div>
+    </div>
+    <nav class="nav" role="tablist" aria-label="Parcours">
+      <button type="button" role="tab" aria-selected="true" data-tab="search" data-i18n="tab_search">Recherche</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="runner" data-i18n="tab_runner">Fiche coureur</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="photos" data-i18n="tab_photos">Photos</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="compare" data-i18n="tab_compare">Avant / après</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="cart" data-i18n="tab_cart">Panier</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="howto" data-i18n="tab_howto">Comment ça marche</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="org" data-i18n="tab_org">Organisateur</button>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE<span class="partial" title="Partiel">·</span></button>
+      <button type="button" data-lang="en" aria-pressed="false">EN<span class="partial" title="Partial">·</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- SEARCH -->
+  <section class="panel active" id="panel-search" role="tabpanel">
+    <div class="hero">
+      <div class="card">
+        <div class="chips">
+          <span class="chip">Lausanne Marathon 2026</span>
+          <span class="chip">Semi-marathon · 25.10.2026</span>
+          <span class="tag tag-src" data-i18n="tag_public">Source : données publiques Datasport</span>
+        </div>
+        <h2 data-i18n="search_title">Trouvez vos photos en quelques secondes</h2>
+        <p class="lead" data-i18n="search_lead">Au lieu de parcourir des dizaines de pages, le système cherche les photos pour vous — à partir de votre dossard, de vos temps de passage et d'indices visuels.</p>
+        <div class="chips" role="group" aria-label="Mode de recherche" id="search-modes" style="margin-bottom:.75rem">
+          <button type="button" class="btn btn-sm btn-primary" data-mode="bib" aria-pressed="true" data-i18n="mode_bib">N° de dossard</button>
+          <button type="button" class="btn btn-sm btn-ghost" data-mode="name" aria-pressed="false" data-i18n="mode_name">Nom</button>
+          <button type="button" class="btn btn-sm btn-ghost" data-mode="natural" aria-pressed="false" data-i18n="mode_natural">Description libre</button>
+        </div>
+        <form id="search-form" autocomplete="on">
+          <div class="form-row">
+            <div style="grid-column:1/-1">
+              <label for="query" data-i18n="label_query">Recherche</label>
+              <input id="query" name="query" type="text" value="30370" placeholder="ex. 30370" />
+              <input type="hidden" id="bib" value="30370" />
+              <input type="hidden" id="name" value="Romain Magnin" />
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:.75rem">
+            <div>
+              <label for="event" data-i18n="label_event">Événement</label>
+              <select id="event">
+                <option selected>Lausanne Marathon 2026 — Semi</option>
+                <option disabled data-i18n="opt_other">Autres événements (démo)</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:flex-end">
+              <button class="btn btn-primary btn-block" type="submit" data-i18n="btn_search">Rechercher mes photos</button>
+            </div>
+          </div>
+        </form>
+        <p class="faint" data-i18n="search_fallback">↳ En cas d'échec du dossard, élargissement automatique par heure et lieu.</p>
+        <div class="progress" aria-hidden="true"><i id="search-progress"></i></div>
+        <p class="faint" id="search-status" data-i18n="search_hint">Exemple prérempli : dossard 30370, Lausanne Marathon 2026, semi, 25.10.2026.</p>
+        <div class="notice ok" id="search-ident" style="margin-top:.6rem"><span data-i18n="search_ident">✓ Participant identifié (démo) : Romain Magnin · Dossard 30370</span></div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="pain_title">Le constat aujourd'hui</h3>
+        <p class="muted" data-i18n="pain_body">Sur le point photo Ouchy, des centaines de photos réparties sur 40+ pages, sans filtre temporel utile. La recherche par dossard ne remonte rien.</p>
+        <div class="stat" style="margin-top:1rem">
+          <div class="k" data-i18n="pain_stat_k">Pages à parcourir (constat Romain)</div>
+          <div class="v">40+</div>
+          <div class="s" data-i18n="pain_stat_s">Sans filtrage par fenêtre de passage</div>
+        </div>
+        <div class="notice warn" style="margin-top:1rem">
+          <strong data-i18n="disclaimer_title">Avertissement</strong>
+          <span data-i18n="disclaimer_body"> Cette maquette n'utilise aucune photo réelle Alphafoto. Les miniatures sont des placeholders SVG. Aucun scraping. Les données chronométrage citées sont publiques (Datasport) et ne valent pas autorisation de réutilisation commerciale.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUNNER -->
+  <section class="panel" id="panel-runner" role="tabpanel">
+    <div class="card" style="margin-bottom:1rem">
+      <div class="chips">
+        <span class="tag tag-src" data-i18n="tag_datasport">Datasport (public)</span>
+        <span class="tag tag-hyp" data-i18n="tag_hyp_points">Points photo = hypothèses</span>
+      </div>
+      <h2 data-i18n="runner_title">Fiche coureur reconstituée</h2>
+      <p class="lead" data-i18n="runner_lead">Temps réels de Romain Magnin, dossard 30370 — semi Lausanne Marathon 2026. Heures horloge = départ + temps de course.</p>
+      <div class="grid-4" style="margin-bottom:1rem">
+        <div class="stat"><div class="k" data-i18n="k_bib">Dossard</div><div class="v">30370</div></div>
+        <div class="stat"><div class="k" data-i18n="k_race">Course</div><div class="v" style="font-size:1.1rem">Semi</div><div class="s">25.10.2026</div></div>
+        <div class="stat"><div class="k" data-i18n="k_gun">Départ (horloge)</div><div class="v" style="font-size:1.15rem">08:56:01,8</div></div>
+        <div class="stat"><div class="k" data-i18n="k_finish">Arrivée</div><div class="v" style="font-size:1.15rem">1:56:15,9</div><div class="s">10:52:17,7</div></div>
+      </div>
+      <h3 data-i18n="splits_title">Temps intermédiaires &amp; heures horloge</h3>
+      <div class="timeline" id="splits"></div>
+      <div class="notice">
+        <strong data-i18n="uncertainty_title">Marge d'incertitude</strong>
+        <span data-i18n="uncertainty_body"> Les fenêtres de passage estiment l'heure de photo à partir de l'allure interpolée entre splits officiels (±30–90 s typique) et d'une dérive d'horloge éventuelle des appareils (±quelques secondes à quelques minutes sans calibration). Une photo de référence avec chrono visible permet de caler les EXIF.</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3 data-i18n="traj_title">Trajectoire &amp; fenêtres par point photo</h3>
+      <p class="muted" data-i18n="traj_lead">Les positions des points photo ci-dessous sont des <strong>hypothèses</strong> (non confirmées par Alphafoto). Elles servent à illustrer le filtrage spatio-temporel.</p>
+      <div class="grid-2" id="photo-points"></div>
+      <div style="margin-top:1rem">
+        <button class="btn btn-primary" type="button" data-goto="photos" data-i18n="btn_see_photos">Voir les photos candidates</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTOS -->
+  <section class="panel" id="panel-photos" role="tabpanel">
+    <div class="card" style="margin-bottom:1rem">
+      <div class="chips">
+        <span class="tag tag-fic" data-i18n="tag_placeholders">Placeholders SVG — pas de photos Alphafoto</span>
+        <span class="tag tag-ok" id="photo-count-chip">12 candidates</span>
+      </div>
+      <h2 data-i18n="photos_title">Photos candidates classées</h2>
+      <p class="lead" data-i18n="photos_lead">Score de confiance décomposé. Confirmez « c'est moi » ou « pas moi » pour réordonner et affiner (apprentissage local à la session — démo).</p>
+      <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;margin-bottom:.5rem">
+        <input type="checkbox" id="face-consent" />
+        <span data-i18n="face_consent">Activer la composante visage (option, consentement explicite nLPD / données biométriques sensibles)</span>
+      </label>
+      <p class="faint" data-i18n="face_note">Sans consentement, le score ignore la similarité faciale. Avec consentement, elle s'ajoute en signal optionnel uniquement.</p>
+      <div class="notice warn" style="margin:.6rem 0" data-i18n="selfie_note"><b>Recherche par selfie ?</b> Variante future uniquement sur activation volontaire, avec information claire, sécurité et vérification juridique. La première version fonctionne sans reconnaissance faciale.</div>
+      <div class="form-row" style="margin-top:.5rem">
+        <div>
+          <label for="filter-point" data-i18n="filter_point">Point photo</label>
+          <select id="filter-point">
+            <option value="all" data-i18n="filter_all">Tous les points</option>
+            <option value="Ouchy">Ouchy / arrivée</option>
+            <option value="Cully">Cully / Lavaux</option>
+            <option value="Lutry">Lutry village</option>
+            <option value="Départ">Départ / Ouchy lac</option>
+            <option value="Retour">Retour lac / Pully</option>
+          </select>
+        </div>
+        <div>
+          <label for="filter-bib" data-i18n="filter_bib">Dossard visible ?</label>
+          <select id="filter-bib">
+            <option value="all">Tous les cas</option>
+            <option value="visible">Oui</option>
+            <option value="invisible">Non, ou partiellement</option>
+          </select>
+        </div>
+      </div>
+      <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;margin-top:.6rem">
+        <input type="checkbox" id="time-first" checked />
+        <span data-i18n="filter_time">Priorité à l'heure de passage</span>
+      </label>
+    </div>
+    <div class="photos" id="photo-grid" aria-live="polite"></div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="panel" id="panel-compare" role="tabpanel">
+    <div class="card">
+      <h2 data-i18n="compare_title">Avant / après</h2>
+      <p class="lead" data-i18n="compare_lead">Même événement, même coureur — deux expériences.</p>
+      <div class="compare">
+        <div class="side bad">
+          <h3 data-i18n="before_title">Aujourd'hui</h3>
+          <div class="stat"><div class="k" data-i18n="before_k">Pages sans filtre</div><div class="v">40+</div><div class="s" data-i18n="before_s">Constat de Romain sur Ouchy</div></div>
+          <ul class="muted">
+            <li data-i18n="before_1">Recherche dossard sans résultat</li>
+            <li data-i18n="before_2">Défilement manuel, fatigue, abandon</li>
+            <li data-i18n="before_3">Peu de signaux pour prioriser une photo</li>
+          </ul>
+        </div>
+        <div class="vs" aria-hidden="true">→</div>
+        <div class="side good">
+          <h3 data-i18n="after_title">Avec PhotoFlow</h3>
+          <div class="stat"><div class="k" data-i18n="after_k">Photos candidates</div><div class="v">12</div><div class="s" data-i18n="after_s">Classées, expliquées, confirmables</div></div>
+          <ul class="muted">
+            <li data-i18n="after_1">Fenêtre temporelle par point photo</li>
+            <li data-i18n="after_2">OCR dossard + indices tenue/couleurs</li>
+            <li data-i18n="after_3">Panier et packs en un clic</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CART -->
+  <section class="panel" id="panel-cart" role="tabpanel">
+    <div class="grid-2">
+      <div class="card">
+        <h2 data-i18n="cart_title">Panier</h2>
+        <p class="muted"><span data-i18n="cart_price_note">Prix unitaire ≈ CHF 12 / photo (confirmé)</span> <span class="tag tag-hyp" data-i18n="tag_verify">≈ CHF 12 · tarif Alphafoto constaté et confirmé par Romain</span></p>
+        <div id="cart-lines"></div>
+        <div class="cart-line" style="border:none;font-size:1.05rem;margin-top:.4rem">
+          <strong data-i18n="cart_total">Total</strong>
+          <strong id="cart-total">CHF 0</strong>
+        </div>
+        <button class="btn btn-primary btn-block" type="button" id="btn-checkout" data-i18n="btn_checkout" style="margin-top:.75rem">Procéder au paiement (démo)</button>
+        <div class="notice ok" style="margin-top:1rem">
+          <strong data-i18n="notif_title">Abonnement notification</strong>
+          <p class="muted" style="margin:.4rem 0" data-i18n="notif_body">Recevoir un e-mail quand de nouvelles photos correspondantes sont indexées (après le jour J, lots tardifs, photographes additionnels).</p>
+          <div class="form-row">
+            <div>
+              <label for="notif-email" data-i18n="label_email">E-mail</label>
+              <input id="notif-email" type="email" placeholder="vous@exemple.ch" />
+            </div>
+            <div style="display:flex;align-items:flex-end">
+              <button class="btn btn-ghost btn-block" type="button" id="btn-notif" data-i18n="btn_notif">M'avertir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2 data-i18n="packs_title">Packs &amp; offres groupées</h2>
+        <p class="muted" data-i18n="packs_lead">Packs = hypothèses Numezis (A/B test). On ne sait pas si Alphafoto propose déjà des packs.</p>
+        <div class="grid-2" style="margin-top:.75rem" id="packs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOWTO -->
+  <section class="panel" id="panel-howto" role="tabpanel">
+    <div class="card">
+      <h2 data-i18n="howto_title">Comment ça marche</h2>
+      <p class="lead" data-i18n="howto_lead">Couche ajoutée à la plateforme existante — pas de refonte. Pipeline en quatre signaux, dont le visage uniquement avec consentement.</p>
+
+      <div class="howto-step">
+        <div class="step-n">1</div>
+        <div>
+          <h3 data-i18n="ht1_t">Filtrage spatio-temporel</h3>
+          <p class="muted" data-i18n="ht1_b">Temps chronométrage (splits Datasport) + horodatage EXIF des photos. Calibration des horloges via photo de référence / chrono visible. Position GPS (ou plan) des points photo pour ne garder que les clichés proches de la trajectoire du coureur dans la bonne fenêtre.</p>
+        </div>
+      </div>
+      <div class="howto-step">
+        <div class="step-n">2</div>
+        <div>
+          <h3 data-i18n="ht2_t">OCR des dossards</h3>
+          <p class="muted" data-i18n="ht2_b">Lecture automatique du numéro sur le dossard (et variantes floues). Signal fort quand le dossard est lisible ; score réduit sinon, sans exclure la photo.</p>
+        </div>
+      </div>
+      <div class="howto-step">
+        <div class="step-n">3</div>
+        <div>
+          <h3 data-i18n="ht3_t">Recherche visuelle multimodale</h3>
+          <p class="muted" data-i18n="ht3_b">Embeddings tenue / couleurs / silhouette pour rapprocher des photos du même coureur même sans dossard lisible (ex. dos tourné, ombre).</p>
+        </div>
+      </div>
+      <div class="howto-step">
+        <div class="step-n">4</div>
+        <div>
+          <h3 data-i18n="ht4_t">Visage — option avec consentement</h3>
+          <p class="muted" data-i18n="ht4_b">Reconnaissance faciale uniquement si le coureur active explicitement l'option. Données biométriques sensibles au sens de la nLPD ; exigences PFPDT. Désactivée par défaut dans cette maquette.</p>
+        </div>
+      </div>
+
+      <div class="notice warn">
+        <strong data-i18n="legal_title">Partenariat, pas scraping sauvage</strong>
+        <span data-i18n="legal_body"> Les résultats Datasport publics ne donnent pas le droit de réutiliser ces données pour un service commercial. En production : accord organisateur, Datasport et photographe ; accès autorisé aux médias ; confidentialité dès la conception. ✓ Accès contractuel · ✓ Aucune vente sans licence · ✓ Biométrie optionnelle · ✓ Mesure conversion avant/après.</span>
+      </div>
+      <div class="notice ok">
+        <strong data-i18n="layer_title">Approche « couche »</strong>
+        <span data-i18n="layer_body"> Index et API de matching en amont de l'UI existante ; les photographes et le catalogue restent la source de vérité. Pas de migration big-bang.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANIZER -->
+  <section class="panel" id="panel-org" role="tabpanel">
+    <div class="card" style="margin-bottom:1rem">
+      <div class="chips">
+        <span class="tag tag-fic" data-i18n="tag_fictive_kpi">KPI = exemples fictifs</span>
+      </div>
+      <h2 data-i18n="org_title">Vue organisateur / photographe</h2>
+      <p class="lead" data-i18n="org_lead">Tableaux de bord pour piloter la qualité du matching et la conversion. Valeurs ci-dessous clairement fictives.</p>
+      <div class="grid-4">
+        <div class="stat kpi"><div class="k" data-i18n="kpi1">Recherches sans résultat</div><div class="v">18%</div><div class="s">exemple fictif</div></div>
+        <div class="stat kpi"><div class="k" data-i18n="kpi2">Bonne corr. top 10</div><div class="v">81%</div><div class="s">exemple fictif</div></div>
+        <div class="stat kpi"><div class="k" data-i18n="kpi3">Conversion recherche→achat</div><div class="v">12%</div><div class="s">exemple fictif</div></div>
+        <div class="stat kpi"><div class="k" data-i18n="kpi4">Panier moyen</div><div class="v">CHF 36</div><div class="s">exemple fictif</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 data-i18n="sim_title">Simulateur de revenus</h3>
+      <p class="muted" data-i18n="sim_lead">Tous les paramètres sont des hypothèses éditables. Aucun chiffre Alphafoto réel.</p>
+      <div class="grid-2">
+        <div>
+          <div class="slider-block">
+            <label><span data-i18n="sim_part">Participants</span><strong id="v-part">8000</strong></label>
+            <input type="range" id="s-part" min="500" max="30000" step="500" value="8000" />
+          </div>
+          <div class="slider-block">
+            <label><span data-i18n="sim_search">Taux de recherche</span><strong id="v-search">35%</strong></label>
+            <input type="range" id="s-search" min="5" max="80" step="1" value="35" />
+          </div>
+          <div class="slider-block">
+            <label><span data-i18n="sim_conv">Conversion</span><strong id="v-conv">12%</strong></label>
+            <input type="range" id="s-conv" min="1" max="40" step="1" value="12" />
+          </div>
+          <div class="slider-block">
+            <label><span data-i18n="sim_ppc">Photos / commande</span><strong id="v-ppc">3</strong></label>
+            <input type="range" id="s-ppc" min="1" max="20" step="1" value="3" />
+          </div>
+          <div class="slider-block">
+            <label><span data-i18n="sim_price">Prix / photo (CHF)</span><strong id="v-price">12</strong></label>
+            <input type="range" id="s-price" min="5" max="30" step="1" value="12" />
+          </div>
+        </div>
+        <div>
+          <table class="sim">
+            <tr><td data-i18n="sim_r1">Recherches</td><td id="o-searches">—</td></tr>
+            <tr><td data-i18n="sim_r2">Commandes</td><td id="o-orders">—</td></tr>
+            <tr><td data-i18n="sim_r3">Photos vendues</td><td id="o-photos">—</td></tr>
+            <tr><td data-i18n="sim_r4">Revenu brut (hypothèse)</td><td id="o-rev">—</td></tr>
+            <tr><td data-i18n="sim_r5">vs. baseline −30 % conversion (hyp.)</td><td id="o-delta">—</td></tr>
+          </table>
+          <div class="notice" style="margin-top:1rem">
+            <span data-i18n="sim_note">Hypothèses : taux et prix saisis manuellement ; « baseline » = même simulateur avec conversion ×0,7 (effet illustratif du matching). Pas une prévision Alphafoto.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p data-i18n="footer">Maquette conceptuelle réalisée pour Romain Magnin — Numezis Advisory &amp; Engineering (advisory.numezis.com). Non affiliée à Alpha Foto GmbH ni à Datasport. Aucun envoi, aucun scraping. v2 — 27.10.2026 (Europe/Zurich).</p>
+  <p class="source-links" style="margin-top:.6rem">
+    <strong data-i18n="sources_label">Origine des informations factuelles :</strong>
+    <a href="https://datasport.com/fr/course/lausanne-marathon-2026/participant/magnin-romain" rel="noopener noreferrer" target="_blank">Datasport — résultat du semi</a>
+    · <a href="https://www.alphafoto.com/event.php?eventID=2064" rel="noopener noreferrer" target="_blank">Alphafoto — événement</a>
+    · <a href="https://www.edoeb.admin.ch/fr/ia-et-protection-des-donnees" rel="noopener noreferrer" target="_blank">PFPDT — IA et protection des données</a>.
+    <span data-i18n="sources_note"> Les candidats photographiques, positions des points photo, scores et packs sont simulés / hypothèses.</span>
+  </p>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  const I18N = {
+    fr: {
+      skip: "Aller au contenu",
+      banner: "Maquette conceptuelle Numezis A&E — non affiliée à Alpha Foto, données d'exemple",
+      brand_sub: "Recherche intelligente · Numezis A&E",
+      tab_search: "Recherche", tab_runner: "Fiche coureur", tab_photos: "Photos",
+      tab_compare: "Avant / après", tab_cart: "Panier", tab_howto: "Comment ça marche", tab_org: "Organisateur",
+      tag_public: "Source : données publiques Datasport",
+      search_title: "Trouvez vos photos en quelques secondes",
+      search_lead: "Au lieu de parcourir des dizaines de pages, le système cherche les photos pour vous — à partir de votre dossard, de vos temps de passage et d'indices visuels.",
+      label_bib: "Dossard", label_name: "Nom (optionnel)", label_event: "Événement",
+      opt_other: "Autres événements (démo)",
+      btn_search: "Rechercher mes photos",
+      search_hint: "Exemple prérempli : dossard 30370, Lausanne Marathon 2026, semi, 25.10.2026.",
+      pain_title: "Le constat aujourd'hui",
+      pain_body: "Sur le point photo Ouchy, des centaines de photos réparties sur 40+ pages, sans filtre temporel utile. La recherche par dossard ne remonte rien.",
+      pain_stat_k: "Pages à parcourir (constat Romain)", pain_stat_s: "Sans filtrage par fenêtre de passage",
+      disclaimer_title: "Avertissement",
+      disclaimer_body: " Cette maquette n'utilise aucune photo réelle Alphafoto. Les miniatures sont des placeholders SVG. Aucun scraping. Les données chronométrage citées sont publiques (Datasport) et ne valent pas autorisation de réutilisation commerciale.",
+      tag_datasport: "Datasport (public)", tag_hyp_points: "Points photo = hypothèses",
+      runner_title: "Fiche coureur reconstituée",
+      runner_lead: "Temps réels de Romain Magnin, dossard 30370 — semi Lausanne Marathon 2026. Heures horloge = départ + temps de course.",
+      k_bib: "Dossard", k_race: "Course", k_gun: "Départ (horloge)", k_finish: "Arrivée",
+      splits_title: "Temps intermédiaires & heures horloge",
+      uncertainty_title: "Marge d'incertitude",
+      uncertainty_body: " Les fenêtres de passage estiment l'heure de photo à partir de l'allure interpolée entre splits officiels (±30–90 s typique) et d'une dérive d'horloge éventuelle des appareils (±quelques secondes à quelques minutes sans calibration). Une photo de référence avec chrono visible permet de caler les EXIF.",
+      traj_title: "Trajectoire & fenêtres par point photo",
+      traj_lead: "Les positions des points photo ci-dessous sont des hypothèses (non confirmées par Alphafoto). Elles servent à illustrer le filtrage spatio-temporel.",
+      btn_see_photos: "Voir les photos candidates",
+      tag_placeholders: "Placeholders SVG — pas de photos Alphafoto",
+      photos_title: "Photos candidates classées",
+      photos_lead: "Score de confiance décomposé. Confirmez « c'est moi » ou « pas moi » pour réordonner et affiner (apprentissage local à la session — démo).",
+      face_consent: "Activer la composante visage (option, consentement explicite nLPD / données biométriques sensibles)",
+      face_note: "Sans consentement, le score ignore la similarité faciale. Avec consentement, elle s'ajoute en signal optionnel uniquement.",
+      me: "C'est moi", not_me: "Pas moi",
+      bar_time: "Fenêtre temps", bar_ocr: "OCR dossard", bar_kit: "Tenue/couleurs", bar_face: "Visage",
+      compare_title: "Avant / après", compare_lead: "Même événement, même coureur — deux expériences.",
+      before_title: "Aujourd'hui", before_k: "Pages sans filtre", before_s: "Constat de Romain sur Ouchy",
+      before_1: "Recherche dossard sans résultat", before_2: "Défilement manuel, fatigue, abandon", before_3: "Peu de signaux pour prioriser une photo",
+      after_title: "Avec PhotoFlow", after_k: "Photos candidates", after_s: "Classées, expliquées, confirmables",
+      after_1: "Fenêtre temporelle par point photo", after_2: "OCR dossard + indices tenue/couleurs", after_3: "Panier et packs en un clic",
+      cart_title: "Panier", cart_price_note: "Prix unitaire ≈ CHF 12 / photo (confirmé)", tag_verify: "≈ CHF 12 · tarif Alphafoto constaté et confirmé par Romain",
+      cart_total: "Total", btn_checkout: "Procéder au paiement (démo)",
+      notif_title: "Abonnement notification",
+      notif_body: "Recevoir un e-mail quand de nouvelles photos correspondantes sont indexées (après le jour J, lots tardifs, photographes additionnels).",
+      label_email: "E-mail", btn_notif: "M'avertir",
+      packs_title: "Packs & offres groupées", packs_lead: "Packs = hypothèses Numezis (A/B test). On ne sait pas si Alphafoto propose déjà des packs.",
+      howto_title: "Comment ça marche",
+      howto_lead: "Couche ajoutée à la plateforme existante — pas de refonte. Pipeline en quatre signaux, dont le visage uniquement avec consentement.",
+      ht1_t: "Filtrage spatio-temporel",
+      ht1_b: "Identifie le bon athlète (nom / dossard / course, distinction des homonymes). Temps chronométrage (splits Datasport) + horodatage EXIF. Calibration des horloges via photo de référence / chrono visible. Position GPS (ou plan) des points photo ; intervalle de confiance. Estimation entre splits, pas une géolocalisation réelle.",
+      ht2_t: "OCR des dossards",
+      ht2_b: "Lecture automatique du numéro sur le dossard (et variantes floues). Signal fort quand le dossard est lisible ; score réduit sinon, sans exclure la photo.",
+      ht3_t: "Recherche visuelle multimodale",
+      ht3_b: "Embeddings tenue / couleurs / silhouette pour rapprocher des photos du même coureur même sans dossard lisible (ex. dos tourné, ombre).",
+      ht4_t: "Visage — option avec consentement",
+      ht4_b: "Reconnaissance faciale uniquement si le coureur active explicitement l'option. Données biométriques sensibles au sens de la nLPD ; exigences PFPDT. Désactivée par défaut dans cette maquette.",
+      legal_title: "Données publiques ≠ autorisation",
+      legal_body: " Les résultats Datasport publics ne donnent pas le droit de réutiliser ces données pour un service commercial. Un accord Datasport / organisateur est nécessaire avant tout pilote réel. Idem pour l'accès aux catalogues photos Alphafoto.",
+      layer_title: "Approche « couche »",
+      layer_body: " Index et API de matching en amont de l'UI existante ; les photographes et le catalogue restent la source de vérité. Pas de migration big-bang.",
+      tag_fictive_kpi: "KPI = exemples fictifs",
+      org_title: "Vue organisateur / photographe",
+      org_lead: "Tableaux de bord pour piloter la qualité du matching et la conversion. Valeurs ci-dessous clairement fictives.",
+      kpi1: "Recherches sans résultat", kpi2: "Bonne corr. top 10", kpi3: "Conversion recherche→achat", kpi4: "Panier moyen",
+      sim_title: "Simulateur de revenus",
+      sim_lead: "Tous les paramètres sont des hypothèses éditables. Aucun chiffre Alphafoto réel.",
+      sim_part: "Participants", sim_search: "Taux de recherche", sim_conv: "Conversion",
+      sim_ppc: "Photos / commande", sim_price: "Prix / photo (CHF)",
+      sim_r1: "Recherches", sim_r2: "Commandes", sim_r3: "Photos vendues",
+      sim_r4: "Revenu brut (hypothèse)", sim_r5: "vs. baseline −30 % conversion (hyp.)",
+      sim_note: "Hypothèses : taux et prix saisis manuellement ; « baseline » = même simulateur avec conversion ×0,7 (effet illustratif du matching). Pas une prévision Alphafoto.",
+      mode_bib: "N° de dossard", mode_name: "Nom", mode_natural: "Description libre",
+      label_query: "Recherche",
+      search_fallback: "↳ En cas d'échec du dossard, élargissement automatique par heure et lieu.",
+      search_ident: "✓ Participant identifié (démo) : Romain Magnin · Dossard 30370",
+      selfie_note: "<b>Recherche par selfie ?</b> Variante future uniquement sur activation volontaire, avec information claire, sécurité et vérification juridique. La première version fonctionne sans reconnaissance faciale.",
+      filter_point: "Point photo", filter_all: "Tous les points", filter_bib: "Dossard visible ?", filter_time: "Priorité à l'heure de passage",
+      sources_label: "Origine des informations factuelles :",
+      sources_note: " Les candidats photographiques, positions des points photo, scores et packs sont simulés / hypothèses.",
+      footer: "Maquette conceptuelle réalisée pour Romain Magnin — Numezis Advisory & Engineering (advisory.numezis.com). Non affiliée à Alpha Foto GmbH ni à Datasport. Aucun envoi, aucun scraping. v2 — 27.10.2026 (Europe/Zurich).",
+      toast_search: "12 photos candidates trouvées (démo).",
+      toast_notif: "Préférence enregistrée localement (démo — aucun e-mail envoyé).",
+      toast_checkout: "Paiement simulé — aucun débit.",
+      toast_pack: "Pack ajouté au panier (démo).",
+      explain_high: "Forte concordance fenêtre + OCR.",
+      explain_mid: "Fenêtre OK, dossard partiel, tenue proche.",
+      explain_low: "Hors cœur de fenêtre ou signaux faibles — à confirmer.",
+    },
+    de: {
+      _partial: true,
+      skip: "Zum Inhalt",
+      banner: "Konzept-Mockup Numezis A&E — nicht mit Alpha Foto verbunden, Beispieldaten",
+      brand_sub: "Intelligente Suche · Numezis A&E",
+      tab_search: "Suche", tab_runner: "Läuferprofil", tab_photos: "Fotos",
+      tab_compare: "Vorher / nachher", tab_cart: "Warenkorb", tab_howto: "So funktioniert's", tab_org: "Veranstalter",
+      search_title: "Finden Sie Ihre Fotos in Sekunden",
+      search_lead: "Statt Dutzende Seiten zu durchsuchen, sucht das System die Fotos für Sie — anhand Startnummer, Zwischenzeiten und visueller Hinweise.",
+      label_bib: "Startnummer", label_name: "Name (optional)", label_event: "Event",
+      btn_search: "Meine Fotos suchen",
+      photos_title: "Rangierte Fotokandidaten",
+      me: "Das bin ich", not_me: "Nicht ich",
+      cart_title: "Warenkorb", packs_title: "Pakete & Bundles",
+      howto_title: "So funktioniert's",
+      org_title: "Ansicht Veranstalter / Fotograf",
+      footer: "Konzept-Mockup für Romain Magnin — Numezis A&E. Nicht mit Alpha Foto GmbH verbunden. DE-Übersetzung teilweise.",
+      toast_search: "12 Fotokandidaten gefunden (Demo).",
+      toast_notif: "Präferenz lokal gespeichert (Demo — keine E-Mail).",
+      toast_checkout: "Zahlung simuliert — keine Belastung.",
+    },
+    en: {
+      _partial: true,
+      skip: "Skip to content",
+      banner: "Conceptual mockup by Numezis A&E — not affiliated with Alpha Foto, sample data",
+      brand_sub: "Smart search · Numezis A&E",
+      tab_search: "Search", tab_runner: "Runner card", tab_photos: "Photos",
+      tab_compare: "Before / after", tab_cart: "Cart", tab_howto: "How it works", tab_org: "Organizer",
+      search_title: "Find your photos in seconds",
+      search_lead: "Instead of browsing dozens of pages, the system finds photos for you — from your bib, split times and visual cues.",
+      label_bib: "Bib number", label_name: "Name (optional)", label_event: "Event",
+      btn_search: "Search my photos",
+      photos_title: "Ranked candidate photos",
+      me: "That's me", not_me: "Not me",
+      cart_title: "Cart", packs_title: "Packs & bundles",
+      howto_title: "How it works",
+      org_title: "Organizer / photographer view",
+      footer: "Conceptual mockup for Romain Magnin — Numezis A&E. Not affiliated with Alpha Foto GmbH. EN translation partial.",
+      toast_search: "12 candidate photos found (demo).",
+      toast_notif: "Preference saved locally (demo — no email sent).",
+      toast_checkout: "Payment simulated — no charge.",
+    }
+  };
+
+  let lang = "fr";
+  const UNIT_PRICE = 12; // hypothèse / constat Romain à vérifier
+
+  const SPLITS = [
+    { name: "Départ", race: "0:00:00,0", clock: "08:56:01,8", km: "0,0", src: "datasport" },
+    { name: "Lutry", race: "24:32,3", clock: "09:20:34,1", km: "4,9", src: "datasport" },
+    { name: "Cully", race: "54:51,7", clock: "09:50:53,5", km: "10,5", src: "datasport" },
+    { name: "100 m avant arrivée", race: "1:55:22,2", clock: "10:51:24,0", km: "≈21,0", src: "datasport" },
+    { name: "Arrivée", race: "1:56:15,9", clock: "10:52:17,7", km: "21,0975", src: "datasport" },
+  ];
+
+  // Hypothèses de points photo (marqués)
+  const POINTS = [
+    { id: "p1", label: "Départ / Ouchy lac", window: "08:55:30 – 08:57:30", margin: "±45 s", note: "hypothèse position", km: "0" },
+    { id: "p2", label: "Lutry village", window: "09:19:40 – 09:21:40", margin: "±60 s", note: "hypothèse position", km: "≈4,9" },
+    { id: "p3", label: "Cully / Lavaux", window: "09:49:40 – 09:52:10", margin: "±75 s", note: "hypothèse position", km: "≈10,5" },
+    { id: "p4", label: "Retour lac / Pully", window: "10:20:00 – 10:28:00", margin: "±90 s (interpolé)", note: "hypothèse — pas de split officiel ici", km: "≈15–17" },
+    { id: "p5", label: "Ouchy / arrivée", window: "10:50:30 – 10:53:30", margin: "±60 s + dérive horloge", note: "hypothèse position point Alphafoto Ouchy", km: "≈21" },
+  ];
+
+  const COLORS = [
+    ["#1d4ed8", "#93c5fd"], ["#0f766e", "#99f6e4"], ["#b45309", "#fcd34d"],
+    ["#7c3aed", "#ddd6fe"], ["#be123c", "#fda4af"], ["#0369a1", "#7dd3fc"],
+    ["#166534", "#86efac"], ["#9a3412", "#fdba74"], ["#334155", "#cbd5e1"],
+    ["#4c1d95", "#c4b5fd"], ["#155e75", "#67e8f9"], ["#854d0e", "#fde68a"],
+  ];
+
+  let photos = [];
+  let cart = new Map();
+  let faceOn = false;
+
+  function t(key) {
+    return (I18N[lang] && I18N[lang][key]) || I18N.fr[key] || key;
+  }
+
+  function applyI18n() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      const val = t(key);
+      if (val != null) el.innerHTML = val;
+    });
+    document.querySelectorAll(".lang button").forEach((b) => {
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
+    });
+    renderPhotos();
+    renderCart();
+  }
+
+  function toast(msg) {
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => el.classList.remove("show"), 2800);
+  }
+
+  function showTab(id) {
+    document.querySelectorAll(".panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + id));
+    document.querySelectorAll(".nav button").forEach((b) => {
+      b.setAttribute("aria-selected", b.getAttribute("data-tab") === id ? "true" : "false");
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function renderSplits() {
+    const root = document.getElementById("splits");
+    root.innerHTML = SPLITS.map((s) => `
+      <div class="t-item">
+        <strong>${s.name} <span class="faint">· ${s.km} km</span></strong>
+        <div class="t-meta">Course ${s.race} → horloge ${s.clock}</div>
+        <div class="faint">Source : données publiques Datasport (citées)</div>
+      </div>`).join("");
+  }
+
+  function renderPoints() {
+    const root = document.getElementById("photo-points");
+    root.innerHTML = POINTS.map((p) => `
+      <div class="stat">
+        <div class="k">${p.label} · km ${p.km}</div>
+        <div class="v" style="font-size:1.05rem">${p.window}</div>
+        <div class="s">Marge ${p.margin} · <span class="tag tag-hyp">${p.note}</span></div>
+      </div>`).join("");
+  }
+
+  let searchMode = "bib";
+  const modeValues = {
+    bib: { value: "30370", ph: "Numéro de dossard" },
+    name: { value: "Romain Magnin", ph: "Nom et prénom" },
+    natural: { value: "Coureur du semi, dossard 30370, vers Ouchy", ph: "Décrivez votre tenue ou le lieu" }
+  };
+
+  function seedPhotos() {
+    const points = ["Ouchy / arrivée", "Cully / Lavaux", "Lutry village", "Départ / Ouchy lac", "Retour lac / Pully"];
+    photos = Array.from({ length: 12 }, (_, i) => {
+      const time = 55 + Math.round((12 - i) * 3.2) + (i % 3);
+      const ocr = Math.max(10, Math.min(98, 92 - i * 6 + (i % 2) * 8));
+      const kit = Math.max(20, Math.min(95, 80 - i * 4 + (i % 3) * 5));
+      const face = Math.max(0, Math.min(90, 70 - i * 5));
+      return {
+        id: "ph" + (i + 1),
+        point: points[i % points.length],
+        time, ocr, kit, face,
+        bibVis: ocr >= 70 ? "visible" : "invisible",
+        status: "pending",
+        color: COLORS[i % COLORS.length],
+      };
+    });
+    scoreAll();
+  }
+
+  function scoreOf(p) {
+    const facePart = faceOn ? p.face * 0.15 : 0;
+    const wTime = faceOn ? 0.35 : 0.4;
+    const wOcr = faceOn ? 0.3 : 0.35;
+    const wKit = faceOn ? 0.2 : 0.25;
+    let s = p.time * wTime + p.ocr * wOcr + p.kit * wKit + facePart;
+    if (p.status === "yes") s += 12;
+    if (p.status === "no") s -= 40;
+    return Math.max(0, Math.min(99, Math.round(s)));
+  }
+
+  function scoreAll() {
+    photos.forEach((p) => { p.score = scoreOf(p); });
+    photos.sort((a, b) => b.score - a.score);
+  }
+
+  function explain(p) {
+    if (p.score >= 75) return t("explain_high");
+    if (p.score >= 55) return t("explain_mid");
+    return t("explain_low");
+  }
+
+  function thumbSvg(p) {
+    const [c1, c2] = p.color;
+    return `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder photo ${p.id}">
+      <defs>
+        <linearGradient id="g${p.id}" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/>
+        </linearGradient>
+      </defs>
+      <rect width="400" height="300" fill="#0a1424"/>
+      <rect x="0" y="180" width="400" height="120" fill="${c1}" opacity=".35"/>
+      <circle cx="320" cy="70" r="28" fill="#fde68a" opacity=".7"/>
+      <path d="M0 200 Q100 160 200 190 T400 170 L400 300 L0 300 Z" fill="${c2}" opacity=".25"/>
+      <ellipse cx="200" cy="210" rx="28" ry="12" fill="#111827" opacity=".5"/>
+      <circle cx="200" cy="120" r="22" fill="#f5d0c5"/>
+      <rect x="178" y="142" width="44" height="58" rx="8" fill="url(#g${p.id})"/>
+      <rect x="188" y="155" width="24" height="18" rx="3" fill="#fff" opacity=".9"/>
+      <text x="200" y="168" text-anchor="middle" font-size="11" font-family="ui-monospace,monospace" font-weight="700" fill="#111">30370</text>
+      <text x="16" y="28" font-size="13" fill="#e2e8f0" font-family="system-ui,sans-serif" opacity=".85">${p.point}</text>
+      <text x="16" y="288" font-size="11" fill="#94a3b8" font-family="system-ui,sans-serif">SIMULATION · pas une photo Alphafoto</text>
+    </svg>`;
+  }
+
+  function renderPhotos() {
+    const root = document.getElementById("photo-grid");
+    if (!root) return;
+    const fp = (document.getElementById("filter-point") || {}).value || "all";
+    const fb = (document.getElementById("filter-bib") || {}).value || "all";
+    const timeFirst = document.getElementById("time-first") ? document.getElementById("time-first").checked : true;
+    let list = photos.filter((p) => {
+      if (fp !== "all" && !p.point.includes(fp.replace(" / arrivée","").split(" ")[0]) && !p.point.startsWith(fp) && !p.point.includes(fp)) return false;
+      // looser match: substring of first token
+      if (fp !== "all") {
+        const key = fp.split(" ")[0];
+        if (!p.point.includes(key)) return false;
+      }
+      if (fb !== "all" && p.bibVis !== fb) return false;
+      return true;
+    });
+    if (timeFirst) list = list.slice().sort((a,b) => b.score - a.score);
+    else list = list.slice().sort((a,b) => a.id.localeCompare(b.id));
+    const visible = list.filter((p) => p.status !== "no").concat(list.filter((p) => p.status === "no"));
+    document.getElementById("photo-count-chip").textContent =
+      visible.filter((p) => p.status !== "no").length + " candidates";
+    if (!visible.length) {
+      root.innerHTML = '<div class="notice">Aucun exemple pour ces filtres. Dans un vrai produit : élargir automatiquement le créneau ou proposer d\'autres points photo.</div>';
+      return;
+    }
+    root.innerHTML = visible.map((p) => {
+      const cls = p.status === "yes" ? "confirmed" : p.status === "no" ? "rejected" : "";
+      const faceBar = faceOn
+        ? `<div class="bar-row"><span>${t("bar_face")}</span><div class="bar"><i style="width:${p.face}%"></i></div><span>${p.face}</span></div>`
+        : `<div class="bar-row"><span>${t("bar_face")}</span><div class="bar"><i style="width:0%"></i></div><span class="faint">off</span></div>`;
+      return `<article class="photo ${cls}" data-id="${p.id}">
+        <div class="thumb">${thumbSvg(p)}<span class="badge-score">${p.score}%</span></div>
+        <div class="photo-body">
+          <strong>${p.point}</strong>
+          <div class="bars">
+            <div class="bar-row"><span>${t("bar_time")}</span><div class="bar"><i style="width:${p.time}%"></i></div><span>${p.time}</span></div>
+            <div class="bar-row"><span>${t("bar_ocr")}</span><div class="bar"><i style="width:${p.ocr}%"></i></div><span>${p.ocr}</span></div>
+            <div class="bar-row"><span>${t("bar_kit")}</span><div class="bar"><i style="width:${p.kit}%"></i></div><span>${p.kit}</span></div>
+            ${faceBar}
+          </div>
+          <p class="explain">${explain(p)}</p>
+          <div class="photo-actions">
+            <button type="button" class="btn btn-good btn-sm" data-act="yes">${t("me")}</button>
+            <button type="button" class="btn btn-bad btn-sm" data-act="no">${t("not_me")}</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-act="cart">+ CHF ${UNIT_PRICE}</button>
+          </div>
+        </div>
+      </article>`;
+    }).join("");
+  }
+
+  function renderCart() {
+    const root = document.getElementById("cart-lines");
+    if (!root) return;
+    if (cart.size === 0) {
+      root.innerHTML = `<p class="muted">${lang === "en" ? "Cart empty — add photos or a pack." : lang === "de" ? "Warenkorb leer — Fotos oder Paket hinzufügen." : "Panier vide — ajoutez des photos ou un pack."}</p>`;
+      document.getElementById("cart-total").textContent = "CHF 0";
+      return;
+    }
+    let total = 0;
+    root.innerHTML = "";
+    cart.forEach((item, id) => {
+      total += item.price;
+      const row = document.createElement("div");
+      row.className = "cart-line";
+      row.innerHTML = `<span>${item.label}</span><span>CHF ${item.price} <button type="button" class="btn btn-ghost btn-sm" data-rm="${id}" aria-label="Retirer">×</button></span>`;
+      root.appendChild(row);
+    });
+    document.getElementById("cart-total").textContent = "CHF " + total;
+  }
+
+  function renderPacks() {
+    const packs = [
+      { id: "pk3a", name: "Pack 3", price: 24, note: "hypothèse A/B (v1) vs 3×12=36" },
+      { id: "pk5", name: "Pack 5", price: 34, note: "hypothèse A/B (v1) vs 5×12=60" },
+      { id: "pk6", name: "Pack 6", price: 49, note: "hypothèse −32 % vs 6×12", featured: true },
+      { id: "pk12", name: "Pack 12", price: 89, note: "hypothèse −38 % vs 12×12" },
+      { id: "pkall", name: "Toutes mes photos", price: 119, note: "hypothèse forfait — packs Alphafoto non vérifiés" },
+    ];
+    document.getElementById("packs").innerHTML = packs.map((p) => `
+      <div class="pack ${p.featured ? "featured" : ""}">
+        <strong>${p.name}</strong>
+        <div class="price">CHF ${p.price}</div>
+        <div><span class="tag tag-hyp">${p.note}</span></div>
+        <button type="button" class="btn btn-primary btn-sm" data-pack="${p.id}" data-price="${p.price}" data-name="${p.name}">Ajouter</button>
+      </div>`).join("");
+  }
+
+  function updateSim() {
+    const part = +document.getElementById("s-part").value;
+    const search = +document.getElementById("s-search").value;
+    const conv = +document.getElementById("s-conv").value;
+    const ppc = +document.getElementById("s-ppc").value;
+    const price = +document.getElementById("s-price").value;
+    document.getElementById("v-part").textContent = part.toLocaleString("fr-CH");
+    document.getElementById("v-search").textContent = search + "%";
+    document.getElementById("v-conv").textContent = conv + "%";
+    document.getElementById("v-ppc").textContent = String(ppc);
+    document.getElementById("v-price").textContent = String(price);
+    const searches = Math.round(part * search / 100);
+    const orders = Math.round(searches * conv / 100);
+    const photosSold = orders * ppc;
+    const rev = photosSold * price;
+    const revBase = Math.round(searches * (conv * 0.7) / 100) * ppc * price;
+    const delta = rev - revBase;
+    document.getElementById("o-searches").textContent = searches.toLocaleString("fr-CH");
+    document.getElementById("o-orders").textContent = orders.toLocaleString("fr-CH");
+    document.getElementById("o-photos").textContent = photosSold.toLocaleString("fr-CH");
+    document.getElementById("o-rev").textContent = "CHF " + rev.toLocaleString("fr-CH");
+    document.getElementById("o-delta").textContent = (delta >= 0 ? "+" : "") + "CHF " + delta.toLocaleString("fr-CH");
+  }
+
+  // Events
+  document.querySelectorAll(".nav button").forEach((b) => {
+    b.addEventListener("click", () => showTab(b.getAttribute("data-tab")));
+  });
+  document.querySelectorAll("[data-goto]").forEach((b) => {
+    b.addEventListener("click", () => showTab(b.getAttribute("data-goto")));
+  });
+  document.querySelectorAll(".lang button").forEach((b) => {
+    b.addEventListener("click", () => { lang = b.getAttribute("data-lang"); applyI18n(); });
+  });
+
+    document.querySelectorAll("#search-modes [data-mode]").forEach((b) => {
+    b.addEventListener("click", () => {
+      searchMode = b.getAttribute("data-mode");
+      document.querySelectorAll("#search-modes [data-mode]").forEach((x) => {
+        const on = x === b;
+        x.setAttribute("aria-pressed", on ? "true" : "false");
+        x.classList.toggle("btn-primary", on);
+        x.classList.toggle("btn-ghost", !on);
+      });
+      const q = document.getElementById("query");
+      q.value = modeValues[searchMode].value;
+      q.placeholder = modeValues[searchMode].ph;
+    });
+  });
+
+  document.getElementById("search-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const bar = document.getElementById("search-progress");
+    const st = document.getElementById("search-status");
+    const ident = document.getElementById("search-ident");
+    const q = (document.getElementById("query").value || "").trim().toLowerCase();
+    const ok = searchMode === "bib" ? q === "30370" : searchMode === "name" ? q.includes("magnin") : q.length > 4;
+    bar.style.width = "0%";
+    st.textContent = lang === "en" ? "Matching…" : lang === "de" ? "Abgleich…" : "Recherche en cours…";
+    (typeof requestAnimationFrame === "function" ? requestAnimationFrame : (fn) => setTimeout(fn, 16))(() => { bar.style.width = "100%"; });
+    setTimeout(() => {
+      if (ok) {
+        st.textContent = t("toast_search");
+        if (ident) ident.innerHTML = "<span>" + t("search_ident") + "</span>";
+        toast(t("toast_search"));
+        showTab("runner");
+      } else {
+        st.textContent = lang === "en"
+          ? "Demo profile only (30370 / Romain Magnin). Auto-widen by time & place would kick in."
+          : "Ce prototype ne contient qu'un profil test (30370 / Romain Magnin). Élargissement auto par heure et lieu.";
+        if (ident) ident.innerHTML = "<span>" + st.textContent + "</span>";
+      }
+    }, 650);
+  });
+
+  ["filter-point","filter-bib","time-first"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("change", () => { scoreAll(); renderPhotos(); });
+  });
+
+  document.getElementById("face-consent").addEventListener("change", (e) => {
+    faceOn = !!e.target.checked;
+    scoreAll();
+    renderPhotos();
+  });
+
+  document.getElementById("photo-grid").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-act]");
+    if (!btn) return;
+    const card = btn.closest(".photo");
+    const id = card.getAttribute("data-id");
+    const p = photos.find((x) => x.id === id);
+    const act = btn.getAttribute("data-act");
+    if (act === "yes") p.status = "yes";
+    if (act === "no") p.status = "no";
+    if (act === "cart") {
+      cart.set(id, { label: "Photo " + id + " · " + p.point, price: UNIT_PRICE });
+      renderCart();
+      toast(lang === "en" ? "Added to cart" : "Ajouté au panier");
+    }
+    scoreAll();
+    renderPhotos();
+  });
+
+  document.getElementById("cart-lines").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-rm]");
+    if (!btn) return;
+    cart.delete(btn.getAttribute("data-rm"));
+    renderCart();
+  });
+
+  document.getElementById("packs").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-pack]");
+    if (!btn) return;
+    const id = btn.getAttribute("data-pack");
+    cart.set(id, { label: btn.getAttribute("data-name") + " (hyp.)", price: +btn.getAttribute("data-price") });
+    renderCart();
+    toast(t("toast_pack") || "Pack ajouté");
+  });
+
+  document.getElementById("btn-notif").addEventListener("click", () => toast(t("toast_notif")));
+  document.getElementById("btn-checkout").addEventListener("click", () => toast(t("toast_checkout")));
+
+  ["s-part", "s-search", "s-conv", "s-ppc", "s-price"].forEach((id) => {
+    document.getElementById(id).addEventListener("input", updateSim);
+  });
+
+  // deep-link ?tab=
+  try {
+    const q = new URLSearchParams(location.search).get('tab');
+    if (q && document.getElementById('panel-' + q)) showTab(q);
+  } catch (e) {}
+
+  // init
+  renderSplits();
+  renderPoints();
+  seedPhotos();
+  renderPhotos();
+  renderPacks();
+  renderCart();
+  updateSim();
+  applyI18n();
+})();
+</script>
+</body>
+</html>

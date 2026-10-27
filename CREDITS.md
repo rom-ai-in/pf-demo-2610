@@ -1,4 +1,4 @@
-# Crédits — PhotoFlow maquette v3.1
+# Crédits — PhotoFlow maquette v3.2
 
 ## Logo
 **Logo © Alpha Foto GmbH**, utilisé à titre de maquette conceptuelle.  

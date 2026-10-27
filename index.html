@@ -1,81 +1,68 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
-<title>Alphafoto · PhotoFlow — maquette v3.1</title>
-<meta name="description" content="Maquette conceptuelle : retrouver ses photos d'événement sportif. Non affiliée à Alpha Foto GmbH." />
+<meta name="description" content="Maquette conceptuelle PhotoFlow — Alphafoto réinventé (non affiliée)." />
+<title>Alphafoto · PhotoFlow — maquette v3.2</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
 <style>
+
 :root{
-  --red:#c6322a;
-  --red-dark:#a32822;
-  --ink:#111111;
-  --muted:#5a5a60;
-  --line:#e5e5e7;
-  --bg:#f7f7f5;
-  --card:#ffffff;
-  --ok:#0f7a3a;
-  --warn:#9a5b00;
-  --shadow:0 1px 2px rgba(0,0,0,.05),0 10px 28px rgba(0,0,0,.06);
-  --radius:12px;
-  --font:Inter,Helvetica Neue,Helvetica,Arial,system-ui,sans-serif;
+  --ink:#1a1a1a;--muted:#6b6b70;--line:#e6e6e8;--bg:#f6f6f7;--card:#fff;
+  --red:#c6322a;--ok:#1f7a45;--warn:#b86e00;--radius:14px;--shadow:0 4px 18px rgba(0,0,0,.06);
+  --tap:44px;--cart-h:0px;--font:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --tap:44px;
-  --cart-h:0px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.45;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+html{scroll-padding-bottom:var(--cart-h)}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.45;-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font:inherit}
-a{color:var(--red);text-decoration:none}
-a:hover{text-decoration:underline}
-:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-button:focus:not(:focus-visible){outline:none}
-
-.banner{background:var(--ink);color:#fff;font-size:12px;letter-spacing:.01em;padding:8px 16px;text-align:center;z-index:40;position:relative}
+a{color:var(--red)}
 .app{min-height:100dvh;display:flex;flex-direction:column}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
-.brand{display:flex;align-items:center;gap:10px;min-height:var(--tap);background:none;border:0;padding:0;cursor:pointer;color:inherit}
-.brand img{height:28px;width:auto;display:block}
-.brand .tagline{font-size:11px;color:var(--muted);font-weight:500;line-height:1.2}
-.lang{display:flex;gap:6px}
-.lang button{min-width:var(--tap);min-height:var(--tap);border:1px solid var(--line);background:#fff;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted)}
+.banner{background:#111;color:#fff;text-align:center;font-size:12px;padding:7px 12px;letter-spacing:.01em}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.brand{display:flex;align-items:center;gap:10px;min-height:var(--tap);background:none;border:0;padding:0;cursor:pointer;color:inherit;min-width:0}
+.brand img{height:32px;width:auto;display:block}
+.brand .tagline{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lang{display:flex;gap:4px}
+.lang button{min-width:40px;min-height:var(--tap);border:1px solid var(--line);background:#fff;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:background .15s,color .15s}
 .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-.progress{padding:8px 18px 0;background:transparent}
-.progress-bar{height:3px;background:var(--line);border-radius:99px;overflow:hidden}
-.progress-bar>i{display:block;height:100%;width:0;background:var(--red);transition:width .35s ease}
-.progress-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding:7px 0 2px}
-
+.cart-btn{position:relative;width:var(--tap);height:var(--tap);border:1px solid var(--line);border-radius:999px;background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s,transform .1s}
+.cart-btn:hover{border-color:#bbb}
+.cart-btn:active{transform:scale(.96)}
+.cart-btn svg{width:22px;height:22px}
+.cart-badge{position:absolute;top:-2px;right:-2px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;line-height:1;box-shadow:0 2px 6px rgba(198,50,42,.35)}
+.cart-badge.show{display:inline-flex}
+.cart-badge.pop{animation:badgePop .35s ease}
+@keyframes badgePop{0%{transform:scale(.6)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+.progress{padding:8px 16px 0;background:#fff}
+.progress-bar{height:3px;background:#ececee;border-radius:99px;overflow:hidden}
+.progress-bar i{display:block;height:100%;width:6%;background:var(--red);border-radius:99px;transition:width .35s ease}
+.progress-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding:6px 0 8px}
 main{flex:1;width:min(1100px,100%);margin:0 auto;padding:14px 16px calc(28px + var(--cart-h))}
-  #gallery{padding-bottom:8px}
-  html{scroll-padding-bottom:var(--cart-h)}
-.screen{display:none}
-.screen.active{display:block;animation:fade .28s ease}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-.hero{position:relative;border-radius:14px;overflow:hidden;color:#fff;box-shadow:var(--shadow);margin-bottom:18px}
-.hero img{width:100%;aspect-ratio:21/9;object-fit:cover;background:#222}
-.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.7))}
-.hero .copy{position:absolute;left:0;right:0;bottom:0;padding:22px 20px}
-.hero h1{margin:0 0 6px;font-size:clamp(1.45rem,3.6vw,2.15rem);letter-spacing:-.03em;line-height:1.12;font-weight:750}
-.hero p{margin:0;max-width:38ch;color:rgba(255,255,255,.92);font-size:14px}
-
-h2{font-size:1.28rem;letter-spacing:-.02em;margin:0 0 4px;font-weight:720}
-.lead{color:var(--muted);margin:0 0 14px;font-size:14.5px}
+.screen{display:none;animation:fade .22s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.hero{position:relative;border-radius:var(--radius);overflow:hidden;margin-bottom:18px;box-shadow:var(--shadow)}
+.hero img{width:100%;aspect-ratio:21/9;object-fit:cover;background:#222;display:block}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.55))}
+.hero .copy{position:absolute;left:18px;bottom:16px;right:18px;color:#fff}
+.hero h1{margin:0 0 4px;font-size:clamp(1.35rem,3vw,1.85rem);letter-spacing:-.03em}
+.hero p{margin:0;opacity:.92;font-size:15px}
+h2{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.02em}
+.lead{margin:0 0 14px;color:var(--muted);font-size:15px}
 .filters{display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
 @media(max-width:820px){.filters{grid-template-columns:1fr 1fr}.hero img{aspect-ratio:16/10}}
 @media(max-width:520px){.filters{grid-template-columns:1fr}.hero img{aspect-ratio:4/3}.brand .tagline{display:none}}
-.field{display:flex;flex-direction:column;gap:5px}
-.field label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);min-height:var(--tap)}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink)}
-.field .err{color:var(--red);font-size:12px;min-height:0}
-.field.invalid input,.field.invalid select{border-color:var(--red);background:#fff8f7}
-
+.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:5px}
+.field input,.field select,.textarea,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);min-height:var(--tap)}
+.field input:focus,.field select:focus,textarea:focus{outline:2px solid rgba(198,50,42,.25);border-color:var(--red)}
+.field.invalid input{border-color:var(--red)}
+.field .err{color:var(--red);font-size:12px;margin-top:4px;min-height:0}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 @media(min-width:1200px){.grid{grid-template-columns:repeat(5,1fr)}}
 @media(max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
@@ -84,94 +71,70 @@ h2{font-size:1.28rem;letter-spacing:-.02em;margin:0 0 4px;font-weight:720}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;text-align:left;padding:0;box-shadow:var(--shadow);transition:transform .18s ease,border-color .18s,box-shadow .18s;min-height:var(--tap)}
 .card:hover{transform:translateY(-2px);border-color:#d0d0d2;box-shadow:0 8px 22px rgba(0,0,0,.08)}
 .card:active{transform:translateY(0)}
-.card .thumb{aspect-ratio:16/10;object-fit:cover;width:100%;background:linear-gradient(90deg,#eee,#f6f6f6,#eee);background-size:200% 100%;animation:sk 1.1s linear infinite}
-@keyframes sk{to{background-position:-200% 0}}
-.card img.thumb{animation:none;background:#e8e8ea}
+.card .thumb{aspect-ratio:16/10;object-fit:cover;width:100%;background:#e8e8ea;display:block}
 .card .body{padding:8px 10px 10px}
 .card .tag{display:inline-flex;font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;color:var(--red);margin-bottom:4px}
 .card h3{margin:0 0 2px;font-size:.9rem;letter-spacing:-.02em;font-weight:700;line-height:1.25}
 .card .meta{color:var(--muted);font-size:12px}
-.card .meta .clock{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:999px;background:#f1f1f2;color:var(--muted);font-weight:700;vertical-align:middle}
-.pill.ex{background:#fdeceb;color:var(--red)}
+.pill{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:#f0f0f2;color:var(--muted)}
 .pill.ok{background:#e8f6ee;color:var(--ok)}
-.empty{padding:28px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);background:#fff}
-
-.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-.choices{display:grid;gap:8px;margin:12px 0}
-.choice{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:#fff;text-align:left;min-height:var(--tap);transition:border-color .15s,background .15s}
-.choice:hover{border-color:#bbb}
-.choice[aria-pressed="true"]{border-color:var(--ink);background:#fafafa;box-shadow:inset 0 0 0 1px var(--ink)}
-.choice .num{width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:700;flex:0 0 auto;font-size:13px}
-.choice b{display:block;margin-bottom:2px;font-size:14px}
-.choice span{color:var(--muted);font-size:13px}
-
-.btn{appearance:none;border:none;border-radius:999px;padding:12px 18px;min-height:var(--tap);font-weight:650;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .1s,opacity .15s}
+.pill.ex{background:#fdecea;color:var(--red)}
+.pill.rec{background:#fff4e5;color:var(--warn)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-top:16px}
+.actions .right{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
+.btn{appearance:none;border:none;border-radius:999px;padding:12px 18px;min-height:var(--tap);font-weight:650;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .1s,opacity .15s;text-decoration:none;color:inherit}
 .btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
 .btn-primary{background:var(--red);color:#fff}
-.btn-primary:hover{background:var(--red-dark)}
-.btn-ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--ink)}
+.btn-primary:hover:not(:disabled){background:#b02b24}
 .btn-dark{background:var(--ink);color:#fff}
-.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;justify-content:space-between;align-items:center}
-.actions .right{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
-
+.btn-ghost{background:#fff;border:1px solid var(--line)}
+.btn-ghost:hover{border-color:#bbb}
+.choices{display:grid;gap:8px}
+.choice{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:#fff;text-align:left;min-height:var(--tap);transition:border-color .15s,background .15s;width:100%}
+.choice:hover{border-color:#ccc}
+.choice .num{width:28px;height:28px;border-radius:50%;background:var(--bg);display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.choice b{display:block;margin-bottom:2px}
+.choice span{color:var(--muted);font-size:13px}
 .bib{font-family:var(--mono);font-size:clamp(1.7rem,5vw,2.5rem);letter-spacing:.08em;font-weight:700;background:var(--ink);color:#fff;display:inline-block;padding:8px 14px;border-radius:8px}
-.time{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:650}
-.split-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
-.split-table th,.split-table td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line)}
-.split-table th{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-.robot{display:grid;gap:8px;margin:12px 0}
-.robot .step{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--bg);color:var(--muted);min-height:var(--tap)}
-.robot .step.on{background:#fff;color:var(--ink);border:1px solid var(--line)}
-.robot .step.done{color:var(--ok)}
-.dot{width:9px;height:9px;border-radius:50%;background:#ccc;flex:0 0 auto}
-.robot .step.on .dot{background:var(--red);box-shadow:0 0 0 4px rgba(198,50,42,.16)}
-.robot .step.done .dot{background:var(--ok);box-shadow:none}
-
-.track{position:relative;margin:14px 0 8px;padding:18px 4px 4px}
-.track-line{position:absolute;left:6px;right:6px;top:34px;height:3px;background:linear-gradient(90deg,var(--ink),var(--red));border-radius:99px}
-.points{display:flex;justify-content:space-between;position:relative;z-index:1;gap:2px}
-.pt{flex:1;text-align:center;font-size:10.5px}
-.pt .pin{width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--ink);margin:0 auto 6px}
-.pt.you .pin{border-color:var(--red);background:var(--red);box-shadow:0 0 0 5px rgba(198,50,42,.18)}
-.pt .win{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.note{color:var(--muted);font-size:12.5px}
+.hidden{display:none!important}
+.empty{text-align:center;padding:28px 16px;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);background:#fff}
+.found-banner{background:#e8f6ee;border:1px solid #b9e0c6;color:var(--ok);padding:12px 14px;border-radius:12px;margin-bottom:12px;font-size:14px}
+.track{position:relative;padding:8px 0 4px}
+.track-line{position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:#e0e0e3}
+.points{display:grid;gap:10px}
+.pt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start}
+.pt .pin{width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid #ccc;position:relative;z-index:1}
+.pt.you .pin{border-color:var(--red);background:#fdecea}
+.pt .win{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .neighbors{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .neighbor{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12.5px;background:#fff;min-height:var(--tap)}
 .neighbor b{font-family:var(--mono)}
-.note{font-size:12px;color:var(--muted);margin-top:8px}
-
-.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.swatches,.checks{display:flex;flex-wrap:wrap;gap:8px}
 .swatch{width:var(--tap);height:var(--tap);border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #ddd;cursor:pointer}
-.swatch[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
-.checks{display:flex;flex-wrap:wrap;gap:8px}
+.swatch[aria-pressed=true]{box-shadow:0 0 0 2px var(--red)}
 .chip{border:1px solid var(--line);border-radius:999px;padding:10px 14px;min-height:var(--tap);background:#fff;cursor:pointer;font-size:13px}
-.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.consent{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:10px;font-size:13px;color:var(--muted)}
-.consent input{width:20px;height:20px;margin-top:2px;flex:0 0 auto}
-
-.agent{text-align:center;padding:8px 0}
-.counter{font-family:var(--mono);font-size:clamp(2.1rem,7vw,3.2rem);font-weight:750;letter-spacing:-.02em;margin:6px 0}
-.agent-steps{text-align:left;max-width:440px;margin:14px auto;display:grid;gap:7px}
-.agent-steps .s{padding:11px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:13.5px;display:flex;justify-content:space-between;gap:8px;min-height:var(--tap);align-items:center}
-.agent-steps .s.active{border-color:var(--red);box-shadow:0 0 0 2px rgba(198,50,42,.12)}
-.agent-steps .s .n{font-family:var(--mono);font-weight:700;color:var(--red)}
-
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin-top:12px}
+.agent{text-align:center;padding:20px 8px}
+.agent .counter{font-size:clamp(2.4rem,8vw,3.6rem);font-weight:800;letter-spacing:-.04em;margin:8px 0}
+.agent-steps{display:grid;gap:8px;text-align:left;max-width:420px;margin:16px auto 0}
+.agent-steps .s{padding:11px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:13.5px;display:flex;justify-content:space-between;gap:8px;min-height:var(--tap);align-items:center;opacity:.55;transition:opacity .2s,border-color .2s}
+.agent-steps .s.active{opacity:1;border-color:var(--red)}
 .gallery-head{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:end;margin-bottom:10px}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-bottom:8px}
 @media(max-width:820px){.gallery{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:420px){.gallery{grid-template-columns:1fr}}
-.photo{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
-.photo.selected{border-color:var(--red);box-shadow:0 0 0 2px rgba(198,50,42,.22)}
-.photo .ph{aspect-ratio:4/3;object-fit:cover;width:100%;background:#ececec}
-@media(max-width:520px){.photo .ph{aspect-ratio:16/10;height:auto;max-height:min(42vh,260px)}.photo .info{padding:8px 10px 10px}.photo .why,.photo .illust{font-size:11px}.photo .row strong{font-size:13px}}
-.photo .info{padding:10px 11px 11px;display:grid;gap:7px}
-.photo .why{font-size:12px;color:var(--muted)}
-.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
-.badge.hi{background:#e8f6ee;color:var(--ok)}
-.badge.mid{background:#fff4e5;color:var(--warn)}
-.illust{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.photo{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow .15s,border-color .15s}
+.photo.selected{border-color:var(--red);box-shadow:0 0 0 2px rgba(198,50,42,.2)}
+.photo .ph{aspect-ratio:4/3;object-fit:cover;width:100%;background:#ececec;display:block}
+@media(max-width:520px){.photo .ph{aspect-ratio:16/10;height:auto;max-height:min(42vh,260px)}.photo .info{padding:8px 10px 10px}.photo .why,.photo .illust{font-size:11px}}
+.photo .info{padding:10px 12px 12px}
+.photo .row{display:flex;justify-content:space-between;gap:6px;align-items:center}
+.photo .why{font-size:12.5px;color:var(--muted);margin:4px 0}
+.photo .illust{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#999;margin-bottom:8px}
 .photo .btns{display:flex;flex-wrap:wrap;gap:6px}
 .photo .btns button{flex:1 1 30%;min-height:var(--tap);border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 6px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s,transform .1s}
 .photo .btns button:hover{border-color:#bbb}
@@ -179,209 +142,339 @@ h2{font-size:1.28rem;letter-spacing:-.02em;margin:0 0 4px;font-weight:720}
 .photo .btns button.yes[aria-pressed="true"]{background:#e8f6ee;border-color:#b9e0c6;color:var(--ok)}
 .photo .btns button.no[aria-pressed="true"]{background:#f4f4f5;color:var(--muted)}
 @media(max-width:420px){.photo .btns button{flex:1 1 0;min-width:0;font-size:11px;padding:8px 4px}}
-
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
+.badge.hi{background:#e8f6ee;color:var(--ok)}
+.badge.mid{background:#fff4e5;color:var(--warn)}
 .cartbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;z-index:35;box-shadow:0 -6px 24px rgba(0,0,0,.06)}
 @media(max-width:520px){.cartbar{padding:8px 12px calc(8px + env(safe-area-inset-bottom))}.cartbar .note{font-size:11px}.cartbar .btn{padding:10px 12px;font-size:13px}}
 .cartbar.show{display:block}
 .cartbar .inner{width:min(1100px,100%);margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 .cartbar .sum{font-weight:700}
 .cartbar .sum .time{font-size:1.05rem}
-.found-banner{background:#e8f6ee;border:1px solid #b9e0c6;color:var(--ok);padding:12px 14px;border-radius:12px;margin-bottom:12px;font-size:14px}
-
-.recap-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
-.recap-total{display:flex;justify-content:space-between;font-weight:750;font-size:1.1rem;margin-top:12px}
-.done-box{text-align:center;padding:28px 12px}
-.done-box .big{font-size:2.4rem;margin-bottom:8px}
-
-footer{border-top:1px solid var(--line);padding:18px 16px;font-size:12px;color:var(--muted);text-align:center}
-footer a{color:var(--muted);text-decoration:underline}
-.hidden{display:none!important}
+.cart-line{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.cart-line img{width:72px;height:72px;object-fit:cover;border-radius:10px;background:#eee}
+.cart-line h4{margin:0 0 4px;font-size:14px}
+.cart-line .meta{font-size:12px;color:var(--muted)}
+.cart-line .price{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cart-line .ops{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.cart-line select,.cart-line input[type=number]{min-height:36px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:#fff}
+.cart-line input[type=number]{width:64px}
+.totals{display:grid;gap:8px;margin-top:14px}
+.totals .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.totals .row.total{font-size:1.15rem;font-weight:800;padding-top:8px;border-top:1px solid var(--line)}
+.pack-box{border:1px dashed #f0b4b0;background:#fff8f7;border-radius:12px;padding:12px;margin:12px 0}
+.pack-box.suggest{border-style:solid;border-color:var(--red)}
+.pay-opts{display:grid;gap:8px}
+.pay-opt{display:flex;gap:12px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;background:#fff;text-align:left;min-height:var(--tap);transition:border-color .15s,background .15s;width:100%}
+.pay-opt:hover{border-color:#ccc}
+.pay-opt[aria-pressed=true]{border-color:var(--red);background:#fff8f7}
+.pay-opt.twint{border-color:#111}
+.pay-opt .mark{font-weight:800;letter-spacing:.04em;background:#111;color:#fff;padding:6px 10px;border-radius:8px;font-size:13px}
+.pay-opt .body{flex:1}
+.pay-opt .body b{display:block}
+.qr-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0}
+.qr-box{position:relative;padding:12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.qr-box canvas{display:block;width:220px;height:220px}
+.qr-stamp{position:absolute;inset:auto 12px 18px 12px;text-align:center;background:rgba(255,255,255,.92);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--red);padding:4px}
+.email-preview{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13px;white-space:pre-wrap;font-family:var(--mono)}
+.done-box{text-align:center}
+.done-box .big{font-size:2.4rem;color:var(--ok);margin-bottom:8px}
+.conf-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+footer{text-align:center;padding:20px 16px 28px;color:var(--muted);font-size:12px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
-@media(max-width:360px){
-  main{padding-left:12px;padding-right:12px}
-  .hero h1{font-size:1.3rem}
-  .card h3{font-size:.9rem}
-}
+.toast{position:fixed;left:50%;bottom:calc(16px + var(--cart-h));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:360px){main{padding-left:12px;padding-right:12px}.hero h1{font-size:1.3rem}.card h3{font-size:.9rem}.lang button{min-width:36px;font-size:11px}}
+
 </style>
 </head>
 <body>
+
 <div class="app">
-  <div class="banner" data-i18n="banner">Maquette conceptuelle — non affiliée à Alpha Foto — données d'exemple</div>
+  <div class="banner" data-i18n="banner"></div>
   <header class="top">
-    <button type="button" class="brand" id="btnHome" aria-label="Alphafoto — accueil">
+    <button type="button" class="brand" id="btnHome">
       <img src="assets/brand/logo_alphafoto.png" width="202" height="39" alt="Alphafoto" />
-      <span class="tagline" data-i18n="brand_sub">Photos d'événements sportifs</span>
+      <span class="tagline" data-i18n="brand_sub"></span>
     </button>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
-      <button type="button" data-lang="de" aria-pressed="false">DE</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    <div class="top-right">
+      <div class="lang" role="group" data-i18n-aria="lang_label">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="cart-btn" id="btnCartIcon" data-i18n-aria="cart_aria">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.2" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
     </div>
   </header>
   <div class="progress" id="progressWrap">
     <div class="progress-bar" aria-hidden="true"><i id="progressFill"></i></div>
     <div class="progress-meta"><span id="progressLabel"></span><span id="progressCount"></span></div>
   </div>
-
   <main>
-    <section class="screen active" id="s-events" data-step="0">
+    <section class="screen active" id="s-events">
       <div class="hero">
         <img src="assets/img/hero.jpg" alt="" width="1400" height="600" fetchpriority="high" />
         <div class="veil" aria-hidden="true"></div>
         <div class="copy">
-          <h1 data-i18n="hero_title">Retrouvez vos photos de course</h1>
-          <p data-i18n="hero_lead">Choisissez votre événement. On s'occupe du reste.</p>
+          <h1 data-i18n="hero_title"></h1>
+          <p data-i18n="hero_lead"></p>
         </div>
       </div>
-      <h2 data-i18n="events_title">Trouver mon événement</h2>
-      <p class="lead" data-i18n="events_lead">Recherchez parmi les événements — course, vélo, triathlon et plus.</p>
+      <h2 data-i18n="events_title"></h2>
+      <p class="lead" data-i18n="events_lead"></p>
       <div class="filters">
-        <div class="field"><label for="q" data-i18n="lbl_search">Recherche</label><input id="q" type="search" placeholder="Lausanne, Jungfrau, gravel…" autocomplete="off" /></div>
-        <div class="field"><label for="sport" data-i18n="lbl_sport">Sport</label>
-          <select id="sport"><option value="all" data-i18n="sport_all">Tous</option><option value="run">Running / Trail</option><option value="bike">Vélo / Gravel</option><option value="tri">Triathlon</option></select>
+        <div class="field"><label for="q" data-i18n="lbl_search"></label><input id="q" type="search" placeholder="Lausanne, Jungfrau, gravel…" autocomplete="off" /></div>
+        <div class="field"><label for="sport" data-i18n="lbl_sport"></label>
+          <select id="sport"><option value="all" data-i18n="sport_all"></option><option value="run">Running / Trail</option><option value="bike">Vélo / Gravel</option><option value="tri">Triathlon</option></select>
         </div>
-        <div class="field"><label for="year" data-i18n="lbl_year">Année</label>
-          <select id="year"><option value="2026">2026</option><option value="all" data-i18n="year_all">Toutes</option></select>
+        <div class="field"><label for="year" data-i18n="lbl_year"></label>
+          <select id="year"><option value="2026">2026</option><option value="all" data-i18n="year_all"></option></select>
         </div>
-        <div class="field"><label for="region" data-i18n="lbl_region">Région</label>
-          <select id="region"><option value="all" data-i18n="region_all">Suisse</option><option value="vd">Vaud / Léman</option><option value="be">Bern / Mittelland</option><option value="vs">Valais / Alpes</option><option value="zh">Zürich / Ostschweiz</option></select>
+        <div class="field"><label for="region" data-i18n="lbl_region"></label>
+          <select id="region"><option value="all" data-i18n="region_all"></option><option value="vd">Vaud / Léman</option><option value="be">Bern / Mittelland</option><option value="vs">Valais / Alpes</option><option value="zh">Zürich / Ostschweiz</option></select>
         </div>
       </div>
       <div class="grid" id="eventGrid"></div>
-      <div class="empty hidden" id="eventsEmpty" data-i18n="events_empty">Aucun événement ne correspond. Essayez un autre filtre.</div>
+      <div class="empty hidden" id="eventsEmpty" data-i18n="events_empty"></div>
     </section>
 
-    <section class="screen" id="s-bib" data-step="1">
+    <section class="screen" id="s-bib">
       <p class="pill" id="eventPill"></p>
-      <h2 data-i18n="bib_title">Votre course et dossard</h2>
-      <p class="lead" data-i18n="bib_lead">Indiquez la distance et votre numéro de dossard.</p>
+      <h2 data-i18n="bib_title"></h2>
+      <p class="lead" data-i18n="bib_lead"></p>
       <form class="panel" id="bibForm">
-        <div class="field" style="margin-bottom:12px" id="raceField"><label for="race" data-i18n="lbl_race">Course</label><select id="race" required></select></div>
-        <div class="field" id="bibField"><label for="bib" data-i18n="lbl_bib">N° de dossard</label>
+        <div class="field" style="margin-bottom:12px"><label for="race" data-i18n="lbl_race"></label><select id="race" required></select></div>
+        <div class="field" id="bibField"><label for="bib" data-i18n="lbl_bib"></label>
           <input id="bib" inputmode="numeric" pattern="[0-9]{1,6}" maxlength="6" autocomplete="off" required />
           <div class="err" id="bibErr"></div>
         </div>
         <p class="note" id="bibHint"></p>
       </form>
       <div class="actions">
-        <button type="button" class="btn btn-ghost" data-back data-i18n="back">Retour</button>
-        <div class="right"><button type="submit" form="bibForm" class="btn btn-primary" id="btnSearchBib" data-i18n="next_search">Chercher mes photos</button></div>
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="submit" form="bibForm" class="btn btn-primary" id="btnSearchBib" data-i18n="next_search"></button></div>
       </div>
     </section>
 
-    <section class="screen" id="s-notfound" data-step="2">
-      <h2 data-i18n="nf_title">Aucune photo liée à ce dossard</h2>
-      <p class="lead" data-i18n="nf_lead">C'est fréquent. On peut quand même vous retrouver grâce à vos temps de course.</p>
+    <section class="screen" id="s-notfound">
+      <h2 data-i18n="nf_title"></h2>
+      <p class="lead" data-i18n="nf_lead"></p>
       <div class="panel" style="margin-bottom:12px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
         <span class="bib" id="bibDisplay">30370</span>
-        <div><div data-i18n="nf_status">Pas de correspondance OCR dans le catalogue (exemple).</div><div class="note" id="nfEvent"></div></div>
+        <div><div data-i18n="nf_status"></div><div class="note" id="nfEvent"></div></div>
       </div>
-      <div class="choices" role="list">
-        <button type="button" class="choice" data-path="manual"><span class="num">1</span><div><b data-i18n="nf_a_t">Saisir mon temps final</b><span data-i18n="nf_a_d">On estime vos passages à partir de votre chrono.</span></div></button>
-        <button type="button" class="choice" data-path="robot"><span class="num">2</span><div><b data-i18n="nf_b_t">Retrouver mes temps</b><span data-i18n="nf_b_d">Par nom et année — récupération simulée des temps officiels.</span></div></button>
-        <button type="button" class="choice" data-path="link"><span class="num">3</span><div><b data-i18n="nf_c_t">Coller mon lien de résultat</b><span data-i18n="nf_c_d">Profil chronométreur (Datasport ou autre) — démo simulée.</span></div></button>
+      <div class="choices">
+        <button type="button" class="choice" data-path="manual"><span class="num">1</span><div><b data-i18n="nf_a_t"></b><span data-i18n="nf_a_d"></span></div></button>
+        <button type="button" class="choice" data-path="robot"><span class="num">2</span><div><b data-i18n="nf_b_t"></b><span data-i18n="nf_b_d"></span></div></button>
+        <button type="button" class="choice" data-path="link"><span class="num">3</span><div><b data-i18n="nf_c_t"></b><span data-i18n="nf_c_d"></span></div></button>
       </div>
       <div id="pathPanel" class="panel hidden"></div>
       <div class="actions">
-        <button type="button" class="btn btn-ghost" data-back data-i18n="back">Retour</button>
-        <div class="right"><button type="button" class="btn btn-primary hidden" id="btnTimesOk" data-i18n="next_times">Utiliser ces temps</button></div>
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="button" class="btn btn-primary hidden" id="btnTimesOk" data-i18n="next_times"></button></div>
       </div>
     </section>
 
-    <section class="screen" id="s-found" data-step="2">
-      <div class="found-banner" data-i18n="found_banner">Bonne nouvelle : des photos sont déjà liées à ce dossard (parcours rapide d'exemple).</div>
-      <h2 data-i18n="found_title">Dossard reconnu</h2>
-      <p class="lead" data-i18n="found_lead">On affine encore avec la tenue, puis l'agent classe vos meilleures photos.</p>
+    <section class="screen" id="s-found">
+      <div class="found-banner" data-i18n="found_banner"></div>
+      <h2 data-i18n="found_title"></h2>
+      <p class="lead" data-i18n="found_lead"></p>
       <div class="panel" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
         <span class="bib" id="bibFoundDisplay">242</span>
-        <div><div id="foundMeta"></div><div class="note" data-i18n="found_note">Exemple de maquette — catalogue simulé.</div></div>
+        <div><div id="foundMeta"></div><div class="note" data-i18n="found_note"></div></div>
       </div>
       <div class="actions">
-        <button type="button" class="btn btn-ghost" data-back data-i18n="back">Retour</button>
-        <div class="right"><button type="button" class="btn btn-primary" id="btnFoundNext" data-i18n="next_refine">Affiner avec ma tenue</button></div>
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="button" class="btn btn-primary" id="btnFoundNext" data-i18n="next_refine"></button></div>
       </div>
     </section>
 
-    <section class="screen" id="s-position" data-step="3">
-      <h2 data-i18n="pos_title">On regarde les coureurs autour de vous</h2>
-      <p class="lead" data-i18n="pos_lead">Fenêtres de passage estimées à chaque point photo, calées sur des dossards déjà identifiés.</p>
+    <section class="screen" id="s-position">
+      <h2 data-i18n="pos_title"></h2>
+      <p class="lead" data-i18n="pos_lead"></p>
       <div class="panel">
         <div class="track"><div class="track-line"></div><div class="points" id="trackPoints"></div></div>
-        <p class="note" data-i18n="pos_note">Points photo et fenêtres = exemple / hypothèse pour la démo.</p>
-        <h3 style="font-size:14px;margin:14px 0 8px" data-i18n="pos_neighbors">Ancres voisines (dossards fictifs, proches)</h3>
+        <p class="note" data-i18n="pos_note"></p>
+        <h3 style="font-size:14px;margin:14px 0 8px" data-i18n="pos_neighbors"></h3>
         <div class="neighbors" id="neighbors"></div>
       </div>
       <div class="actions">
-        <button type="button" class="btn btn-ghost" data-back data-i18n="back">Retour</button>
-        <div class="right"><button type="button" class="btn btn-primary" data-next data-i18n="next">Continuer</button></div>
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="button" class="btn btn-primary" data-next="outfit" data-i18n="next"></button></div>
       </div>
     </section>
 
-    <section class="screen" id="s-outfit" data-step="4">
-      <h2 data-i18n="out_title">Comment étiez-vous habillé·e ?</h2>
-      <p class="lead" data-i18n="out_lead">Quelques pastilles suffisent. Utile surtout si le dossard est peu lisible.</p>
+    <section class="screen" id="s-outfit">
+      <h2 data-i18n="out_title"></h2>
+      <p class="lead" data-i18n="out_lead"></p>
       <div class="panel">
-        <div class="field" style="margin-bottom:12px"><label data-i18n="out_top">Haut</label><div class="swatches" id="swTop"></div></div>
-        <div class="field" style="margin-bottom:12px"><label data-i18n="out_bottom">Bas</label><div class="swatches" id="swBottom"></div></div>
-        <div class="field" style="margin-bottom:12px"><label data-i18n="out_extra">Accessoires</label><div class="checks" id="extras"></div></div>
-        <div class="field"><label for="desc" data-i18n="out_desc">Décrivez-vous (optionnel)</label>
-          <textarea id="desc" rows="2" placeholder="Maillot bleu, short noir, casquette blanche…"></textarea>
-        </div>
-        <label class="consent"><input type="checkbox" id="faceOpt" /> <span data-i18n="out_face">Option visage : j'ajoute un selfie et j'accepte explicitement le traitement de données biométriques sensibles (nLPD). Non cochée par défaut.</span></label>
-        <div id="selfieBox" class="field hidden" style="margin-top:10px"><label for="selfie" data-i18n="out_selfie">Selfie (fichier local, non envoyé)</label><input id="selfie" type="file" accept="image/*" /></div>
+        <div class="field" style="margin-bottom:12px"><label data-i18n="out_top"></label><div class="swatches" id="swTop"></div></div>
+        <div class="field" style="margin-bottom:12px"><label data-i18n="out_bottom"></label><div class="swatches" id="swBottom"></div></div>
+        <div class="field" style="margin-bottom:12px"><label data-i18n="out_extra"></label><div class="checks" id="extras"></div></div>
+        <div class="field"><label for="desc" data-i18n="out_desc"></label><textarea id="desc" rows="2"></textarea></div>
+        <label class="consent"><input type="checkbox" id="faceOpt" /> <span data-i18n="out_face"></span></label>
+        <div id="selfieBox" class="field hidden" style="margin-top:10px"><label for="selfie" data-i18n="out_selfie"></label><input id="selfie" type="file" accept="image/*" /></div>
       </div>
       <div class="actions">
-        <button type="button" class="btn btn-ghost" data-back data-i18n="back">Retour</button>
-        <div class="right"><button type="button" class="btn btn-primary" data-next data-i18n="next_search_agent">Lancer la recherche</button></div>
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="button" class="btn btn-primary" data-next="agent" data-i18n="next_search_agent"></button></div>
       </div>
     </section>
 
-    <section class="screen" id="s-agent" data-step="5">
+    <section class="screen" id="s-agent">
       <div class="agent" aria-live="polite">
-        <h2 data-i18n="ag_title">L'agent cherche vos photos</h2>
-        <p class="lead" data-i18n="ag_lead">Filtrage temps → OCR dossards → tenue → classement.</p>
+        <h2 data-i18n="ag_title"></h2>
+        <p class="lead" data-i18n="ag_lead"></p>
         <div class="counter" id="agentCount">0</div>
-        <div class="note" data-i18n="ag_count_lbl">candidates retenues</div>
+        <div class="note" data-i18n="ag_count_lbl"></div>
         <div class="agent-steps" id="agentSteps"></div>
       </div>
     </section>
 
-    <section class="screen" id="s-results" data-step="6">
+    <section class="screen" id="s-results">
       <div class="gallery-head">
         <div>
-          <h2 data-i18n="res_title">Vos photos probables</h2>
-          <p class="lead" style="margin:0" data-i18n="res_lead">Meilleure correspondance en premier. Images d'illustration uniquement.</p>
+          <h2 data-i18n="res_title"></h2>
+          <p class="lead" style="margin:0" data-i18n="res_lead"></p>
         </div>
-        <button type="button" class="btn btn-ghost" id="btnNotify" data-i18n="res_notify">Me prévenir des nouvelles photos</button>
+        <button type="button" class="btn btn-ghost" id="btnNotify" data-i18n="res_notify"></button>
       </div>
       <div class="row" style="margin-bottom:10px">
         <label class="field" style="min-width:200px"><span class="sr-only">Point</span>
-          <select id="pointFilter"><option value="all" data-i18n="res_all_points">Tous les points</option></select>
+          <select id="pointFilter"><option value="all" data-i18n="res_all_points"></option></select>
         </label>
       </div>
       <div class="gallery" id="gallery"></div>
       <div class="actions" style="margin-top:18px">
-        <button type="button" class="btn btn-ghost" data-back data-i18n="back">Retour</button>
-        <div class="right"><button type="button" class="btn btn-ghost" id="btnRestart" data-i18n="restart">Autre événement</button></div>
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="button" class="btn btn-ghost" id="btnRestart" data-i18n="restart"></button></div>
       </div>
     </section>
 
-    <section class="screen" id="s-checkout" data-step="7">
-      <h2 data-i18n="chk_title">Récapitulatif</h2>
-      <p class="lead" data-i18n="chk_lead">Vérifiez votre sélection. Aucun paiement réel dans cette maquette.</p>
-      <div class="panel" id="recapBox"></div>
+    <section class="screen" id="s-cart">
+      <h2 data-i18n="cart_title"></h2>
+      <p class="lead" data-i18n="cart_lead"></p>
+      <div id="cartEmpty" class="empty hidden">
+        <h3 data-i18n="cart_empty_title"></h3>
+        <p data-i18n="cart_empty_lead"></p>
+        <button type="button" class="btn btn-primary" id="btnCartBrowse" data-i18n="cart_browse" style="margin-top:12px"></button>
+      </div>
+      <div id="cartFilled" class="hidden">
+        <div class="panel" id="cartLines"></div>
+        <div class="pack-box" id="packBox">
+          <div class="row" style="display:flex;justify-content:space-between;gap:10px;align-items:start;flex-wrap:wrap">
+            <div>
+              <b data-i18n="cart_pack_title"></b> <span class="pill ex" data-i18n="cart_pack_ex"></span>
+              <div class="note" id="packSave"></div>
+              <div class="note" id="packSuggest" style="display:none" data-i18n="cart_pack_suggest"></div>
+            </div>
+            <button type="button" class="btn btn-ghost" id="btnPackToggle" data-i18n="cart_pack_apply"></button>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:12px">
+          <div class="field" style="margin-bottom:10px">
+            <label for="promo" data-i18n="cart_promo"></label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input id="promo" type="text" autocomplete="off" placeholder="DEMO10" style="flex:1;min-width:140px" />
+              <button type="button" class="btn btn-ghost" id="btnPromo" data-i18n="cart_promo_apply"></button>
+            </div>
+            <div class="err" id="promoMsg" style="color:inherit"></div>
+          </div>
+          <div class="totals" id="cartTotals"></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" id="btnClearCart" data-i18n="cart_clear"></button>
+          <div class="right"><button type="button" class="btn btn-primary" id="btnToCheckout" data-i18n="cart_checkout"></button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="s-checkout">
+      <h2 data-i18n="chk_title"></h2>
+      <p class="lead" data-i18n="chk_lead"></p>
+      <form class="panel" id="contactForm">
+        <div class="field" style="margin-bottom:12px" id="nameField">
+          <label for="custName" data-i18n="lbl_name"></label>
+          <input id="custName" name="name" autocomplete="name" required />
+          <div class="err" id="nameErr"></div>
+        </div>
+        <div class="field" id="emailField">
+          <label for="custEmail" data-i18n="lbl_email"></label>
+          <input id="custEmail" name="email" type="email" autocomplete="email" required />
+          <div class="err" id="emailErr"></div>
+        </div>
+      </form>
       <div class="actions">
-        <button type="button" class="btn btn-ghost" id="btnBackResults" data-i18n="back">Retour</button>
-        <div class="right"><button type="button" class="btn btn-dark" id="btnPay" data-i18n="chk_pay">Payer</button></div>
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="submit" form="contactForm" class="btn btn-primary" data-i18n="pay_continue"></button></div>
       </div>
     </section>
 
-    <section class="screen" id="s-done" data-step="8">
+    <section class="screen" id="s-pay">
+      <h2 data-i18n="pay_title"></h2>
+      <p class="lead" data-i18n="pay_lead"></p>
+      <div class="pay-opts" id="payOpts">
+        <button type="button" class="pay-opt twint" data-pay="twint" aria-pressed="true">
+          <span class="mark">TWINT</span>
+          <span class="body"><b data-i18n="pay_twint"></b><span class="pill rec" data-i18n="pay_twint_rec"></span></span>
+        </button>
+        <button type="button" class="pay-opt" data-pay="card" aria-pressed="false">
+          <span class="body"><b data-i18n="pay_card"></b></span>
+        </button>
+        <button type="button" class="pay-opt" data-pay="postfinance" aria-pressed="false">
+          <span class="body"><b data-i18n="pay_pf"></b></span>
+        </button>
+        <button type="button" class="pay-opt" data-pay="paypal" aria-pressed="false">
+          <span class="body"><b data-i18n="pay_paypal"></b></span>
+        </button>
+      </div>
+      <p class="note" id="payNote" style="margin-top:10px"></p>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+        <div class="right"><button type="button" class="btn btn-primary" id="btnPayGo" data-i18n="pay_continue"></button></div>
+      </div>
+    </section>
+
+    <section class="screen" id="s-twint">
+      <h2 data-i18n="twint_title"></h2>
+      <p class="lead" id="twintLead"></p>
+      <div class="panel">
+        <div class="qr-wrap" id="twintDesk">
+          <div class="qr-box"><canvas id="qrCanvas" width="220" height="220"></canvas><div class="qr-stamp" data-i18n="twint_demo"></div></div>
+          <div class="note"><span data-i18n="twint_timer"></span> <b id="twintTimer">04:00</b></div>
+        </div>
+        <div class="hidden" id="twintMob" style="text-align:center">
+          <button type="button" class="btn btn-dark" id="btnOpenTwint" data-i18n="twint_open" style="min-width:220px"></button>
+          <p class="note" style="margin-top:10px" data-i18n="twint_demo"></p>
+        </div>
+        <p class="note" id="twintWait" style="text-align:center;margin-top:12px" data-i18n="twint_wait"></p>
+        <div style="text-align:center;margin-top:12px">
+          <button type="button" class="btn btn-primary" id="btnSimTwint" data-i18n="twint_sim"></button>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back data-i18n="back"></button>
+      </div>
+    </section>
+
+    <section class="screen" id="s-confirm">
       <div class="done-box panel">
         <div class="big" aria-hidden="true">✓</div>
-        <h2 data-i18n="done_title">Fin de la démo</h2>
-        <p class="lead" data-i18n="done_lead">Merci. Aucune commande n'a été passée, aucun paiement n'a été traité.</p>
-        <button type="button" class="btn btn-primary" id="btnDoneHome" data-i18n="restart">Autre événement</button>
+        <h2 data-i18n="conf_title"></h2>
+        <p class="lead" data-i18n="conf_lead"></p>
+        <p><span data-i18n="conf_order"></span> <b id="orderId" class="time"></b></p>
+        <div id="confRecap" class="note" style="text-align:left;margin:12px auto;max-width:420px"></div>
+        <div class="conf-actions">
+          <button type="button" class="btn btn-primary" id="btnDlHd" data-i18n="conf_download"></button>
+          <button type="button" class="btn btn-ghost" id="btnShare" data-i18n="conf_share"></button>
+          <button type="button" class="btn btn-ghost" id="btnConfNotify" data-i18n="conf_notify"></button>
+        </div>
+        <h3 style="font-size:14px;margin:18px 0 8px" data-i18n="conf_email_preview"></h3>
+        <div class="email-preview" id="emailPreview"></div>
+        <button type="button" class="btn btn-dark" id="btnConfHome" data-i18n="conf_home" style="margin-top:16px"></button>
       </div>
     </section>
   </main>
@@ -389,27 +482,35 @@ footer a{color:var(--muted);text-decoration:underline}
   <div class="cartbar" id="cartbar" aria-live="polite">
     <div class="inner">
       <div>
-        <div class="sum"><span id="cartCount">0</span> <span data-i18n="cart_photos">photos</span> · <span class="time" id="cartTotal">CHF 0</span></div>
-        <div class="note"><span data-i18n="cart_unit">CHF 12 / photo</span> · <span class="pill ex" data-i18n="cart_pack">Pack « toutes mes photos » = exemple</span></div>
+        <div class="sum"><span id="cartCount">0</span> · <span class="time" id="cartTotal">CHF 0.00</span></div>
+        <div class="note" data-i18n="cart_unit"></div>
       </div>
-      <div class="row">
-        <button type="button" class="btn btn-ghost" id="btnPack" data-i18n="cart_add_pack">Ajouter le pack (ex.)</button>
-        <button type="button" class="btn btn-dark" id="btnCheckout" data-i18n="cart_checkout">Continuer</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button type="button" class="btn btn-ghost" id="btnBarCart" data-i18n="cart_bar_view"></button>
+        <button type="button" class="btn btn-dark" id="btnBarCheckout" data-i18n="cart_checkout"></button>
       </div>
     </div>
   </div>
-
+  <div class="toast" id="toast" role="status"></div>
   <footer>
-    <div><a href="how-it-works.html" data-i18n="footer_how">Comment fonctionne la recherche</a> · <a href="CREDITS.md" data-i18n="footer_credits">Crédits images</a></div>
-    <div style="margin-top:8px" data-i18n="footer_legal">Maquette conceptuelle indépendante — non affiliée à Alpha Foto GmbH ni aux chronométreurs. Aucun scraping. v3.1 — 27.10.2026.</div>
+    <div><a href="how-it-works.html" data-i18n="footer_how"></a> · <a href="CREDITS.md" data-i18n="footer_credits"></a></div>
+    <div style="margin-top:8px" data-i18n="footer_legal"></div>
   </footer>
 </div>
+
 <script>
+window.__I18N__ = {"fr": {"banner": "Maquette conceptuelle — non affiliée à Alpha Foto — données d'exemple", "brand_sub": "Photos d'événements sportifs", "cart_aria": "Panier", "hero_title": "Retrouvez vos photos de course", "hero_lead": "Choisissez votre événement. On s'occupe du reste.", "events_title": "Trouver mon événement", "events_lead": "Recherchez parmi les événements — course, vélo, triathlon et plus.", "events_empty": "Aucun événement ne correspond. Essayez un autre filtre.", "lbl_search": "Recherche", "lbl_sport": "Sport", "sport_all": "Tous", "lbl_year": "Année", "year_all": "Toutes", "lbl_region": "Région", "region_all": "Suisse", "bib_title": "Votre course et dossard", "bib_lead": "Indiquez la distance et votre numéro de dossard.", "lbl_race": "Course", "lbl_bib": "N° de dossard", "back": "Retour", "next": "Continuer", "next_search": "Chercher mes photos", "next_times": "Utiliser ces temps", "next_search_agent": "Lancer la recherche", "next_refine": "Affiner avec ma tenue", "restart": "Autre événement", "nf_title": "Aucune photo liée à ce dossard", "nf_lead": "C'est fréquent. On peut quand même vous retrouver grâce à vos temps de course.", "nf_status": "Pas de correspondance OCR dans le catalogue (exemple).", "nf_a_t": "Saisir mon temps final", "nf_a_d": "On estime vos passages à partir de votre chrono.", "nf_b_t": "Retrouver mes temps", "nf_b_d": "Par nom et année — récupération simulée des temps officiels.", "nf_c_t": "Coller mon lien de résultat", "nf_c_d": "Profil chronométreur (Datasport ou autre) — démo simulée.", "found_banner": "Bonne nouvelle : des photos sont déjà liées à ce dossard (parcours rapide d'exemple).", "found_title": "Dossard reconnu", "found_lead": "On affine encore avec la tenue, puis l'agent classe vos meilleures photos.", "found_note": "Exemple de maquette — catalogue simulé.", "pos_title": "On regarde les coureurs autour de vous", "pos_lead": "Fenêtres de passage estimées à chaque point photo, calées sur des dossards déjà identifiés.", "pos_note": "Points photo et fenêtres = exemple / hypothèse pour la démo.", "pos_neighbors": "Ancres voisines (dossards fictifs, proches)", "out_title": "Comment étiez-vous habillé·e ?", "out_lead": "Quelques pastilles suffisent. Utile surtout si le dossard est peu lisible.", "out_top": "Haut", "out_bottom": "Bas", "out_extra": "Accessoires", "out_desc": "Décrivez-vous (optionnel)", "out_face": "Option visage : j'ajoute un selfie et j'accepte explicitement le traitement de données biométriques sensibles (nLPD). Non cochée par défaut.", "out_selfie": "Selfie (fichier local, non envoyé)", "ag_title": "L'agent cherche vos photos", "ag_lead": "Filtrage temps → OCR dossards → tenue → classement.", "ag_count_lbl": "candidates retenues", "res_title": "Vos photos probables", "res_lead": "Meilleure correspondance en premier. Images d'illustration uniquement.", "res_notify": "Me prévenir des nouvelles photos", "res_all_points": "Tous les points", "btn_yes": "C'est moi", "btn_no": "Pas moi", "btn_add": "Ajouter", "btn_remove": "Retirer", "illust": "Image d'illustration", "conf_hi": "Confiance élevée", "conf_mid": "Confiance moyenne", "cart_title": "Votre panier", "cart_lead": "Vérifiez vos photos avant de payer. Aucun paiement réel dans cette maquette.", "cart_empty_title": "Votre panier est vide", "cart_empty_lead": "Ajoutez des photos depuis les résultats, ou commencez par trouver votre événement.", "cart_browse": "Trouver mon événement", "cart_clear": "Vider le panier", "cart_format_hd": "Numérique HD", "cart_format_print": "Impression", "cart_print_ex": "prix impression = exemple", "cart_qty": "Qté", "cart_subtotal": "Sous-total", "cart_pack_title": "Pack « toutes mes photos »", "cart_pack_ex": "exemple", "cart_pack_save": "Économie", "cart_pack_suggest": "Le pack est plus avantageux pour votre sélection — bascule proposée.", "cart_pack_apply": "Appliquer le pack", "cart_promo": "Code promo", "cart_promo_apply": "Appliquer", "cart_promo_ok": "Code DEMO10 appliqué (−10 %).", "cart_promo_bad": "Ce code n'est pas reconnu. Essayez DEMO10 (exemple).", "cart_vat": "TVA suisse 8,1 % incluse (exemple de calcul)", "cart_total": "Total", "cart_checkout": "Passer au paiement", "cart_unit": "CHF 12.00 / photo HD", "chk_title": "Vos coordonnées", "chk_lead": "Pour recevoir le lien de téléchargement (simulation — aucun e-mail réel).", "lbl_name": "Nom complet", "lbl_email": "E-mail", "err_name": "Indiquez votre nom.", "err_email": "Indiquez une adresse e-mail valide.", "pay_title": "Choix du paiement", "pay_lead": "Moyens relevés sur alphafoto.com — aucun paiement réel ici.", "pay_twint": "TWINT", "pay_twint_rec": "Recommandé en Suisse", "pay_card": "Carte Visa / Mastercard", "pay_pf": "PostFinance / facture", "pay_paypal": "PayPal", "pay_card_na": "Paiement par carte non disponible dans la démo (aucun champ carte).", "pay_other_na": "Option présentée pour la démo — flux non simulé. Choisissez TWINT.", "pay_continue": "Continuer", "twint_title": "Payer avec TWINT", "twint_lead_desk": "Ouvrez l'app TWINT et scannez le QR (factice — démo uniquement).", "twint_lead_mob": "Ouvrez TWINT pour confirmer le paiement (simulation).", "twint_open": "Ouvrir TWINT", "twint_demo": "QR de démo — aucun paiement réel", "twint_timer": "Expire dans", "twint_sim": "Simuler la confirmation", "twint_wait": "En attente de confirmation…", "conf_title": "Paiement confirmé", "conf_lead": "Simulation réussie. Voici votre récapitulatif de commande factice.", "conf_order": "N° de commande", "conf_download": "Télécharger HD", "conf_share": "Partager", "conf_notify": "Me prévenir des nouvelles photos", "conf_email_preview": "Aperçu e-mail de confirmation (simulé)", "conf_home": "Retour à l'accueil", "footer_how": "Comment fonctionne la recherche", "footer_credits": "Crédits images", "footer_legal": "Maquette conceptuelle indépendante — non affiliée à Alpha Foto GmbH ni aux chronométreurs. Aucun scraping. Aucun vrai paiement. v3.2 — 27.10.2026.", "step_events": "Événement", "step_bib": "Dossard", "step_times": "Temps", "step_pos": "Position", "step_out": "Tenue", "step_agent": "Agent", "step_res": "Résultats", "step_cart": "Panier", "step_chk": "Coordonnées", "step_pay": "Paiement", "step_twint": "TWINT", "step_conf": "Confirmation", "tag_demo": "Démo · parcours complet", "tag_listed": "nom vu sur Alphafoto", "tag_example": "exemple", "bib_err": "Entrez un numéro de dossard valide (chiffres).", "bib_hint_lm": "Exemple prérempli pour la démo Lausanne : 30370 (cas « dossard non trouvé »).", "bib_hint_found": "Essayez le dossard d'exemple pour le parcours rapide.", "bib_hint_gen": "Saisissez votre dossard.", "point_generic": "Point photo", "why_hi": "Fenêtre", "why_hi2": "tenue proche", "why_mid": "Fenêtre large", "ag_s1": "Photos point Ouchy", "ag_s2": "Après fenêtre temporelle", "ag_s3": "Lecture dossards (OCR)", "ag_s4": "Filtre tenue", "ag_s5": "Classement final", "ag_s1f": "Photos déjà liées au dossard", "ag_s2f": "Filtre tenue", "ag_s3f": "Classement final", "found_count": "12 photos déjà indexées (simulé)", "notify_ok": "Notification activée (simulation).", "share_ok": "Lien de partage copié (simulation).", "lang_label": "Langue", "cart_bar_view": "Voir le panier", "cart_added": "Ajouté au panier"}, "de": {"banner": "Konzept-Mockup — nicht mit Alpha Foto verbunden — Beispieldaten", "brand_sub": "Fotos von Sportveranstaltungen", "cart_aria": "Warenkorb", "hero_title": "Finden Sie Ihre Rennfotos", "hero_lead": "Wählen Sie Ihren Event. Den Rest erledigen wir.", "events_title": "Meinen Event finden", "events_lead": "Suche unter Events — Laufen, Velo, Triathlon und mehr.", "events_empty": "Kein Event passt. Andere Filter versuchen.", "lbl_search": "Suche", "lbl_sport": "Sport", "sport_all": "Alle", "lbl_year": "Jahr", "year_all": "Alle", "lbl_region": "Region", "region_all": "Schweiz", "bib_title": "Ihre Distanz & Startnummer", "bib_lead": "Distanz und Startnummer angeben.", "lbl_race": "Rennen", "lbl_bib": "Startnummer", "back": "Zurück", "next": "Weiter", "next_search": "Fotos suchen", "next_times": "Diese Zeiten nutzen", "next_search_agent": "Suche starten", "next_refine": "Mit Outfit verfeinern", "restart": "Anderer Event", "nf_title": "Keine Fotos zu dieser Startnummer", "nf_lead": "Kommt vor. Mit Ihren Laufzeiten finden wir Sie trotzdem.", "nf_status": "Keine OCR-Treffer im Katalog (Beispiel).", "nf_a_t": "Endzeit manuell eingeben", "nf_a_d": "Passagefenster aus Ihrer Zeit schätzen.", "nf_b_t": "Meine Zeiten holen", "nf_b_d": "Nach Name und Jahr — simulierte offizielle Zeiten.", "nf_c_t": "Resultats-Link einfügen", "nf_c_d": "Zeitnehmer-Profil — Demo simuliert.", "found_banner": "Gute Nachricht: Fotos sind bereits mit dieser Startnummer verknüpft (Beispiel-Schnellweg).", "found_title": "Startnummer erkannt", "found_lead": "Outfit verfeinern, dann sortiert der Agent Ihre besten Fotos.", "found_note": "Mockup-Beispiel — simulierter Katalog.", "pos_title": "Läufer um Sie herum", "pos_lead": "Geschätzte Passagefenster an jedem Fotopunkt.", "pos_note": "Fotopunkte und Fenster = Demo-Beispiel/Hypothese.", "pos_neighbors": "Nachbar-Anker (fiktiv)", "out_title": "Wie waren Sie gekleidet?", "out_lead": "Ein paar Farben reichen.", "out_top": "Oberteil", "out_bottom": "Hose", "out_extra": "Accessoires", "out_desc": "Kurz beschreiben (optional)", "out_face": "Gesichtsoption: Selfie + ausdrückliche Einwilligung (nDSG). Standardmässig aus.", "out_selfie": "Selfie (lokal, wird nicht gesendet)", "ag_title": "Der Agent sucht Ihre Fotos", "ag_lead": "Zeitfilter → Startnummern-OCR → Outfit → Ranking.", "ag_count_lbl": "behaltene Kandidaten", "res_title": "Ihre wahrscheinlichen Fotos", "res_lead": "Beste Treffer zuerst. Nur Illustrationsbilder.", "res_notify": "Bei neuen Fotos benachrichtigen", "res_all_points": "Alle Punkte", "btn_yes": "Das bin ich", "btn_no": "Nicht ich", "btn_add": "Hinzufügen", "btn_remove": "Entfernen", "illust": "Illustrationsbild", "conf_hi": "Hohe Sicherheit", "conf_mid": "Mittlere Sicherheit", "cart_title": "Ihr Warenkorb", "cart_lead": "Fotos vor der Zahlung prüfen. Keine echte Zahlung in diesem Mockup.", "cart_empty_title": "Ihr Warenkorb ist leer", "cart_empty_lead": "Fügen Sie Fotos aus den Resultaten hinzu oder finden Sie zuerst Ihren Event.", "cart_browse": "Event finden", "cart_clear": "Warenkorb leeren", "cart_format_hd": "Digital HD", "cart_format_print": "Druck", "cart_print_ex": "Druckpreis = Beispiel", "cart_qty": "Anz.", "cart_subtotal": "Zwischensumme", "cart_pack_title": "Paket «alle meine Fotos»", "cart_pack_ex": "Beispiel", "cart_pack_save": "Ersparnis", "cart_pack_suggest": "Das Paket ist für Ihre Auswahl günstiger — Wechsel vorgeschlagen.", "cart_pack_apply": "Paket anwenden", "cart_promo": "Promo-Code", "cart_promo_apply": "Einlösen", "cart_promo_ok": "Code DEMO10 angewendet (−10 %).", "cart_promo_bad": "Code unbekannt. Versuchen Sie DEMO10 (Beispiel).", "cart_vat": "Schweizer MwSt. 8,1 % inkl. (Beispielrechnung)", "cart_total": "Total", "cart_checkout": "Zur Zahlung", "cart_unit": "CHF 12.00 / Foto HD", "chk_title": "Ihre Angaben", "chk_lead": "Für den Download-Link (Simulation — keine echte E-Mail).", "lbl_name": "Vollständiger Name", "lbl_email": "E-Mail", "err_name": "Bitte Namen angeben.", "err_email": "Bitte gültige E-Mail angeben.", "pay_title": "Zahlungsart wählen", "pay_lead": "Auf alphafoto.com genannte Methoden — keine echte Zahlung.", "pay_twint": "TWINT", "pay_twint_rec": "Empfohlen in der Schweiz", "pay_card": "Visa / Mastercard", "pay_pf": "PostFinance / Rechnung", "pay_paypal": "PayPal", "pay_card_na": "Kartenzahlung in der Demo nicht verfügbar (keine Kartendaten).", "pay_other_na": "Nur zur Demo angezeigt — Flow nicht simuliert. Bitte TWINT wählen.", "pay_continue": "Weiter", "twint_title": "Mit TWINT bezahlen", "twint_lead_desk": "Öffnen Sie die TWINT-App und scannen Sie den QR (fiktiv — nur Demo).", "twint_lead_mob": "Öffnen Sie TWINT zur Bestätigung (Simulation).", "twint_open": "TWINT öffnen", "twint_demo": "Demo-QR — keine echte Zahlung", "twint_timer": "Läuft ab in", "twint_sim": "Bestätigung simulieren", "twint_wait": "Warte auf Bestätigung…", "conf_title": "Zahlung bestätigt", "conf_lead": "Simulation erfolgreich. Hier Ihre fiktive Bestellübersicht.", "conf_order": "Bestellnr.", "conf_download": "HD herunterladen", "conf_share": "Teilen", "conf_notify": "Bei neuen Fotos benachrichtigen", "conf_email_preview": "Vorschau Bestätigungs-E-Mail (simuliert)", "conf_home": "Zur Startseite", "footer_how": "So funktioniert die Suche", "footer_credits": "Bildnachweise", "footer_legal": "Unabhängiges Konzept-Mockup — nicht mit Alpha Foto GmbH verbunden. Kein Scraping. Keine echte Zahlung. v3.2 — 27.10.2026.", "step_events": "Event", "step_bib": "Startnr.", "step_times": "Zeiten", "step_pos": "Position", "step_out": "Outfit", "step_agent": "Agent", "step_res": "Resultate", "step_cart": "Warenkorb", "step_chk": "Angaben", "step_pay": "Zahlung", "step_twint": "TWINT", "step_conf": "Bestätigung", "tag_demo": "Demo · voller Pfad", "tag_listed": "Name auf Alphafoto gesehen", "tag_example": "Beispiel", "bib_err": "Bitte gültige Startnummer (Ziffern).", "bib_hint_lm": "Demo Lausanne vorausgefüllt: 30370 (Fall «nicht gefunden»).", "bib_hint_found": "Beispiel-Startnummer für den Schnellweg versuchen.", "bib_hint_gen": "Startnummer eingeben.", "point_generic": "Fotopunkt", "why_hi": "Fenster", "why_hi2": "ähnliches Outfit", "why_mid": "Breites Fenster", "ag_s1": "Fotos Punkt Ouchy", "ag_s2": "Nach Zeitfenster", "ag_s3": "Startnummern-OCR", "ag_s4": "Outfit-Filter", "ag_s5": "Endranking", "ag_s1f": "Bereits verknüpfte Fotos", "ag_s2f": "Outfit-Filter", "ag_s3f": "Endranking", "found_count": "12 Fotos bereits indexiert (simuliert)", "notify_ok": "Benachrichtigung aktiviert (Simulation).", "share_ok": "Share-Link kopiert (Simulation).", "lang_label": "Sprache", "cart_bar_view": "Warenkorb ansehen", "cart_added": "Zum Warenkorb"}, "en": {"banner": "Conceptual mockup — not affiliated with Alpha Foto — sample data", "brand_sub": "Sports event photography", "cart_aria": "Cart", "hero_title": "Find your race photos", "hero_lead": "Pick your event. We handle the rest.", "events_title": "Find my event", "events_lead": "Browse events — running, cycling, triathlon and more.", "events_empty": "No matching events. Try another filter.", "lbl_search": "Search", "lbl_sport": "Sport", "sport_all": "All", "lbl_year": "Year", "year_all": "All", "lbl_region": "Region", "region_all": "Switzerland", "bib_title": "Your race & bib", "bib_lead": "Select the distance and enter your bib number.", "lbl_race": "Race", "lbl_bib": "Bib number", "back": "Back", "next": "Continue", "next_search": "Search my photos", "next_times": "Use these times", "next_search_agent": "Start search", "next_refine": "Refine with outfit", "restart": "Another event", "nf_title": "No photos linked to this bib", "nf_lead": "It happens. Your race times can still find you.", "nf_status": "No OCR match in the catalogue (example).", "nf_a_t": "Enter my finish time", "nf_a_d": "Estimate passage windows from your chrono.", "nf_b_t": "Fetch my times", "nf_b_d": "By name and year — simulated official timing.", "nf_c_t": "Paste my result link", "nf_c_d": "Timing profile — simulated demo.", "found_banner": "Good news: photos are already linked to this bib (sample fast path).", "found_title": "Bib recognised", "found_lead": "Refine with your outfit, then the agent ranks your best photos.", "found_note": "Mockup example — simulated catalogue.", "pos_title": "Runners around you", "pos_lead": "Estimated passage windows at each photo point.", "pos_note": "Photo points and windows = demo example / hypothesis.", "pos_neighbors": "Neighbor anchors (fictional)", "out_title": "What were you wearing?", "out_lead": "A few colour chips are enough.", "out_top": "Top", "out_bottom": "Bottom", "out_extra": "Extras", "out_desc": "Describe yourself (optional)", "out_face": "Face option: add a selfie and explicitly consent to sensitive biometric processing (nLPD). Off by default.", "out_selfie": "Selfie (local file, not uploaded)", "ag_title": "The agent is finding your photos", "ag_lead": "Time filter → bib OCR → outfit → ranking.", "ag_count_lbl": "candidates kept", "res_title": "Your likely photos", "res_lead": "Best match first. Illustration images only.", "res_notify": "Notify me of new photos", "res_all_points": "All points", "btn_yes": "That's me", "btn_no": "Not me", "btn_add": "Add", "btn_remove": "Remove", "illust": "Illustration image", "conf_hi": "High confidence", "conf_mid": "Medium confidence", "cart_title": "Your cart", "cart_lead": "Review your photos before paying. No real payment in this mockup.", "cart_empty_title": "Your cart is empty", "cart_empty_lead": "Add photos from results, or start by finding your event.", "cart_browse": "Find my event", "cart_clear": "Clear cart", "cart_format_hd": "Digital HD", "cart_format_print": "Print", "cart_print_ex": "print price = example", "cart_qty": "Qty", "cart_subtotal": "Subtotal", "cart_pack_title": "“All my photos” pack", "cart_pack_ex": "example", "cart_pack_save": "You save", "cart_pack_suggest": "The pack is better value for your selection — switch suggested.", "cart_pack_apply": "Apply pack", "cart_promo": "Promo code", "cart_promo_apply": "Apply", "cart_promo_ok": "Code DEMO10 applied (−10%).", "cart_promo_bad": "That code isn’t recognised. Try DEMO10 (example).", "cart_vat": "Swiss VAT 8.1% included (example calculation)", "cart_total": "Total", "cart_checkout": "Proceed to payment", "cart_unit": "CHF 12.00 / HD photo", "chk_title": "Your details", "chk_lead": "To receive the download link (simulation — no real email).", "lbl_name": "Full name", "lbl_email": "Email", "err_name": "Please enter your name.", "err_email": "Please enter a valid email.", "pay_title": "Choose payment", "pay_lead": "Methods listed on alphafoto.com — no real payment here.", "pay_twint": "TWINT", "pay_twint_rec": "Recommended in Switzerland", "pay_card": "Visa / Mastercard", "pay_pf": "PostFinance / invoice", "pay_paypal": "PayPal", "pay_card_na": "Card payment not available in the demo (no card fields).", "pay_other_na": "Shown for the demo — flow not simulated. Please choose TWINT.", "pay_continue": "Continue", "twint_title": "Pay with TWINT", "twint_lead_desk": "Open the TWINT app and scan the QR (fake — demo only).", "twint_lead_mob": "Open TWINT to confirm payment (simulation).", "twint_open": "Open TWINT", "twint_demo": "Demo QR — no real payment", "twint_timer": "Expires in", "twint_sim": "Simulate confirmation", "twint_wait": "Waiting for confirmation…", "conf_title": "Payment confirmed", "conf_lead": "Simulation succeeded. Here is your fictional order summary.", "conf_order": "Order no.", "conf_download": "Download HD", "conf_share": "Share", "conf_notify": "Notify me of new photos", "conf_email_preview": "Confirmation email preview (simulated)", "conf_home": "Back to home", "footer_how": "How the search works", "footer_credits": "Image credits", "footer_legal": "Independent conceptual mockup — not affiliated with Alpha Foto GmbH. No scraping. No real payment. v3.2 — 27.10.2026.", "step_events": "Event", "step_bib": "Bib", "step_times": "Times", "step_pos": "Position", "step_out": "Outfit", "step_agent": "Agent", "step_res": "Results", "step_cart": "Cart", "step_chk": "Details", "step_pay": "Payment", "step_twint": "TWINT", "step_conf": "Confirmation", "tag_demo": "Demo · full path", "tag_listed": "name seen on Alphafoto", "tag_example": "example", "bib_err": "Enter a valid bib number (digits).", "bib_hint_lm": "Lausanne demo prefilled: 30370 (“bib not found” case).", "bib_hint_found": "Try the sample bib for the fast path.", "bib_hint_gen": "Enter your bib number.", "point_generic": "Photo point", "why_hi": "Window", "why_hi2": "similar outfit", "why_mid": "Wide window", "ag_s1": "Ouchy point photos", "ag_s2": "After time window", "ag_s3": "Bib OCR", "ag_s4": "Outfit filter", "ag_s5": "Final ranking", "ag_s1f": "Photos already linked to bib", "ag_s2f": "Outfit filter", "ag_s3f": "Final ranking", "found_count": "12 photos already indexed (simulated)", "notify_ok": "Notification enabled (simulation).", "share_ok": "Share link copied (simulation).", "lang_label": "Language", "cart_bar_view": "View cart", "cart_added": "Added to cart"}};
 (function(){
 'use strict';
 const IMG='assets/img/';
-const PRICE=12;
-/** Events: names/dates only if seen on alphafoto.com (27.10.2026). Others marked example. */
+const PRICE_HD=12;
+const PRICE_PRINT=29; // example
+const PACK_PRICE=79; // example
+const VAT=0.081;
+const LS_CART='pf_cart_v32';
+const LS_LANG='pf_lang_v32';
+const I18N=window.__I18N__;
+
 const EVENTS=[
   {id:'lm2026',name:'Lausanne Marathon',date:'25.10.2026',sport:'run',region:'vd',img:'hero.jpg',featured:true,verified:true,races:['Semi-marathon','Marathon','10 km'],
     points:[
@@ -439,133 +540,123 @@ const ROMAIN={name:'Romain Magnin',bib:'30370',race:'Semi-marathon',splits:[
 const COLORS=[['#111111','Noir'],['#FFFFFF','Blanc'],['#c6322a','Rouge'],['#1B4D9E','Bleu'],['#2F6F3E','Vert'],['#F2C94C','Jaune'],['#E8E8EA','Gris'],['#E85D04','Orange']];
 const GALS=['gal-u00.jpg','gal-u01.jpg','gal-u02.jpg','gal-u03.jpg','gal-u04.jpg','gal-u05.jpg','gal-u06.jpg','gal-u07.jpg','gal-u08.jpg','gal-u09.jpg','gal-u10.jpg','gal-u11.jpg','gal-bib-safe.jpg'];
 
-const I18N={
-  de:{
-    banner:'Konzept-Mockup — nicht mit Alpha Foto verbunden — Beispieldaten',
-    brand_sub:'Fotos von Sportveranstaltungen',
-    hero_title:'Finden Sie Ihre Rennfotos', hero_lead:'Wählen Sie Ihren Event. Den Rest erledigen wir.',
-    events_title:'Meinen Event finden', events_lead:'Suche unter Events — Laufen, Velo, Triathlon und mehr.',
-    events_empty:'Kein Event passt. Andere Filter versuchen.',
-    lbl_search:'Suche', lbl_sport:'Sport', sport_all:'Alle', lbl_year:'Jahr', year_all:'Alle', lbl_region:'Region', region_all:'Schweiz',
-    bib_title:'Ihre Distanz & Startnummer', bib_lead:'Distanz und Startnummer angeben.',
-    lbl_race:'Rennen', lbl_bib:'Startnummer', back:'Zurück', next:'Weiter', next_search:'Fotos suchen', next_times:'Diese Zeiten nutzen',
-    next_search_agent:'Suche starten', next_refine:'Mit Outfit verfeinern', restart:'Anderer Event',
-    nf_title:'Keine Fotos zu dieser Startnummer', nf_lead:'Kommt vor. Mit Ihren Laufzeiten finden wir Sie trotzdem.',
-    nf_status:'Keine OCR-Treffer im Katalog (Beispiel).',
-    nf_a_t:'Endzeit manuell eingeben', nf_a_d:'Passagefenster aus Ihrer Zeit schätzen.',
-    nf_b_t:'Meine Zeiten holen', nf_b_d:'Nach Name und Jahr — simulierte offizielle Zeiten.',
-    nf_c_t:'Resultats-Link einfügen', nf_c_d:'Zeitnehmer-Profil — Demo simuliert.',
-    found_banner:'Gute Nachricht: Fotos sind bereits mit dieser Startnummer verknüpft (Beispiel-Schnellweg).',
-    found_title:'Startnummer erkannt', found_lead:'Outfit verfeinern, dann sortiert der Agent Ihre besten Fotos.',
-    found_note:'Mockup-Beispiel — simulierter Katalog.',
-    pos_title:'Läufer um Sie herum', pos_lead:'Geschätzte Passagefenster an jedem Fotopunkt.',
-    pos_note:'Fotopunkte und Fenster = Demo-Beispiel/Hypothese.', pos_neighbors:'Nachbar-Anker (fiktiv)',
-    out_title:'Wie waren Sie gekleidet?', out_lead:'Ein paar Farben reichen.',
-    out_top:'Oberteil', out_bottom:'Hose', out_extra:'Accessoires', out_desc:'Kurz beschreiben (optional)',
-    out_face:'Gesichtsoption: Selfie + ausdrückliche Einwilligung (nDSG). Standardmässig aus.',
-    out_selfie:'Selfie (lokal, wird nicht gesendet)',
-    ag_title:'Der Agent sucht Ihre Fotos', ag_lead:'Zeitfilter → Startnummern-OCR → Outfit → Ranking.', ag_count_lbl:'behaltene Kandidaten',
-    res_title:'Ihre wahrscheinlichen Fotos', res_lead:'Beste Treffer zuerst. Nur Illustrationsbilder.',
-    res_notify:'Bei neuen Fotos benachrichtigen', res_all_points:'Alle Punkte',
-    cart_photos:'Fotos', cart_unit:'CHF 12 / Foto', cart_pack:'Paket «alle meine Fotos» = Beispiel',
-    cart_add_pack:'Paket hinzufügen (Bsp.)', cart_checkout:'Weiter',
-    chk_title:'Zusammenfassung', chk_lead:'Auswahl prüfen. Keine echte Zahlung in diesem Mockup.', chk_pay:'Bezahlen',
-    done_title:'Ende der Demo', done_lead:'Danke. Keine Bestellung, keine Zahlung.',
-    footer_how:'So funktioniert die Suche', footer_credits:'Bildnachweise',
-    footer_legal:'Unabhängiges Konzept-Mockup — nicht mit Alpha Foto GmbH verbunden. v3.1 — 27.10.2026.',
-    step_events:'Event', step_bib:'Startnr.', step_times:'Zeiten', step_pos:'Position', step_out:'Outfit', step_agent:'Agent', step_res:'Resultate', step_chk:'Warenkorb', step_done:'Fertig'
-  },
-  en:{
-    banner:'Conceptual mockup — not affiliated with Alpha Foto — sample data',
-    brand_sub:'Sports event photography',
-    hero_title:'Find your race photos', hero_lead:'Pick your event. We handle the rest.',
-    events_title:'Find my event', events_lead:'Browse events — running, cycling, triathlon and more.',
-    events_empty:'No matching events. Try another filter.',
-    lbl_search:'Search', lbl_sport:'Sport', sport_all:'All', lbl_year:'Year', year_all:'All', lbl_region:'Region', region_all:'Switzerland',
-    bib_title:'Your race & bib', bib_lead:'Select the distance and enter your bib number.',
-    lbl_race:'Race', lbl_bib:'Bib number', back:'Back', next:'Continue', next_search:'Search my photos', next_times:'Use these times',
-    next_search_agent:'Start search', next_refine:'Refine with outfit', restart:'Another event',
-    nf_title:'No photos linked to this bib', nf_lead:'It happens. Your race times can still find you.',
-    nf_status:'No OCR match in the catalogue (example).',
-    nf_a_t:'Enter my finish time', nf_a_d:'Estimate passage windows from your chrono.',
-    nf_b_t:'Fetch my times', nf_b_d:'By name and year — simulated official timing.',
-    nf_c_t:'Paste my result link', nf_c_d:'Timing profile — simulated demo.',
-    found_banner:'Good news: photos are already linked to this bib (sample fast path).',
-    found_title:'Bib recognised', found_lead:'Refine with your outfit, then the agent ranks your best photos.',
-    found_note:'Mockup example — simulated catalogue.',
-    pos_title:'Runners around you', pos_lead:'Estimated passage windows at each photo point.',
-    pos_note:'Photo points and windows = demo example / hypothesis.', pos_neighbors:'Neighbor anchors (fictional)',
-    out_title:'What were you wearing?', out_lead:'A few colour chips are enough.',
-    out_top:'Top', out_bottom:'Bottom', out_extra:'Extras', out_desc:'Describe yourself (optional)',
-    out_face:'Face option: add a selfie and explicitly consent to sensitive biometric processing (nLPD). Off by default.',
-    out_selfie:'Selfie (local file, not uploaded)',
-    ag_title:'The agent is finding your photos', ag_lead:'Time filter → bib OCR → outfit → ranking.', ag_count_lbl:'candidates kept',
-    res_title:'Your likely photos', res_lead:'Best match first. Illustration images only.',
-    res_notify:'Notify me of new photos', res_all_points:'All points',
-    cart_photos:'photos', cart_unit:'CHF 12 / photo', cart_pack:'“All my photos” pack = example',
-    cart_add_pack:'Add pack (example)', cart_checkout:'Continue',
-    chk_title:'Order summary', chk_lead:'Check your selection. No real payment in this mockup.', chk_pay:'Pay',
-    done_title:'End of the demo', done_lead:'Thanks. No order was placed and no payment was processed.',
-    footer_how:'How the search works', footer_credits:'Image credits',
-    footer_legal:'Independent conceptual mockup — not affiliated with Alpha Foto GmbH. v3.1 — 27.10.2026.',
-    step_events:'Event', step_bib:'Bib', step_times:'Times', step_pos:'Position', step_out:'Outfit', step_agent:'Agent', step_res:'Results', step_chk:'Cart', step_done:'Done'
-  }
-};
+const SCREENS=['events','bib','notfound','found','position','outfit','agent','results','cart','checkout','pay','twint','confirm'];
+const STEP_KEYS={events:'step_events',bib:'step_bib',notfound:'step_times',found:'step_bib',position:'step_pos',outfit:'step_out',agent:'step_agent',results:'step_res',cart:'step_cart',checkout:'step_chk',pay:'step_pay',twint:'step_twint',confirm:'step_conf'};
 
-const SCREENS=['events','bib','notfound','found','position','outfit','agent','results','checkout','done'];
-const STEP_KEYS={events:'step_events',bib:'step_bib',notfound:'step_times',found:'step_bib',position:'step_pos',outfit:'step_out',agent:'step_agent',results:'step_res',checkout:'step_chk',done:'step_done'};
-const FR_STEPS={events:'Événement',bib:'Dossard',notfound:'Temps',found:'Dossard',position:'Position',outfit:'Tenue',agent:'Agent',results:'Résultats',checkout:'Panier',done:'Fin'};
+let lang=localStorage.getItem(LS_LANG)||'fr';
+let screen='events', event=null, path=null, bibFoundPath=false, historyQuiet=false;
+let cart=[]; // {id,src,pointLabel,format,qty,eventName,bib}
+let packOn=false, promoOk=false, payMethod='twint';
+let customer={name:'',email:''};
+let orderId='';
+let twintTimerIv=null, twintAutoIv=null;
+let galleryItems=[];
 
-let lang='fr', screen='events', event=null, selected=new Set(), path=null, bibFoundPath=false, historyQuiet=false;
-
-function tr(key, fallback){
-  if(lang==='fr') return fallback;
-  return (I18N[lang]&&I18N[lang][key]) || fallback;
+function tr(key){
+  return (I18N[lang]&&I18N[lang][key]) || (I18N.fr&&I18N.fr[key]) || key;
+}
+function chf(n){
+  const v=(Math.round(n*100)/100).toFixed(2);
+  return 'CHF '+v;
+}
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),1400);
 }
 function applyI18n(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
-    if(!el.dataset.fr) el.dataset.fr=el.textContent;
-    el.textContent = lang==='fr' ? el.dataset.fr : (I18N[lang][el.dataset.i18n]||el.dataset.fr);
+    const k=el.dataset.i18n;
+    if(I18N[lang]&&I18N[lang][k]!=null) el.textContent=I18N[lang][k];
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+    const k=el.dataset.i18nAria;
+    el.setAttribute('aria-label', tr(k));
   });
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.lang===lang?'true':'false'));
   document.documentElement.lang=lang;
+  localStorage.setItem(LS_LANG, lang);
   updateProgress();
-  renderEvents();
+  renderCartScreen();
+  updateCartChrome();
+  if(screen==='results') renderResults();
+  if(screen==='twint') setupTwintUI();
 }
-
-function updateProgress(){
-  const order = bibFoundPath
-    ? ['events','bib','found','outfit','agent','results','checkout','done']
-    : ['events','bib','notfound','position','outfit','agent','results','checkout','done'];
-  let idx=order.indexOf(screen);
-  if(idx<0) idx=Math.max(0, order.length-1);
-  const pct=Math.max(6, Math.round(((idx+1)/order.length)*100));
-  document.getElementById('progressFill').style.width=pct+'%';
-  const label = lang==='fr' ? (FR_STEPS[screen]||'') : tr(STEP_KEYS[screen], FR_STEPS[screen]||'');
-  document.getElementById('progressLabel').textContent=label;
-  document.getElementById('progressCount').textContent=`${Math.min(idx+1,order.length)} / ${order.length}`;
+function loadCart(){
+  try{
+    const raw=localStorage.getItem(LS_CART);
+    if(raw){ const d=JSON.parse(raw); cart=Array.isArray(d.items)?d.items:[]; packOn=!!d.packOn; promoOk=!!d.promoOk; }
+  }catch(e){ cart=[]; }
 }
+function saveCart(){
+  localStorage.setItem(LS_CART, JSON.stringify({items:cart, packOn, promoOk}));
+}
+function cartCount(){ return cart.reduce((s,i)=>s+ (i.format==='print'?i.qty:1), 0); }
+function linePrice(it){
+  if(it.format==='print') return PRICE_PRINT * (it.qty||1);
+  return PRICE_HD;
+}
+function subtotal(){
+  if(packOn) return PACK_PRICE;
+  return cart.reduce((s,i)=>s+linePrice(i),0);
+}
+function discount(){
+  return promoOk ? subtotal()*0.10 : 0;
+}
+function total(){ return Math.max(0, subtotal()-discount()); }
+function vatPart(){ return total() - total()/(1+VAT); }
 
+function updateCartChrome(){
+  const n=cart.length;
+  const badge=document.getElementById('cartBadge');
+  badge.textContent=String(n);
+  badge.classList.toggle('show', n>0);
+  document.getElementById('cartCount').textContent=String(n)+' · '+photoLabel(n);
+  document.getElementById('cartTotal').textContent=chf(total());
+  const on=screen==='results' && n>=0;
+  setCartPad(screen==='results');
+  document.getElementById('btnBarCheckout').disabled = n===0;
+}
+function photoLabel(n){
+  if(lang==='de') return n===1?'Foto':'Fotos';
+  if(lang==='en') return n===1?'photo':'photos';
+  return n<=1?'photo':'photos';
+}
 function setCartPad(on){
   const bar=document.getElementById('cartbar');
   bar.classList.toggle('show', on);
   const apply=()=>{
-    const h = on ? Math.ceil(bar.getBoundingClientRect().height || 0) : 0;
-    document.documentElement.style.setProperty('--cart-h', (h? h+8 : 0)+'px');
+    const h = on ? Math.ceil(bar.getBoundingClientRect().height||0) : 0;
+    document.documentElement.style.setProperty('--cart-h', (h?h+8:0)+'px');
   };
   requestAnimationFrame(()=>requestAnimationFrame(apply));
   if(on && !window.__cartRO){
     window.addEventListener('resize', ()=>{ if(bar.classList.contains('show')) apply(); });
     if(typeof ResizeObserver!=='undefined'){
-      window.__cartRO = new ResizeObserver(()=>{ if(bar.classList.contains('show')) apply(); });
+      window.__cartRO=new ResizeObserver(()=>{ if(bar.classList.contains('show')) apply(); });
       window.__cartRO.observe(bar);
-    } else {
-      window.__cartRO = true;
-    }
+    } else window.__cartRO=true;
   }
+}
+function popBadge(){
+  const badge=document.getElementById('cartBadge');
+  badge.classList.remove('pop'); void badge.offsetWidth; badge.classList.add('pop');
+}
+
+function updateProgress(){
+  const order = bibFoundPath
+    ? ['events','bib','found','outfit','agent','results','cart','checkout','pay','twint','confirm']
+    : ['events','bib','notfound','position','outfit','agent','results','cart','checkout','pay','twint','confirm'];
+  let idx=order.indexOf(screen);
+  if(idx<0) idx=0;
+  const pct=Math.max(6, Math.round(((idx+1)/order.length)*100));
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressLabel').textContent=tr(STEP_KEYS[screen]||'');
+  document.getElementById('progressCount').textContent=`${Math.min(idx+1,order.length)} / ${order.length}`;
 }
 
 function go(name, push=true){
+  const toastEl=document.getElementById('toast'); if(toastEl) toastEl.classList.remove('show');
   screen=name;
   SCREENS.forEach(id=>{
     const el=document.getElementById('s-'+id);
@@ -577,7 +668,11 @@ function go(name, push=true){
   if(name==='position') renderPosition();
   if(name==='agent') runAgent();
   if(name==='results') renderResults();
-  if(name==='checkout') renderRecap();
+  if(name==='cart') renderCartScreen();
+  if(name==='twint') startTwint();
+  if(name==='confirm') renderConfirm();
+  if(name==='pay'){ payMethod='twint'; syncPayOpts(); }
+  updateCartChrome();
   if(push && !historyQuiet){
     const url=new URL(location.href);
     url.hash = '#'+name+(event?('/'+event.id):'');
@@ -596,7 +691,7 @@ function renderEvents(){
     if(sport!=='all' && e.sport!==sport) return false;
     if(region!=='all' && e.region!==region) return false;
     if(year!=='all' && e.date && !String(e.date).includes(year) && e.date!==year) return false;
-    if(year!=='all' && !e.date && year) {/* year-only events keep for 2026 filter if verified */ if(year!=='2026') return false; }
+    if(year!=='all' && !e.date && year && year!=='2026') return false;
     if(q && !e.name.toLowerCase().includes(q)) return false;
     return true;
   });
@@ -604,15 +699,14 @@ function renderEvents(){
   list.forEach(e=>{
     const btn=document.createElement('button');
     btn.type='button'; btn.className='card';
-    const yearLabel=e.date||'';
     const tags=[];
-    if(e.featured) tags.push('<div class="tag">'+tr('tag_demo','Démo · parcours complet')+'</div>');
-    if(e.example || !e.verified) tags.push('<span class="pill ex">'+tr('tag_example','exemple')+'</span>');
-    else if(!e.featured) tags.push('<span class="pill ok">'+tr('tag_listed','nom vu sur Alphafoto')+'</span>');
+    if(e.featured) tags.push('<div class="tag">'+tr('tag_demo')+'</div>');
+    if(e.example || !e.verified) tags.push('<span class="pill ex">'+tr('tag_example')+'</span>');
+    else if(!e.featured) tags.push('<span class="pill ok">'+tr('tag_listed')+'</span>');
     btn.innerHTML=`<img class="thumb" src="${IMG}${e.img}" alt="" loading="lazy" width="640" height="360" />
       <div class="body">${tags.join(' ')}
         <h3>${e.name}${e.date&&e.date.length>4?' '+e.date.slice(-4):''}</h3>
-        <div class="meta"><span class="clock">${yearLabel||'—'}</span> · ${e.sport}</div>
+        <div class="meta"><span class="clock">${e.date||'—'}</span> · ${e.sport}</div>
       </div>`;
     btn.addEventListener('click',()=>selectEvent(e));
     grid.appendChild(btn);
@@ -620,14 +714,12 @@ function renderEvents(){
 }
 
 function selectEvent(e){
-  event=e; bibFoundPath=false; selected.clear();
-  const label=e.name+(e.date?(' · '+e.date):'')+(e.example?' · '+tr('tag_example','exemple'):'');
-  document.getElementById('eventPill').textContent=label;
-  document.getElementById('race').innerHTML=e.races.map((r,i)=>`<option ${i===0?'selected':''}>${r}</option>`).join('');
+  event=e; bibFoundPath=false;
+  document.getElementById('eventPill').textContent=e.name+(e.date?(' · '+e.date):'')+(e.example?' · '+tr('tag_example'):'');
+  const race=document.getElementById('race');
+  race.innerHTML=(e.races||['Race']).map(r=>`<option>${r}</option>`).join('');
   document.getElementById('bib').value=e.demoBib||'';
-  document.getElementById('bibHint').textContent = e.id==='lm2026'
-    ? tr('bib_hint_lm','Exemple prérempli pour la démo Lausanne : 30370 (cas « dossard non trouvé »).')
-    : (e.bibFound ? tr('bib_hint_found','Essayez le dossard d\'exemple pour le parcours rapide.') : tr('bib_hint_gen','Saisissez votre dossard.'));
+  document.getElementById('bibHint').textContent = e.id==='lm2026' ? tr('bib_hint_lm') : (e.bibFound ? tr('bib_hint_found') : tr('bib_hint_gen'));
   document.getElementById('bibErr').textContent='';
   document.getElementById('bibField').classList.remove('invalid');
   go('bib');
@@ -639,7 +731,7 @@ document.getElementById('bibForm').addEventListener('submit', e=>{
   const field=document.getElementById('bibField');
   if(!/^\d{1,6}$/.test(bib)){
     field.classList.add('invalid');
-    document.getElementById('bibErr').textContent=tr('bib_err','Entrez un numéro de dossard valide (chiffres).');
+    document.getElementById('bibErr').textContent=tr('bib_err');
     document.getElementById('bib').focus();
     return;
   }
@@ -648,80 +740,45 @@ document.getElementById('bibForm').addEventListener('submit', e=>{
   document.getElementById('bibDisplay').textContent=bib;
   document.getElementById('bibFoundDisplay').textContent=bib;
   document.getElementById('nfEvent').textContent=(event?event.name:'')+' · '+document.getElementById('race').value;
-  // Found path: event flagged bibFound AND bib matches demoBib (or any on example event with bibFound)
   const found = !!(event && event.bibFound && (bib===event.demoBib || (event.example && bib)));
   bibFoundPath=found;
-  path=null;
-  document.getElementById('pathPanel').classList.add('hidden');
-  document.getElementById('pathPanel').innerHTML='';
-  document.getElementById('btnTimesOk').classList.add('hidden');
   if(found){
-    document.getElementById('foundMeta').textContent=(event.name)+' · '+document.getElementById('race').value+' · '+tr('found_count','12 photos déjà indexées (simulé)');
+    document.getElementById('foundMeta').textContent=(event.name)+' · '+document.getElementById('race').value+' · '+tr('found_count');
     go('found');
-  } else {
-    go('notfound');
-  }
+  } else go('notfound');
 });
 
-function showTimes(sourceLabel){
+function showTimes(msg){
   const panel=document.getElementById('pathPanel');
   panel.classList.remove('hidden');
-  panel.innerHTML=`<p class="note">${sourceLabel}</p>
-    <p class="note">${tr('chrono_prod','En production : via accord / API avec le chronométreur — aucun appel réel ici.')}</p>
-    <table class="split-table"><thead><tr><th>${tr('th_point','Point')}</th><th>${tr('th_dist','Distance')}</th><th>${tr('th_net','Temps net')}</th><th>${tr('th_clock','Heure horloge')}</th></tr></thead>
-    <tbody>${ROMAIN.splits.map(s=>`<tr><td>${s.label}</td><td>${s.dist}</td><td class="time">${s.net}</td><td class="time">${s.clock}</td></tr>`).join('')}</tbody></table>`;
+  const rows=ROMAIN.splits.map(s=>`<tr><td>${s.label}</td><td>${s.dist}</td><td>${s.net}</td><td>${s.clock}</td></tr>`).join('');
+  panel.innerHTML=`<p><b>${msg}</b></p>
+    <p class="note">En production : via accord / API avec le chronométreur — aucun appel réel ici.</p>
+    <div style="overflow:auto"><table style="width:100%;font-size:13px;border-collapse:collapse">
+      <thead><tr><th>Point</th><th>Distance</th><th>Temps net</th><th>Heure</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
   document.getElementById('btnTimesOk').classList.remove('hidden');
 }
-function runRobot(){
-  const panel=document.getElementById('pathPanel');
-  panel.classList.remove('hidden');
-  panel.innerHTML=`<div class="field" style="margin-bottom:10px"><label>${tr('lbl_name','Nom')}</label><input value="${ROMAIN.name}" id="robotName" /></div>
-    <div class="field" style="margin-bottom:10px"><label>${tr('lbl_year','Année')}</label><input value="2026" id="robotYear" /></div>
-    <div class="robot" id="robotSteps">
-      <div class="step" data-i="0"><span class="dot"></span><span>${tr('rb0','Connexion chronométreur (simulée)')}</span></div>
-      <div class="step" data-i="1"><span class="dot"></span><span>${tr('rb1','Recherche')} « ${ROMAIN.name} » · Lausanne Marathon</span></div>
-      <div class="step" data-i="2"><span class="dot"></span><span>${tr('rb2','Lecture des splits publics')}</span></div>
-      <div class="step" data-i="3"><span class="dot"></span><span>${tr('rb3','Conversion heures horloge')}</span></div>
-    </div>`;
-  document.getElementById('btnTimesOk').classList.add('hidden');
-  let i=0;
-  const tick=()=>{
-    const steps=[...panel.querySelectorAll('.robot .step')];
-    steps.forEach(s=>{ const n=+s.dataset.i; s.classList.toggle('on', n===i); s.classList.toggle('done', n<i); });
-    i++;
-    if(i<=steps.length) setTimeout(tick, 480);
-    else showTimes(tr('rb_done','Temps récupérés (simulation) pour ')+ROMAIN.name+' — Datasport public, démo uniquement.');
-  };
-  setTimeout(tick, 250);
-}
-function runLink(){
-  const panel=document.getElementById('pathPanel');
-  panel.classList.remove('hidden');
-  panel.innerHTML=`<div class="field"><label>${tr('lbl_link','Lien profil / résultat')}</label>
-    <input id="resultLink" value="https://www.datasport.com/…/magnin-romain" /></div>
-    <p class="note" style="margin-top:8px">${tr('link_wait','Analyse du lien… (simulée)')}</p>`;
-  document.getElementById('btnTimesOk').classList.add('hidden');
-  setTimeout(()=>showTimes(tr('link_done','Profil collé — splits importés (simulation). Aucun appel réseau.')), 800);
-}
-function runManual(){
-  const panel=document.getElementById('pathPanel');
-  panel.classList.remove('hidden');
-  panel.innerHTML=`<div class="field"><label>${tr('lbl_ftime','Temps final (hh:mm:ss)')}</label>
-    <input id="manualTime" class="time" value="1:56:15,9" /></div>
-    <p class="note" style="margin-top:8px">${tr('manual_note','Pour la démo, les splits détaillés utilisent les temps publics d\'exemple une fois validés.')}</p>`;
-  showTimes(tr('manual_done','Temps manuel + splits d\'exemple (Datasport public, démo).'));
-}
-
-document.querySelectorAll('.choice').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.choice').forEach(b=>b.setAttribute('aria-pressed','false'));
-    btn.setAttribute('aria-pressed','true');
-    path=btn.dataset.path;
-    if(path==='robot') runRobot();
-    else if(path==='link') runLink();
-    else runManual();
-  });
-});
+document.querySelectorAll('[data-path]').forEach(b=>b.addEventListener('click',()=>{
+  path=b.dataset.path;
+  if(path==='manual'){
+    document.getElementById('pathPanel').classList.remove('hidden');
+    document.getElementById('pathPanel').innerHTML=`<div class="field"><label>Temps final</label><input id="manualTime" value="1:56:15" /></div>
+      <p class="note" style="margin-top:8px">Pour la démo, les splits détaillés utilisent les temps publics d'exemple une fois validés.</p>`;
+    document.getElementById('btnTimesOk').classList.remove('hidden');
+    document.getElementById('btnTimesOk').onclick=()=>{ showTimes(tr('nf_a_t')); };
+  } else if(path==='robot'){
+    const panel=document.getElementById('pathPanel');
+    panel.classList.remove('hidden');
+    panel.innerHTML='<p class="note">…</p>';
+    let n=0; const iv=setInterval(()=>{
+      n++; panel.innerHTML=`<p>${'●'.repeat(n%3+1)} ${tr('nf_b_t')}</p>`;
+      if(n>8){ clearInterval(iv); showTimes('Temps récupérés (simulation) pour '+ROMAIN.name+' — Datasport public, démo uniquement.'); }
+    }, 280);
+  } else {
+    showTimes(tr('nf_c_t')+' — démo');
+  }
+}));
 document.getElementById('btnTimesOk').addEventListener('click',()=>go('position'));
 document.getElementById('btnFoundNext').addEventListener('click',()=>go('outfit'));
 
@@ -733,7 +790,6 @@ function renderPosition(){
     <div class="pt ${p.id==='ouchy'||i===Math.min(3,pts.length-1)?'you':''}">
       <div class="pin"></div><div><strong>${p.label}</strong></div><div class="win">${p.t||'—'}</div>
     </div>`).join('');
-  // fictional neighbor bibs near 30370 — not conflicting as "the" athlete
   document.getElementById('neighbors').innerHTML=[
     ['30358','Ouchy · photo liée'],['30366','Ouchy · ancre horloge'],['30381','Arrivée · ancre']
   ].map(([b,l])=>`<div class="neighbor"><b>${b}</b><div class="note">${l}</div></div>`).join('');
@@ -761,15 +817,15 @@ document.getElementById('faceOpt').addEventListener('change',e=>document.getElem
 
 function runAgent(){
   const steps= bibFoundPath ? [
-    {lbl:tr('ag_s1f','Photos déjà liées au dossard'), from:48, to:48},
-    {lbl:tr('ag_s2f','Filtre tenue'), from:48, to:19},
-    {lbl:tr('ag_s3f','Classement final'), from:19, to:10}
+    {lbl:tr('ag_s1f'), from:48, to:48},
+    {lbl:tr('ag_s2f'), from:48, to:19},
+    {lbl:tr('ag_s3f'), from:19, to:10}
   ] : [
-    {lbl:tr('ag_s1','Photos point Ouchy'), from:4280, to:4280},
-    {lbl:tr('ag_s2','Après fenêtre temporelle'), from:4280, to:186},
-    {lbl:tr('ag_s3','Lecture dossards (OCR)'), from:186, to:42},
-    {lbl:tr('ag_s4','Filtre tenue'), from:42, to:11},
-    {lbl:tr('ag_s5','Classement final'), from:11, to:8}
+    {lbl:tr('ag_s1'), from:4280, to:4280},
+    {lbl:tr('ag_s2'), from:4280, to:186},
+    {lbl:tr('ag_s3'), from:186, to:42},
+    {lbl:tr('ag_s4'), from:42, to:11},
+    {lbl:tr('ag_s5'), from:11, to:8}
   ];
   const box=document.getElementById('agentSteps');
   box.innerHTML=steps.map((s,i)=>`<div class="s" data-i="${i}"><span>${s.lbl}</span><span class="n">—</span></div>`).join('');
@@ -789,141 +845,312 @@ function runAgent(){
   runStep();
 }
 
-function renderResults(){
-  const pts=(event&&event.points&&event.points.length)?event.points:[{id:'p1',label:tr('point_generic','Point photo')}];
-  const sel=document.getElementById('pointFilter');
-  const cur=sel.value;
-  sel.innerHTML=`<option value="all">${tr('res_all_points','Tous les points')}</option>`+pts.map(p=>`<option value="${p.id}">${p.label}</option>`).join('');
-  if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
-  const filter=sel.value;
-  const items=[];
-  let gi=0;
+function buildGallery(){
+  const pts=(event&&event.points&&event.points.length)?event.points:[{id:'p1',label:tr('point_generic')}];
+  const items=[]; let gi=0;
   for(const p of pts){
     for(let k=0;k<2 && gi<GALS.length;k++,gi++){
       const idx=items.length;
       const conf= idx%3===1 ? 'mid' : 'hi';
       items.push({
-        id:'ph'+idx, point:p.id, pointLabel:p.label,
-        src:GALS[gi],
-        conf,
-        why: conf==='hi' ? (tr('why_hi','Fenêtre')+' '+p.label+' · '+tr('why_hi2','tenue proche')) : (tr('why_mid','Fenêtre large')+' · '+p.label),
+        id:'ph'+idx, point:p.id, pointLabel:p.label, src:GALS[gi], conf,
+        why: conf==='hi' ? (tr('why_hi')+' '+p.label+' · '+tr('why_hi2')) : (tr('why_mid')+' · '+p.label),
         score:96-idx*6
       });
     }
   }
   items.sort((a,b)=>b.score-a.score);
+  galleryItems=items;
+  return items;
+}
+
+function renderResults(){
+  const items=galleryItems.length?galleryItems:buildGallery();
+  const pts=(event&&event.points&&event.points.length)?event.points:[{id:'p1',label:tr('point_generic')}];
+  const sel=document.getElementById('pointFilter');
+  const cur=sel.value;
+  sel.innerHTML=`<option value="all">${tr('res_all_points')}</option>`+pts.map(p=>`<option value="${p.id}">${p.label}</option>`).join('');
+  if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
+  const filter=sel.value;
   const gal=document.getElementById('gallery');
   gal.innerHTML='';
   items.filter(it=>filter==='all'||it.point===filter).forEach(it=>{
+    const inCart=cart.some(c=>c.id===it.id);
     const el=document.createElement('article');
-    el.className='photo'+(selected.has(it.id)?' selected':'');
-    el.innerHTML=`<img class="ph" src="${IMG}${it.src}" alt="${tr('illust_alt','Illustration')} ${it.pointLabel}" loading="lazy" width="640" height="400" />
+    el.className='photo'+(inCart?' selected':'');
+    el.innerHTML=`<img class="ph" src="${IMG}${it.src}" alt="${tr('illust')} ${it.pointLabel}" loading="lazy" width="640" height="400" />
       <div class="info">
-        <div class="row" style="justify-content:space-between;gap:6px">
-          <strong>${it.pointLabel}</strong>
-          <span class="badge ${it.conf}" title="${it.why}">${it.conf==='hi'?tr('conf_hi','Confiance élevée'):tr('conf_mid','Confiance moyenne')}</span>
-        </div>
+        <div class="row"><strong>${it.pointLabel}</strong>
+          <span class="badge ${it.conf}">${it.conf==='hi'?tr('conf_hi'):tr('conf_mid')}</span></div>
         <div class="why">${it.why}</div>
-        <div class="illust">${tr('illust','Image d\'illustration')}</div>
+        <div class="illust">${tr('illust')}</div>
         <div class="btns">
-          <button type="button" class="yes" data-act="yes" aria-pressed="false">${tr('btn_yes','C\'est moi')}</button>
-          <button type="button" class="no" data-act="no" aria-pressed="false">${tr('btn_no','Pas moi')}</button>
-          <button type="button" data-act="cart">${selected.has(it.id)?tr('btn_remove','Retirer'):tr('btn_add','Ajouter')}</button>
+          <button type="button" class="yes" data-act="yes" aria-pressed="false">${tr('btn_yes')}</button>
+          <button type="button" class="no" data-act="no" aria-pressed="false">${tr('btn_no')}</button>
+          <button type="button" data-act="cart">${inCart?tr('btn_remove'):tr('btn_add')}</button>
         </div>
       </div>`;
     el.querySelectorAll('button').forEach(b=>{
       b.addEventListener('click',()=>{
         const act=b.dataset.act;
-        if(act==='cart'){ if(selected.has(it.id)) selected.delete(it.id); else selected.add(it.id); renderResults(); }
-        else if(act==='yes'){ b.setAttribute('aria-pressed','true'); el.querySelector('.no').setAttribute('aria-pressed','false'); selected.add(it.id); updateCart(); el.classList.add('selected'); el.querySelector('[data-act=cart]').textContent=tr('btn_remove','Retirer'); }
-        else { b.setAttribute('aria-pressed','true'); el.querySelector('.yes').setAttribute('aria-pressed','false'); selected.delete(it.id); el.classList.remove('selected'); el.style.opacity='.42'; updateCart(); }
+        if(act==='cart' || act==='yes'){
+          if(act==='yes'){ b.setAttribute('aria-pressed','true'); el.querySelector('.no').setAttribute('aria-pressed','false'); }
+          addToCart(it); el.classList.add('selected');
+          el.querySelector('[data-act=cart]').textContent=tr('btn_remove');
+        } else {
+          b.setAttribute('aria-pressed','true'); el.querySelector('.yes').setAttribute('aria-pressed','false');
+          removeFromCart(it.id); el.classList.remove('selected'); el.style.opacity='.42';
+          el.querySelector('[data-act=cart]').textContent=tr('btn_add');
+        }
       });
     });
     gal.appendChild(el);
   });
-  updateCart();
-}
-document.getElementById('pointFilter').addEventListener('change', renderResults);
-
-function photoLabel(n){
-  if(lang==='de') return n===1?'Foto':'Fotos';
-  if(lang==='en') return n===1?'photo':'photos';
-  return n<=1?'photo':'photos';
-}
-function updateCart(){
-  const n=selected.size;
-  document.getElementById('cartCount').textContent=String(n);
-  const lab=document.querySelector('#cartbar [data-i18n=cart_photos]');
-  if(lab) lab.textContent=photoLabel(n);
-  document.getElementById('cartTotal').textContent='CHF '+(n*PRICE);
-  document.getElementById('btnCheckout').disabled = n===0;
+  updateCartChrome();
 }
 
-function renderRecap(){
-  const n=selected.size;
-  const packNote = `<div class="note">${tr('chk_pack_note','Le pack « toutes mes photos » est un exemple de démo — tarif non vérifié côté Alphafoto.')}</div>`;
-  document.getElementById('recapBox').innerHTML=`
-    <div class="recap-line"><span>${event?event.name:'—'}</span><span class="pill">${document.getElementById('bib').value||'—'}</span></div>
-    <div class="recap-line"><span>${n} ${photoLabel(n)}</span><span class="time">CHF ${n*PRICE}</span></div>
-    <div class="recap-line"><span>${tr('cart_unit','CHF 12 / photo')}</span><span>${tr('chk_confirmed','tarif confirmé (hors page)')}</span></div>
-    ${packNote}
-    <div class="recap-total"><span>${tr('chk_total','Total')}</span><span class="time">CHF ${n*PRICE}</span></div>
-    <p class="note">${tr('chk_pay_note','Le bouton Payer ouvre uniquement l\'écran de fin de démo — pas de carte, pas de transaction.')}</p>`;
+function addToCart(it){
+  if(cart.some(c=>c.id===it.id)) return;
+  cart.push({
+    id:it.id, src:it.src, pointLabel:it.pointLabel, format:'hd', qty:1,
+    eventName: event?event.name:'', bib: document.getElementById('bib').value||''
+  });
+  packOn=false; saveCart(); updateCartChrome(); popBadge(); toast(tr('cart_added'));
+}
+function removeFromCart(id){
+  cart=cart.filter(c=>c.id!==id); saveCart(); updateCartChrome();
 }
 
-document.getElementById('btnPack').addEventListener('click',()=>{
-  document.querySelectorAll('#gallery .photo [data-act=cart]').forEach(btn=>{ if(btn.textContent===tr('btn_add','Ajouter') || btn.textContent==='Ajouter') btn.click(); });
+function renderCartScreen(){
+  const empty=document.getElementById('cartEmpty');
+  const filled=document.getElementById('cartFilled');
+  const isEmpty=!cart.length && !packOn;
+  empty.classList.toggle('hidden', !isEmpty);
+  filled.classList.toggle('hidden', isEmpty);
+  if(isEmpty) return;
+  const box=document.getElementById('cartLines');
+  box.innerHTML=cart.map((it,idx)=>{
+    return `<div class="cart-line" data-i="${idx}">
+      <img src="${IMG}${it.src}" alt="" width="72" height="72" />
+      <div>
+        <h4>${it.pointLabel}</h4>
+        <div class="meta">${it.eventName||'—'} · ${it.bib||'—'}</div>
+        <div class="ops">
+          <select data-act="fmt" aria-label="format">
+            <option value="hd" ${it.format==='hd'?'selected':''}>${tr('cart_format_hd')} · ${chf(PRICE_HD)}</option>
+            <option value="print" ${it.format==='print'?'selected':''}>${tr('cart_format_print')} · ${chf(PRICE_PRINT)} (${tr('cart_print_ex')})</option>
+          </select>
+          <label class="note">${tr('cart_qty')}
+            <input type="number" min="1" max="9" value="${it.qty||1}" data-act="qty" ${it.format==='print'?'':'disabled'} />
+          </label>
+          <button type="button" class="btn btn-ghost" data-act="rm" style="min-height:36px;padding:6px 12px">${tr('btn_remove')}</button>
+        </div>
+      </div>
+      <div class="price">${chf(linePrice(it))}</div>
+    </div>`;
+  }).join('') || `<p class="note">${tr('cart_pack_title')}</p>`;
+
+  box.querySelectorAll('.cart-line').forEach(line=>{
+    const i=+line.dataset.i;
+    line.querySelector('[data-act=fmt]').addEventListener('change',e=>{
+      cart[i].format=e.target.value; if(cart[i].format!=='print') cart[i].qty=1;
+      packOn=false; saveCart(); renderCartScreen(); updateCartChrome();
+    });
+    line.querySelector('[data-act=qty]').addEventListener('change',e=>{
+      cart[i].qty=Math.max(1, Math.min(9, parseInt(e.target.value,10)||1));
+      saveCart(); renderCartScreen(); updateCartChrome();
+    });
+    line.querySelector('[data-act=rm]').addEventListener('click',()=>{
+      cart.splice(i,1); saveCart(); renderCartScreen(); updateCartChrome();
+    });
+  });
+
+  const aLaCarte=cart.reduce((s,i)=>s+linePrice(i),0);
+  const saveAmt=Math.max(0, aLaCarte-PACK_PRICE);
+  document.getElementById('packSave').textContent = `${tr('cart_pack_save')} ${chf(saveAmt)} · ${chf(PACK_PRICE)}`;
+  const suggest=aLaCarte>PACK_PRICE && !packOn && cart.length>=4;
+  document.getElementById('packSuggest').style.display=suggest?'block':'none';
+  document.getElementById('packBox').classList.toggle('suggest', suggest||packOn);
+  document.getElementById('btnPackToggle').textContent = packOn ? tr('btn_remove') : tr('cart_pack_apply');
+
+  const vat=vatPart();
+  document.getElementById('cartTotals').innerHTML=`
+    <div class="row"><span data-i18n="cart_subtotal">${tr('cart_subtotal')}</span><span>${chf(subtotal())}</span></div>
+    ${promoOk?`<div class="row"><span>DEMO10</span><span>− ${chf(discount())}</span></div>`:''}
+    <div class="row note"><span>${tr('cart_vat')}</span><span>${chf(vat)}</span></div>
+    <div class="row total"><span>${tr('cart_total')}</span><span>${chf(total())}</span></div>`;
+  document.getElementById('btnToCheckout').disabled = cart.length===0 && !packOn;
+}
+
+document.getElementById('btnPackToggle').addEventListener('click',()=>{
+  packOn=!packOn; saveCart(); renderCartScreen(); updateCartChrome();
 });
-document.getElementById('btnCheckout').addEventListener('click',()=>{ if(selected.size) go('checkout'); });
-document.getElementById('btnPay').addEventListener('click',()=>{ setCartPad(false); go('done'); });
-document.getElementById('btnBackResults').addEventListener('click',()=>go('results'));
-document.getElementById('btnNotify').addEventListener('click',()=>alert(tr('notify_ok','Notification activée (simulation).')));
-document.getElementById('btnRestart').addEventListener('click',()=>{ selected.clear(); event=null; go('events'); });
-document.getElementById('btnDoneHome').addEventListener('click',()=>{ selected.clear(); event=null; go('events'); });
-document.getElementById('btnHome').addEventListener('click',()=>{ selected.clear(); event=null; go('events'); });
+document.getElementById('btnPromo').addEventListener('click',()=>{
+  const code=(document.getElementById('promo').value||'').trim().toUpperCase();
+  const msg=document.getElementById('promoMsg');
+  if(code==='DEMO10'){ promoOk=true; msg.style.color='var(--ok)'; msg.textContent=tr('cart_promo_ok'); }
+  else { promoOk=false; msg.style.color='var(--red)'; msg.textContent=tr('cart_promo_bad'); }
+  saveCart(); renderCartScreen(); updateCartChrome();
+});
+document.getElementById('btnClearCart').addEventListener('click',()=>{
+  cart=[]; packOn=false; promoOk=false; saveCart(); renderCartScreen(); updateCartChrome();
+});
+document.getElementById('btnCartBrowse').addEventListener('click',()=>go('events'));
+document.getElementById('btnToCheckout').addEventListener('click',()=>{ if(cart.length||packOn) go('checkout'); });
+document.getElementById('btnBarCart').addEventListener('click',()=>go('cart'));
+document.getElementById('btnBarCheckout').addEventListener('click',()=>go(cart.length?'checkout':'cart'));
+document.getElementById('btnCartIcon').addEventListener('click',()=>go('cart'));
+
+document.getElementById('contactForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=(document.getElementById('custName').value||'').trim();
+  const email=(document.getElementById('custEmail').value||'').trim();
+  let ok=true;
+  if(name.length<2){ document.getElementById('nameField').classList.add('invalid'); document.getElementById('nameErr').textContent=tr('err_name'); ok=false; }
+  else { document.getElementById('nameField').classList.remove('invalid'); document.getElementById('nameErr').textContent=''; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ document.getElementById('emailField').classList.add('invalid'); document.getElementById('emailErr').textContent=tr('err_email'); ok=false; }
+  else { document.getElementById('emailField').classList.remove('invalid'); document.getElementById('emailErr').textContent=''; }
+  if(!ok) return;
+  customer={name,email}; go('pay');
+});
+
+function syncPayOpts(){
+  document.querySelectorAll('#payOpts .pay-opt').forEach(b=>{
+    b.setAttribute('aria-pressed', b.dataset.pay===payMethod?'true':'false');
+  });
+  const note=document.getElementById('payNote');
+  if(payMethod==='twint') note.textContent='';
+  else if(payMethod==='card') note.textContent=tr('pay_card_na');
+  else note.textContent=tr('pay_other_na');
+  document.getElementById('btnPayGo').disabled = payMethod!=='twint';
+}
+document.querySelectorAll('#payOpts .pay-opt').forEach(b=>b.addEventListener('click',()=>{
+  payMethod=b.dataset.pay; syncPayOpts();
+}));
+document.getElementById('btnPayGo').addEventListener('click',()=>{ if(payMethod==='twint') go('twint'); });
+
+function isMobile(){ try{ if(window.matchMedia) return window.matchMedia('(max-width:720px)').matches || /Mobi|Android/i.test(navigator.userAgent||''); }catch(e){} return false; }
+function setupTwintUI(){
+  document.getElementById('twintLead').textContent = isMobile()?tr('twint_lead_mob'):tr('twint_lead_desk');
+  document.getElementById('twintDesk').classList.toggle('hidden', isMobile());
+  document.getElementById('twintMob').classList.toggle('hidden', !isMobile());
+}
+function drawFakeQR(canvas, seed){
+  if(!canvas || typeof canvas.getContext!=='function') return;
+  const ctx=canvas.getContext('2d');
+  if(!ctx) return;
+  const n=33, s=canvas.width/n;
+  ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  let x=seed|0;
+  const rnd=()=>{ x^=x<<13; x^=x>>>17; x^=x<<5; return (x>>>0)/0xffffffff; };
+  ctx.fillStyle='#111';
+  function finder(ox,oy){
+    for(let i=0;i<7;i++) for(let j=0;j<7;j++){
+      const edge=i===0||i===6||j===0||j===6;
+      const mid=i>=2&&i<=4&&j>=2&&j<=4;
+      if(edge||mid) ctx.fillRect((ox+i)*s,(oy+j)*s,s,s);
+    }
+  }
+  finder(1,1); finder(n-8,1); finder(1,n-8);
+  for(let i=0;i<n;i++) for(let j=0;j<n;j++){
+    if(i<8&&j<8) continue; if(i>n-9&&j<8) continue; if(i<8&&j>n-9) continue;
+    if(rnd()>0.55) ctx.fillRect(i*s,j*s,Math.ceil(s),Math.ceil(s));
+  }
+  ctx.fillStyle='#c6322a';
+  ctx.font='bold 14px sans-serif';
+  ctx.fillText('DEMO', canvas.width/2-22, canvas.height/2+5);
+}
+function startTwint(){
+  setupTwintUI();
+  orderId='PF-'+Date.now().toString(36).toUpperCase().slice(-8);
+  drawFakeQR(document.getElementById('qrCanvas'), Date.now()&0xffff);
+  let left=240;
+  const tEl=document.getElementById('twintTimer');
+  clearInterval(twintTimerIv); clearTimeout(twintAutoIv);
+  const tick=()=>{
+    const m=String(Math.floor(left/60)).padStart(2,'0');
+    const s=String(left%60).padStart(2,'0');
+    tEl.textContent=m+':'+s;
+    if(left<=0) clearInterval(twintTimerIv);
+    left--;
+  };
+  tick(); twintTimerIv=setInterval(tick,1000);
+  twintAutoIv=setTimeout(()=>{ if(screen==='twint') go('confirm'); }, 8000);
+}
+document.getElementById('btnSimTwint').addEventListener('click',()=>{ clearTimeout(twintAutoIv); go('confirm'); });
+document.getElementById('btnOpenTwint').addEventListener('click',()=>{
+  toast('TWINT · '+tr('twint_demo'));
+  clearTimeout(twintAutoIv);
+  twintAutoIv=setTimeout(()=>{ if(screen==='twint') go('confirm'); }, 2500);
+});
+
+function renderConfirm(){
+  if(!orderId) orderId='PF-DEMO';
+  document.getElementById('orderId').textContent=orderId;
+  document.getElementById('confRecap').innerHTML =
+    `<div>${customer.name||'—'} · ${customer.email||'—'}</div>
+     <div>${cart.length} ${photoLabel(cart.length)}${packOn?' · pack':''} · <b>${chf(total())}</b></div>
+     <div>${tr('cart_vat')}</div>`;
+  document.getElementById('emailPreview').textContent =
+`From: photos@alphafoto.example
+To: ${customer.email||'you@example.com'}
+Subject: ${tr('conf_order')} ${orderId}
+
+${tr('conf_title')}
+${customer.name||''}
+${cart.length} ${photoLabel(cart.length)} · ${chf(total())}
+TWINT · ${tr('twint_demo')}
+
+— PhotoFlow v3.2 demo`;
+}
+
+document.getElementById('btnDlHd').addEventListener('click',()=>{
+  const it=cart[0]||{src:GALS[0]};
+  const a=document.createElement('a');
+  a.href=IMG+it.src; a.download='photoflow-demo-'+it.src; a.click();
+});
+document.getElementById('btnShare').addEventListener('click',async()=>{
+  const url=location.origin+location.pathname+'#confirm';
+  try{ await navigator.clipboard.writeText(url); }catch(e){}
+  toast(tr('share_ok'));
+});
+document.getElementById('btnConfNotify').addEventListener('click',()=>toast(tr('notify_ok')));
+document.getElementById('btnNotify').addEventListener('click',()=>toast(tr('notify_ok')));
+document.getElementById('btnConfHome').addEventListener('click',()=>{ go('events'); });
+document.getElementById('btnRestart').addEventListener('click',()=>{ event=null; galleryItems=[]; go('events'); });
+document.getElementById('btnHome').addEventListener('click',()=>go('events'));
 
 document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>history.back()));
-document.querySelectorAll('#s-position [data-next], #s-outfit [data-next]').forEach(b=>b.addEventListener('click',()=>{
-  if(screen==='position') go('outfit');
-  else if(screen==='outfit') go('agent');
-}));
-
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.next)));
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{ lang=b.dataset.lang; applyI18n(); }));
-['q','sport','year','region'].forEach(id=>{
-  const el=document.getElementById(id);
-  el.addEventListener('input', renderEvents);
-  el.addEventListener('change', renderEvents);
-});
+['q','sport','year','region'].forEach(id=>document.getElementById(id).addEventListener('input', renderEvents));
+['sport','year','region'].forEach(id=>document.getElementById(id).addEventListener('change', renderEvents));
+document.getElementById('pointFilter').addEventListener('change', renderResults);
 
 window.addEventListener('popstate', ev=>{
   historyQuiet=true;
   const st=ev.state;
-  if(st && st.screen){
-    if(st.eventId){ event=EVENTS.find(e=>e.id===st.eventId)||event; }
+  if(st&&st.screen){
+    if(st.eventId) event=EVENTS.find(e=>e.id===st.eventId)||event;
     go(st.screen, false);
   } else {
     const h=(location.hash||'#events').slice(1).split('/');
-    const name=h[0]||'events';
     if(h[1]) event=EVENTS.find(e=>e.id===h[1])||event;
-    go(SCREENS.includes(name)?name:'events', false);
+    if(SCREENS.includes(h[0])) go(h[0], false); else go('events', false);
   }
   historyQuiet=false;
 });
 
-// boot from hash
-(function boot(){
-  const h=(location.hash||'').slice(1);
-  if(h){
-    const parts=h.split('/');
-    if(parts[1]) event=EVENTS.find(e=>e.id===parts[1])||null;
-    if(SCREENS.includes(parts[0]) && parts[0]==='events') go('events', false);
-    else go('events', false);
-  } else {
-    history.replaceState({screen:'events'}, '', '#events');
-  }
-  renderEvents(); applyI18n(); updateProgress();
+// boot
+loadCart();
+applyI18n();
+renderEvents();
+updateCartChrome();
+const boot=(location.hash||'#events').slice(1).split('/');
+if(boot[1]) event=EVENTS.find(e=>e.id===boot[1])||null;
+if(SCREENS.includes(boot[0]) && boot[0]!=='events'){ historyQuiet=true; go(boot[0], false); historyQuiet=false; }
 })();
-})();
+
 </script>
 </body>
 </html>

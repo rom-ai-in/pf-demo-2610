@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow,noarchive" />
 <meta name="description" content="PhotoFlow — maquette conceptuelle indépendante (démo panier / TWINT)." />
-<title>PhotoFlow — alphafoto.com (maquette v3.2)</title>
+<title>PhotoFlow — alphafoto.com (maquette v3.2.2)</title>
 <link rel="icon" href="assets/brand/logo_alphafoto.png" />
 <style>
 
@@ -102,12 +102,18 @@ h2{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.02em}
 .empty{text-align:center;padding:28px 16px;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);background:#fff}
 .found-banner{background:#e8f6ee;border:1px solid #b9e0c6;color:var(--ok);padding:12px 14px;border-radius:12px;margin-bottom:12px;font-size:14px}
 .track{position:relative;padding:8px 0 4px}
-.track-line{position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:#e0e0e3}
+.track-line{position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:#e0e0e3}
 .points{display:grid;gap:10px}
-.pt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start}
-.pt .pin{width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid #ccc;position:relative;z-index:1}
+.pt{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start}
+.pt .pin{width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid #ccc;position:relative;z-index:1;flex-shrink:0;margin-left:2px}
 .pt.you .pin{border-color:var(--red);background:#fdecea}
-.pt .win{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pt-body{min-width:0;overflow:hidden}
+.pt-name{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.pt .win{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.35;margin-top:4px;display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.pt .win-center{font-weight:700;color:var(--ink);white-space:nowrap}
+.pt .win-range{white-space:nowrap;font-size:11.5px;letter-spacing:0.01em}
+.times-table th,.times-table td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.times-table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
 .neighbors{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .neighbor{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12.5px;background:#fff;min-height:var(--tap)}
 .neighbor b{font-family:var(--mono)}
@@ -498,8 +504,9 @@ footer{text-align:center;padding:20px 16px 28px;color:var(--muted);font-size:12p
   </footer>
 </div>
 
+
 <script>
-window.__I18N__ = {"fr": {"banner": "Maquette conceptuelle — non affiliée à Alpha Foto — données d'exemple", "brand_sub": "Photos d'événements sportifs", "cart_aria": "Panier", "hero_title": "Retrouvez vos photos de course", "hero_lead": "Choisissez votre événement. On s'occupe du reste.", "events_title": "Trouver mon événement", "events_lead": "Recherchez parmi les événements — course, vélo, triathlon et plus.", "events_empty": "Aucun événement ne correspond. Essayez un autre filtre.", "lbl_search": "Recherche", "lbl_sport": "Sport", "sport_all": "Tous", "lbl_year": "Année", "year_all": "Toutes", "lbl_region": "Région", "region_all": "Suisse", "bib_title": "Votre course et dossard", "bib_lead": "Indiquez la distance et votre numéro de dossard.", "lbl_race": "Course", "lbl_bib": "N° de dossard", "back": "Retour", "next": "Continuer", "next_search": "Chercher mes photos", "next_times": "Utiliser ces temps", "next_search_agent": "Lancer la recherche", "next_refine": "Affiner avec ma tenue", "restart": "Autre événement", "nf_title": "Aucune photo liée à ce dossard", "nf_lead": "C'est fréquent. On peut quand même vous retrouver grâce à vos temps de course.", "nf_status": "Pas de correspondance OCR dans le catalogue (exemple).", "nf_a_t": "Saisir mon temps final", "nf_a_d": "On estime vos passages à partir de votre chrono.", "nf_b_t": "Retrouver mes temps", "nf_b_d": "Par nom et année — récupération simulée des temps officiels.", "nf_c_t": "Coller mon lien de résultat", "nf_c_d": "Profil chronométreur (Datasport ou autre) — démo simulée.", "found_banner": "Bonne nouvelle : des photos sont déjà liées à ce dossard (parcours rapide d'exemple).", "found_title": "Dossard reconnu", "found_lead": "On affine encore avec la tenue, puis l'agent classe vos meilleures photos.", "found_note": "Exemple de maquette — catalogue simulé.", "pos_title": "On regarde les coureurs autour de vous", "pos_lead": "Fenêtres de passage estimées à chaque point photo, calées sur des dossards déjà identifiés.", "pos_note": "Points photo et fenêtres = exemple / hypothèse pour la démo.", "pos_neighbors": "Ancres voisines (dossards fictifs, proches)", "out_title": "Comment étiez-vous habillé·e ?", "out_lead": "Quelques pastilles suffisent. Utile surtout si le dossard est peu lisible.", "out_top": "Haut", "out_bottom": "Bas", "out_extra": "Accessoires", "out_desc": "Décrivez-vous (optionnel)", "out_face": "Option visage : j'ajoute un selfie et j'accepte explicitement le traitement de données biométriques sensibles (nLPD). Non cochée par défaut.", "out_selfie": "Selfie (fichier local, non envoyé)", "ag_title": "L'agent cherche vos photos", "ag_lead": "Filtrage temps → OCR dossards → tenue → classement.", "ag_count_lbl": "candidates retenues", "res_title": "Vos photos probables", "res_lead": "Meilleure correspondance en premier. Images d'illustration uniquement.", "res_notify": "Me prévenir des nouvelles photos", "res_all_points": "Tous les points", "btn_yes": "C'est moi", "btn_no": "Pas moi", "btn_add": "Ajouter", "btn_remove": "Retirer", "illust": "Image d'illustration", "conf_hi": "Confiance élevée", "conf_mid": "Confiance moyenne", "cart_title": "Votre panier", "cart_lead": "Vérifiez vos photos avant de payer. Aucun paiement réel dans cette maquette.", "cart_empty_title": "Votre panier est vide", "cart_empty_lead": "Ajoutez des photos depuis les résultats, ou commencez par trouver votre événement.", "cart_browse": "Trouver mon événement", "cart_clear": "Vider le panier", "cart_format_hd": "Numérique HD", "cart_format_print": "Impression", "cart_print_ex": "prix impression = exemple", "cart_qty": "Qté", "cart_subtotal": "Sous-total", "cart_pack_title": "Pack « toutes mes photos »", "cart_pack_ex": "exemple", "cart_pack_save": "Économie", "cart_pack_suggest": "Le pack est plus avantageux pour votre sélection — bascule proposée.", "cart_pack_apply": "Appliquer le pack", "cart_promo": "Code promo", "cart_promo_apply": "Appliquer", "cart_promo_ok": "Code DEMO10 appliqué (−10 %).", "cart_promo_bad": "Ce code n'est pas reconnu. Essayez DEMO10 (exemple).", "cart_vat": "TVA suisse 8,1 % incluse (exemple de calcul)", "cart_total": "Total", "cart_checkout": "Passer au paiement", "cart_unit": "CHF 12.00 / photo HD", "chk_title": "Vos coordonnées", "chk_lead": "Pour recevoir le lien de téléchargement (simulation — aucun e-mail réel).", "lbl_name": "Nom complet", "lbl_email": "E-mail", "err_name": "Indiquez votre nom.", "err_email": "Indiquez une adresse e-mail valide.", "pay_title": "Choix du paiement", "pay_lead": "Moyens relevés sur alphafoto.com — aucun paiement réel ici.", "pay_twint": "TWINT", "pay_twint_rec": "Recommandé en Suisse", "pay_card": "Carte Visa / Mastercard", "pay_pf": "PostFinance / facture", "pay_paypal": "PayPal", "pay_card_na": "Paiement par carte non disponible dans la démo (aucun champ carte).", "pay_other_na": "Option présentée pour la démo — flux non simulé. Choisissez TWINT.", "pay_continue": "Continuer", "twint_title": "Payer avec TWINT", "twint_lead_desk": "Ouvrez l'app TWINT et scannez le QR (factice — démo uniquement).", "twint_lead_mob": "Ouvrez TWINT pour confirmer le paiement (simulation).", "twint_open": "Ouvrir TWINT", "twint_demo": "QR de démo — aucun paiement réel", "twint_timer": "Expire dans", "twint_sim": "Simuler la confirmation", "twint_wait": "En attente de confirmation…", "conf_title": "Paiement confirmé", "conf_lead": "Simulation réussie. Voici votre récapitulatif de commande factice.", "conf_order": "N° de commande", "conf_download": "Télécharger HD", "conf_share": "Partager", "conf_notify": "Me prévenir des nouvelles photos", "conf_email_preview": "Aperçu e-mail de confirmation (simulé)", "conf_home": "Retour à l'accueil", "footer_how": "Comment fonctionne la recherche", "footer_credits": "Crédits images", "footer_legal": "Maquette conceptuelle indépendante — non affiliée à Alpha Foto GmbH ni aux chronométreurs. Aucun scraping. Aucun vrai paiement. v3.2 — 27.10.2026.", "step_events": "Événement", "step_bib": "Dossard", "step_times": "Temps", "step_pos": "Position", "step_out": "Tenue", "step_agent": "Agent", "step_res": "Résultats", "step_cart": "Panier", "step_chk": "Coordonnées", "step_pay": "Paiement", "step_twint": "TWINT", "step_conf": "Confirmation", "tag_demo": "Démo · parcours complet", "tag_listed": "nom vu sur Alphafoto", "tag_example": "exemple", "bib_err": "Entrez un numéro de dossard valide (chiffres).", "bib_hint_lm": "Exemple prérempli pour la démo Lausanne : 30370 (cas « dossard non trouvé »).", "bib_hint_found": "Essayez le dossard d'exemple pour le parcours rapide.", "bib_hint_gen": "Saisissez votre dossard.", "point_generic": "Point photo", "why_hi": "Fenêtre", "why_hi2": "tenue proche", "why_mid": "Fenêtre large", "ag_s1": "Photos point Ouchy", "ag_s2": "Après fenêtre temporelle", "ag_s3": "Lecture dossards (OCR)", "ag_s4": "Filtre tenue", "ag_s5": "Classement final", "ag_s1f": "Photos déjà liées au dossard", "ag_s2f": "Filtre tenue", "ag_s3f": "Classement final", "found_count": "12 photos déjà indexées (simulé)", "notify_ok": "Notification activée (simulation).", "share_ok": "Lien de partage copié (simulation).", "lang_label": "Langue", "cart_bar_view": "Voir le panier", "cart_added": "Ajouté au panier", "cart_pack_hint": "Pack toutes vos photos (exemple) : {price}, avantageux dès {n} photos", "cart_pack_on": "Pack appliqué · {price}"}, "de": {"banner": "Konzept-Mockup — nicht mit Alpha Foto verbunden — Beispieldaten", "brand_sub": "Fotos von Sportveranstaltungen", "cart_aria": "Warenkorb", "hero_title": "Finden Sie Ihre Rennfotos", "hero_lead": "Wählen Sie Ihren Event. Den Rest erledigen wir.", "events_title": "Meinen Event finden", "events_lead": "Suche unter Events — Laufen, Velo, Triathlon und mehr.", "events_empty": "Kein Event passt. Andere Filter versuchen.", "lbl_search": "Suche", "lbl_sport": "Sport", "sport_all": "Alle", "lbl_year": "Jahr", "year_all": "Alle", "lbl_region": "Region", "region_all": "Schweiz", "bib_title": "Ihre Distanz & Startnummer", "bib_lead": "Distanz und Startnummer angeben.", "lbl_race": "Rennen", "lbl_bib": "Startnummer", "back": "Zurück", "next": "Weiter", "next_search": "Fotos suchen", "next_times": "Diese Zeiten nutzen", "next_search_agent": "Suche starten", "next_refine": "Mit Outfit verfeinern", "restart": "Anderer Event", "nf_title": "Keine Fotos zu dieser Startnummer", "nf_lead": "Kommt vor. Mit Ihren Laufzeiten finden wir Sie trotzdem.", "nf_status": "Keine OCR-Treffer im Katalog (Beispiel).", "nf_a_t": "Endzeit manuell eingeben", "nf_a_d": "Passagefenster aus Ihrer Zeit schätzen.", "nf_b_t": "Meine Zeiten holen", "nf_b_d": "Nach Name und Jahr — simulierte offizielle Zeiten.", "nf_c_t": "Resultats-Link einfügen", "nf_c_d": "Zeitnehmer-Profil — Demo simuliert.", "found_banner": "Gute Nachricht: Fotos sind bereits mit dieser Startnummer verknüpft (Beispiel-Schnellweg).", "found_title": "Startnummer erkannt", "found_lead": "Outfit verfeinern, dann sortiert der Agent Ihre besten Fotos.", "found_note": "Mockup-Beispiel — simulierter Katalog.", "pos_title": "Läufer um Sie herum", "pos_lead": "Geschätzte Passagefenster an jedem Fotopunkt.", "pos_note": "Fotopunkte und Fenster = Demo-Beispiel/Hypothese.", "pos_neighbors": "Nachbar-Anker (fiktiv)", "out_title": "Wie waren Sie gekleidet?", "out_lead": "Ein paar Farben reichen.", "out_top": "Oberteil", "out_bottom": "Hose", "out_extra": "Accessoires", "out_desc": "Kurz beschreiben (optional)", "out_face": "Gesichtsoption: Selfie + ausdrückliche Einwilligung (nDSG). Standardmässig aus.", "out_selfie": "Selfie (lokal, wird nicht gesendet)", "ag_title": "Der Agent sucht Ihre Fotos", "ag_lead": "Zeitfilter → Startnummern-OCR → Outfit → Ranking.", "ag_count_lbl": "behaltene Kandidaten", "res_title": "Ihre wahrscheinlichen Fotos", "res_lead": "Beste Treffer zuerst. Nur Illustrationsbilder.", "res_notify": "Bei neuen Fotos benachrichtigen", "res_all_points": "Alle Punkte", "btn_yes": "Das bin ich", "btn_no": "Nicht ich", "btn_add": "Hinzufügen", "btn_remove": "Entfernen", "illust": "Illustrationsbild", "conf_hi": "Hohe Sicherheit", "conf_mid": "Mittlere Sicherheit", "cart_title": "Ihr Warenkorb", "cart_lead": "Fotos vor der Zahlung prüfen. Keine echte Zahlung in diesem Mockup.", "cart_empty_title": "Ihr Warenkorb ist leer", "cart_empty_lead": "Fügen Sie Fotos aus den Resultaten hinzu oder finden Sie zuerst Ihren Event.", "cart_browse": "Event finden", "cart_clear": "Warenkorb leeren", "cart_format_hd": "Digital HD", "cart_format_print": "Druck", "cart_print_ex": "Druckpreis = Beispiel", "cart_qty": "Anz.", "cart_subtotal": "Zwischensumme", "cart_pack_title": "Paket «alle meine Fotos»", "cart_pack_ex": "Beispiel", "cart_pack_save": "Ersparnis", "cart_pack_suggest": "Das Paket ist für Ihre Auswahl günstiger — Wechsel vorgeschlagen.", "cart_pack_apply": "Paket anwenden", "cart_promo": "Promo-Code", "cart_promo_apply": "Einlösen", "cart_promo_ok": "Code DEMO10 angewendet (−10 %).", "cart_promo_bad": "Code unbekannt. Versuchen Sie DEMO10 (Beispiel).", "cart_vat": "Schweizer MwSt. 8,1 % inkl. (Beispielrechnung)", "cart_total": "Total", "cart_checkout": "Zur Zahlung", "cart_unit": "CHF 12.00 / Foto HD", "chk_title": "Ihre Angaben", "chk_lead": "Für den Download-Link (Simulation — keine echte E-Mail).", "lbl_name": "Vollständiger Name", "lbl_email": "E-Mail", "err_name": "Bitte Namen angeben.", "err_email": "Bitte gültige E-Mail angeben.", "pay_title": "Zahlungsart wählen", "pay_lead": "Auf alphafoto.com genannte Methoden — keine echte Zahlung.", "pay_twint": "TWINT", "pay_twint_rec": "Empfohlen in der Schweiz", "pay_card": "Visa / Mastercard", "pay_pf": "PostFinance / Rechnung", "pay_paypal": "PayPal", "pay_card_na": "Kartenzahlung in der Demo nicht verfügbar (keine Kartendaten).", "pay_other_na": "Nur zur Demo angezeigt — Flow nicht simuliert. Bitte TWINT wählen.", "pay_continue": "Weiter", "twint_title": "Mit TWINT bezahlen", "twint_lead_desk": "Öffnen Sie die TWINT-App und scannen Sie den QR (fiktiv — nur Demo).", "twint_lead_mob": "Öffnen Sie TWINT zur Bestätigung (Simulation).", "twint_open": "TWINT öffnen", "twint_demo": "Demo-QR — keine echte Zahlung", "twint_timer": "Läuft ab in", "twint_sim": "Bestätigung simulieren", "twint_wait": "Warte auf Bestätigung…", "conf_title": "Zahlung bestätigt", "conf_lead": "Simulation erfolgreich. Hier Ihre fiktive Bestellübersicht.", "conf_order": "Bestellnr.", "conf_download": "HD herunterladen", "conf_share": "Teilen", "conf_notify": "Bei neuen Fotos benachrichtigen", "conf_email_preview": "Vorschau Bestätigungs-E-Mail (simuliert)", "conf_home": "Zur Startseite", "footer_how": "So funktioniert die Suche", "footer_credits": "Bildnachweise", "footer_legal": "Unabhängiges Konzept-Mockup — nicht mit Alpha Foto GmbH verbunden. Kein Scraping. Keine echte Zahlung. v3.2 — 27.10.2026.", "step_events": "Event", "step_bib": "Startnr.", "step_times": "Zeiten", "step_pos": "Position", "step_out": "Outfit", "step_agent": "Agent", "step_res": "Resultate", "step_cart": "Warenkorb", "step_chk": "Angaben", "step_pay": "Zahlung", "step_twint": "TWINT", "step_conf": "Bestätigung", "tag_demo": "Demo · voller Pfad", "tag_listed": "Name auf Alphafoto gesehen", "tag_example": "Beispiel", "bib_err": "Bitte gültige Startnummer (Ziffern).", "bib_hint_lm": "Demo Lausanne vorausgefüllt: 30370 (Fall «nicht gefunden»).", "bib_hint_found": "Beispiel-Startnummer für den Schnellweg versuchen.", "bib_hint_gen": "Startnummer eingeben.", "point_generic": "Fotopunkt", "why_hi": "Fenster", "why_hi2": "ähnliches Outfit", "why_mid": "Breites Fenster", "ag_s1": "Fotos Punkt Ouchy", "ag_s2": "Nach Zeitfenster", "ag_s3": "Startnummern-OCR", "ag_s4": "Outfit-Filter", "ag_s5": "Endranking", "ag_s1f": "Bereits verknüpfte Fotos", "ag_s2f": "Outfit-Filter", "ag_s3f": "Endranking", "found_count": "12 Fotos bereits indexiert (simuliert)", "notify_ok": "Benachrichtigung aktiviert (Simulation).", "share_ok": "Share-Link kopiert (Simulation).", "lang_label": "Sprache", "cart_bar_view": "Warenkorb ansehen", "cart_added": "Zum Warenkorb", "cart_pack_hint": "Paket alle Ihre Fotos (Beispiel): {price}, lohnt sich ab {n} Fotos", "cart_pack_on": "Paket aktiv · {price}"}, "en": {"banner": "Conceptual mockup — not affiliated with Alpha Foto — sample data", "brand_sub": "Sports event photography", "cart_aria": "Cart", "hero_title": "Find your race photos", "hero_lead": "Pick your event. We handle the rest.", "events_title": "Find my event", "events_lead": "Browse events — running, cycling, triathlon and more.", "events_empty": "No matching events. Try another filter.", "lbl_search": "Search", "lbl_sport": "Sport", "sport_all": "All", "lbl_year": "Year", "year_all": "All", "lbl_region": "Region", "region_all": "Switzerland", "bib_title": "Your race & bib", "bib_lead": "Select the distance and enter your bib number.", "lbl_race": "Race", "lbl_bib": "Bib number", "back": "Back", "next": "Continue", "next_search": "Search my photos", "next_times": "Use these times", "next_search_agent": "Start search", "next_refine": "Refine with outfit", "restart": "Another event", "nf_title": "No photos linked to this bib", "nf_lead": "It happens. Your race times can still find you.", "nf_status": "No OCR match in the catalogue (example).", "nf_a_t": "Enter my finish time", "nf_a_d": "Estimate passage windows from your chrono.", "nf_b_t": "Fetch my times", "nf_b_d": "By name and year — simulated official timing.", "nf_c_t": "Paste my result link", "nf_c_d": "Timing profile — simulated demo.", "found_banner": "Good news: photos are already linked to this bib (sample fast path).", "found_title": "Bib recognised", "found_lead": "Refine with your outfit, then the agent ranks your best photos.", "found_note": "Mockup example — simulated catalogue.", "pos_title": "Runners around you", "pos_lead": "Estimated passage windows at each photo point.", "pos_note": "Photo points and windows = demo example / hypothesis.", "pos_neighbors": "Neighbor anchors (fictional)", "out_title": "What were you wearing?", "out_lead": "A few colour chips are enough.", "out_top": "Top", "out_bottom": "Bottom", "out_extra": "Extras", "out_desc": "Describe yourself (optional)", "out_face": "Face option: add a selfie and explicitly consent to sensitive biometric processing (nLPD). Off by default.", "out_selfie": "Selfie (local file, not uploaded)", "ag_title": "The agent is finding your photos", "ag_lead": "Time filter → bib OCR → outfit → ranking.", "ag_count_lbl": "candidates kept", "res_title": "Your likely photos", "res_lead": "Best match first. Illustration images only.", "res_notify": "Notify me of new photos", "res_all_points": "All points", "btn_yes": "That's me", "btn_no": "Not me", "btn_add": "Add", "btn_remove": "Remove", "illust": "Illustration image", "conf_hi": "High confidence", "conf_mid": "Medium confidence", "cart_title": "Your cart", "cart_lead": "Review your photos before paying. No real payment in this mockup.", "cart_empty_title": "Your cart is empty", "cart_empty_lead": "Add photos from results, or start by finding your event.", "cart_browse": "Find my event", "cart_clear": "Clear cart", "cart_format_hd": "Digital HD", "cart_format_print": "Print", "cart_print_ex": "print price = example", "cart_qty": "Qty", "cart_subtotal": "Subtotal", "cart_pack_title": "“All my photos” pack", "cart_pack_ex": "example", "cart_pack_save": "You save", "cart_pack_suggest": "The pack is better value for your selection — switch suggested.", "cart_pack_apply": "Apply pack", "cart_promo": "Promo code", "cart_promo_apply": "Apply", "cart_promo_ok": "Code DEMO10 applied (−10%).", "cart_promo_bad": "That code isn’t recognised. Try DEMO10 (example).", "cart_vat": "Swiss VAT 8.1% included (example calculation)", "cart_total": "Total", "cart_checkout": "Proceed to payment", "cart_unit": "CHF 12.00 / HD photo", "chk_title": "Your details", "chk_lead": "To receive the download link (simulation — no real email).", "lbl_name": "Full name", "lbl_email": "Email", "err_name": "Please enter your name.", "err_email": "Please enter a valid email.", "pay_title": "Choose payment", "pay_lead": "Methods listed on alphafoto.com — no real payment here.", "pay_twint": "TWINT", "pay_twint_rec": "Recommended in Switzerland", "pay_card": "Visa / Mastercard", "pay_pf": "PostFinance / invoice", "pay_paypal": "PayPal", "pay_card_na": "Card payment not available in the demo (no card fields).", "pay_other_na": "Shown for the demo — flow not simulated. Please choose TWINT.", "pay_continue": "Continue", "twint_title": "Pay with TWINT", "twint_lead_desk": "Open the TWINT app and scan the QR (fake — demo only).", "twint_lead_mob": "Open TWINT to confirm payment (simulation).", "twint_open": "Open TWINT", "twint_demo": "Demo QR — no real payment", "twint_timer": "Expires in", "twint_sim": "Simulate confirmation", "twint_wait": "Waiting for confirmation…", "conf_title": "Payment confirmed", "conf_lead": "Simulation succeeded. Here is your fictional order summary.", "conf_order": "Order no.", "conf_download": "Download HD", "conf_share": "Share", "conf_notify": "Notify me of new photos", "conf_email_preview": "Confirmation email preview (simulated)", "conf_home": "Back to home", "footer_how": "How the search works", "footer_credits": "Image credits", "footer_legal": "Independent conceptual mockup — not affiliated with Alpha Foto GmbH. No scraping. No real payment. v3.2 — 27.10.2026.", "step_events": "Event", "step_bib": "Bib", "step_times": "Times", "step_pos": "Position", "step_out": "Outfit", "step_agent": "Agent", "step_res": "Results", "step_cart": "Cart", "step_chk": "Details", "step_pay": "Payment", "step_twint": "TWINT", "step_conf": "Confirmation", "tag_demo": "Demo · full path", "tag_listed": "name seen on Alphafoto", "tag_example": "example", "bib_err": "Enter a valid bib number (digits).", "bib_hint_lm": "Lausanne demo prefilled: 30370 (“bib not found” case).", "bib_hint_found": "Try the sample bib for the fast path.", "bib_hint_gen": "Enter your bib number.", "point_generic": "Photo point", "why_hi": "Window", "why_hi2": "similar outfit", "why_mid": "Wide window", "ag_s1": "Ouchy point photos", "ag_s2": "After time window", "ag_s3": "Bib OCR", "ag_s4": "Outfit filter", "ag_s5": "Final ranking", "ag_s1f": "Photos already linked to bib", "ag_s2f": "Outfit filter", "ag_s3f": "Final ranking", "found_count": "12 photos already indexed (simulated)", "notify_ok": "Notification enabled (simulation).", "share_ok": "Share link copied (simulation).", "lang_label": "Language", "cart_bar_view": "View cart", "cart_added": "Added to cart", "cart_pack_hint": "All your photos pack (example): {price}, better value from {n} photos", "cart_pack_on": "Pack applied · {price}"}};
+window.__I18N__ = {"fr": {"banner": "Maquette conceptuelle — non affiliée à Alpha Foto — données d'exemple", "brand_sub": "Photos d'événements sportifs", "cart_aria": "Panier", "hero_title": "Retrouvez vos photos de course", "hero_lead": "Choisissez votre événement. On s'occupe du reste.", "events_title": "Trouver mon événement", "events_lead": "Recherchez parmi les événements — course, vélo, triathlon et plus.", "events_empty": "Aucun événement ne correspond. Essayez un autre filtre.", "lbl_search": "Recherche", "lbl_sport": "Sport", "sport_all": "Tous", "lbl_year": "Année", "year_all": "Toutes", "lbl_region": "Région", "region_all": "Suisse", "bib_title": "Votre course et dossard", "bib_lead": "Indiquez la distance et votre numéro de dossard.", "lbl_race": "Course", "lbl_bib": "N° de dossard", "back": "Retour", "next": "Continuer", "next_search": "Chercher mes photos", "next_times": "Utiliser ces temps", "next_search_agent": "Lancer la recherche", "next_refine": "Affiner avec ma tenue", "restart": "Autre événement", "nf_title": "Aucune photo liée à ce dossard", "nf_lead": "C'est fréquent. On peut quand même vous retrouver grâce à vos temps de course.", "nf_status": "Pas de correspondance OCR dans le catalogue (exemple).", "nf_a_t": "Saisir mon temps final", "nf_a_d": "On estime vos fenêtres de passage à partir de votre chrono.", "nf_b_t": "Retrouver mes temps", "nf_b_d": "Par nom et année — récupération simulée des temps officiels.", "nf_c_t": "Coller mon lien de résultat", "nf_c_d": "Profil chronométreur (Datasport ou autre) — démo simulée.", "found_banner": "Bonne nouvelle : des photos sont déjà liées à ce dossard (parcours rapide d'exemple).", "found_title": "Dossard reconnu", "found_lead": "On affine encore avec la tenue, puis l'agent classe vos meilleures photos.", "found_note": "Exemple de maquette — catalogue simulé.", "pos_title": "On regarde les coureurs autour de vous", "pos_lead": "Fenêtres de passage estimées à chaque point photo, calées sur des dossards déjà identifiés.", "pos_note": "Points photo et fenêtres = exemple / hypothèse pour la démo. Positions = hypothèse.", "pos_neighbors": "Dossards voisins (fictifs, proches)", "out_title": "Comment étiez-vous habillé·e ?", "out_lead": "Quelques pastilles suffisent. Utile surtout si le dossard est peu lisible.", "out_top": "Haut", "out_bottom": "Bas", "out_extra": "Accessoires", "out_desc": "Décrivez-vous (optionnel)", "out_face": "Option visage : j'ajoute un selfie et j'accepte explicitement le traitement de données biométriques sensibles (nLPD). Non cochée par défaut.", "out_selfie": "Selfie (fichier local, non envoyé)", "ag_title": "L'agent cherche vos photos", "ag_lead": "Filtrage temps → OCR dossards → tenue → classement.", "ag_count_lbl": "candidates retenues", "res_title": "Vos photos probables", "res_lead": "Meilleure correspondance en premier. Images d'illustration uniquement.", "res_notify": "Me prévenir des nouvelles photos", "res_all_points": "Tous les points", "btn_yes": "C'est moi", "btn_no": "Pas moi", "btn_add": "Ajouter", "btn_remove": "Retirer", "illust": "Image d'illustration", "conf_hi": "Confiance élevée", "conf_mid": "Confiance moyenne", "cart_title": "Votre panier", "cart_lead": "Vérifiez vos photos avant de payer. Aucun paiement réel dans cette maquette.", "cart_empty_title": "Votre panier est vide", "cart_empty_lead": "Ajoutez des photos depuis les résultats, ou commencez par trouver votre événement.", "cart_browse": "Trouver mon événement", "cart_clear": "Vider le panier", "cart_format_hd": "Numérique HD", "cart_format_print": "Impression", "cart_print_ex": "prix impression = exemple", "cart_qty": "Qté", "cart_subtotal": "Sous-total", "cart_pack_title": "Pack « toutes mes photos »", "cart_pack_ex": "exemple", "cart_pack_save": "Économie", "cart_pack_suggest": "Le pack est plus avantageux pour votre sélection — bascule proposée.", "cart_pack_apply": "Appliquer le pack", "cart_promo": "Code promo", "cart_promo_apply": "Appliquer", "cart_promo_ok": "Code DEMO10 appliqué (−10 %).", "cart_promo_bad": "Ce code n'est pas reconnu. Essayez DEMO10 (exemple).", "cart_vat": "TVA suisse 8,1 % incluse (exemple de calcul)", "cart_total": "Total", "cart_checkout": "Passer au paiement", "cart_unit": "CHF 12.00 / photo HD", "chk_title": "Vos coordonnées", "chk_lead": "Pour recevoir le lien de téléchargement (simulation — aucun e-mail réel).", "lbl_name": "Nom complet", "lbl_email": "E-mail", "err_name": "Indiquez votre nom.", "err_email": "Indiquez une adresse e-mail valide.", "pay_title": "Choix du paiement", "pay_lead": "Moyens relevés sur alphafoto.com — aucun paiement réel ici.", "pay_twint": "TWINT", "pay_twint_rec": "Recommandé en Suisse", "pay_card": "Carte Visa / Mastercard", "pay_pf": "PostFinance / facture", "pay_paypal": "PayPal", "pay_card_na": "Paiement par carte non disponible dans la démo (aucun champ carte).", "pay_other_na": "Option présentée pour la démo — flux non simulé. Choisissez TWINT.", "pay_continue": "Continuer", "twint_title": "Payer avec TWINT", "twint_lead_desk": "Ouvrez l'app TWINT et scannez le QR (factice — démo uniquement).", "twint_lead_mob": "Ouvrez TWINT pour confirmer le paiement (simulation).", "twint_open": "Ouvrir TWINT", "twint_demo": "QR de démo — aucun paiement réel", "twint_timer": "Expire dans", "twint_sim": "Simuler la confirmation", "twint_wait": "En attente de confirmation…", "conf_title": "Paiement confirmé", "conf_lead": "Simulation réussie. Voici votre récapitulatif de commande factice.", "conf_order": "N° de commande", "conf_download": "Télécharger HD", "conf_share": "Partager", "conf_notify": "Me prévenir des nouvelles photos", "conf_email_preview": "Aperçu e-mail de confirmation (simulé)", "conf_home": "Retour à l'accueil", "footer_how": "Comment fonctionne la recherche", "footer_credits": "Crédits images", "footer_legal": "Maquette conceptuelle indépendante — non affiliée à Alpha Foto GmbH ni aux chronométreurs. Aucun scraping. Aucun vrai paiement. v3.2.2 — 27.10.2026.", "step_events": "Événement", "step_bib": "Dossard", "step_times": "Temps", "step_pos": "Position", "step_out": "Tenue", "step_agent": "Agent", "step_res": "Résultats", "step_cart": "Panier", "step_chk": "Coordonnées", "step_pay": "Paiement", "step_twint": "TWINT", "step_conf": "Confirmation", "tag_demo": "Démo · parcours complet", "tag_listed": "nom vu sur Alphafoto", "tag_example": "exemple", "bib_err": "Entrez un numéro de dossard valide (chiffres).", "bib_hint_lm": "Exemple prérempli pour la démo Lausanne : 30370 (cas « dossard non trouvé »).", "bib_hint_found": "Essayez le dossard d'exemple pour le parcours rapide.", "bib_hint_gen": "Saisissez votre dossard.", "point_generic": "Point photo", "why_hi": "Fenêtre", "why_hi2": "tenue proche", "why_mid": "Fenêtre large", "ag_s1": "Photos point Ouchy", "ag_s2": "Après fenêtre temporelle", "ag_s3": "Lecture dossards (OCR)", "ag_s4": "Filtre tenue", "ag_s5": "Classement final", "ag_s1f": "Photos déjà liées au dossard", "ag_s2f": "Filtre tenue", "ag_s3f": "Classement final", "found_count": "12 photos déjà indexées (simulé)", "notify_ok": "Notification activée (simulation).", "share_ok": "Lien de partage copié (simulation).", "lang_label": "Langue", "cart_bar_view": "Voir le panier", "cart_added": "Ajouté au panier", "cart_pack_hint": "Pack toutes vos photos (exemple) : {price}, avantageux dès {n} photos", "cart_pack_on": "Pack appliqué · {price}", "times_fetched": "Temps récupérés (simulation) pour {name} — Datasport public, démo uniquement.", "times_prod_note": "En production : via accord / API avec le chronométreur — aucun appel réel ici.", "th_point": "Point", "th_distance": "Distance", "th_net": "Temps net", "th_clock": "Heure", "split_start": "Départ", "split_finish": "Arrivée", "split_near_finish": "100 m avant arrivée", "race_half": "Semi-marathon", "race_marathon": "Marathon", "race_10k": "10 km", "race_classic": "Course classique", "race_gravel": "Gravel", "race_tri": "Triathlon", "race_trail": "Trail", "manual_time_lbl": "Temps final", "manual_time_note": "Pour la démo, les splits détaillés utilisent les temps publics d'exemple une fois validés.", "demo_suffix": "démo", "neigh_linked": "Ouchy · photo liée", "neigh_clock": "Ouchy · ancre horloge", "neigh_finish": "Arrivée · ancre", "color_black": "Noir", "color_white": "Blanc", "color_red": "Rouge", "color_blue": "Bleu", "color_green": "Vert", "color_yellow": "Jaune", "color_grey": "Gris", "color_orange": "Orange", "extra_cap": "Casquette", "extra_glasses": "Lunettes", "extra_belt": "Ceinture", "point_finish": "Arrivée", "point_hyp": "hypothèse", "win_center": "≈ {center}", "win_range": "{lo}–{hi}", "pack_short": "pack", "how_title": "Comment fonctionne la recherche", "how_back": "← Retour", "how_intro": "Version sobre du moteur — pour tous les événements Alphafoto. Adapté au sport (course, vélo, triathlon…).", "how_1": "Temps et lieu — à partir du chronométrage (quand un accord / API existe) et des points photo de l'événement, on estime une fenêtre de passage à chaque spot.", "how_2": "OCR du dossard — lecture automatique des numéros visibles sur les clichés, lorsqu'ils sont lisibles.", "how_3": "Tenue et description — couleurs et accessoires pour départager les candidats, surtout si le dossard est absent ou illisible (ex. certains sports d'hiver).", "how_4": "Visage — uniquement avec consentement explicite (données biométriques sensibles, nLPD). Désactivé par défaut.", "how_note": "Cette page décrit un concept. Aucun appel réel aux chronométreurs ni aux catalogues photo dans la maquette. Les images affichées sont des illustrations libres de droits."}, "de": {"banner": "Konzept-Mockup — nicht mit Alpha Foto verbunden — Beispieldaten", "brand_sub": "Fotos von Sportveranstaltungen", "cart_aria": "Warenkorb", "hero_title": "Finden Sie Ihre Rennfotos", "hero_lead": "Wählen Sie Ihren Event. Den Rest erledigen wir.", "events_title": "Meinen Event finden", "events_lead": "Suche unter Events — Laufen, Velo, Triathlon und mehr.", "events_empty": "Kein Event passt. Andere Filter versuchen.", "lbl_search": "Suche", "lbl_sport": "Sport", "sport_all": "Alle", "lbl_year": "Jahr", "year_all": "Alle", "lbl_region": "Region", "region_all": "Schweiz", "bib_title": "Ihre Distanz & Startnummer", "bib_lead": "Distanz und Startnummer angeben.", "lbl_race": "Rennen", "lbl_bib": "Startnummer", "back": "Zurück", "next": "Weiter", "next_search": "Fotos suchen", "next_times": "Diese Zeiten nutzen", "next_search_agent": "Suche starten", "next_refine": "Mit Outfit verfeinern", "restart": "Anderer Event", "nf_title": "Keine Fotos zu dieser Startnummer", "nf_lead": "Kommt vor. Mit Ihren Laufzeiten finden wir Sie trotzdem.", "nf_status": "Keine OCR-Treffer im Katalog (Beispiel).", "nf_a_t": "Endzeit manuell eingeben", "nf_a_d": "Geschätztes Zeitfenster aus Ihrer Endzeit ableiten.", "nf_b_t": "Meine Zeiten holen", "nf_b_d": "Nach Name und Jahr — simulierte offizielle Zeiten.", "nf_c_t": "Link zur Rangliste einfügen", "nf_c_d": "Zeitnehmer-Profil (Datasport o. ä.) — Demo simuliert.", "found_banner": "Gute Nachricht: Fotos sind bereits mit dieser Startnummer verknüpft (Beispiel-Schnellweg).", "found_title": "Startnummer erkannt", "found_lead": "Outfit verfeinern, dann sortiert der Agent Ihre besten Fotos.", "found_note": "Mockup-Beispiel — simulierter Katalog.", "pos_title": "Läufer um Sie herum", "pos_lead": "Geschätzte Zeitfenster an jedem Fotopunkt, abgestimmt auf bereits erkannte Startnummern.", "pos_note": "Fotopunkte und Zeitfenster = Demo-Beispiel / Hypothese. Positionen = Hypothese.", "pos_neighbors": "Nachbar-Startnummern (fiktiv)", "out_title": "Wie waren Sie gekleidet?", "out_lead": "Ein paar Farben reichen.", "out_top": "Oberteil", "out_bottom": "Hose", "out_extra": "Accessoires", "out_desc": "Kurz beschreiben (optional)", "out_face": "Gesichtsoption: Selfie + ausdrückliche Einwilligung (nDSG). Standardmässig ausgeschaltet.", "out_selfie": "Selfie (lokal, wird nicht gesendet)", "ag_title": "Der Agent sucht Ihre Fotos", "ag_lead": "Zeitfilter → Startnummern-OCR → Outfit → Rangfolge.", "ag_count_lbl": "behaltene Kandidaten", "res_title": "Ihre wahrscheinlichen Fotos", "res_lead": "Beste Treffer zuerst. Nur Illustrationsbilder.", "res_notify": "Bei neuen Fotos benachrichtigen", "res_all_points": "Alle Punkte", "btn_yes": "Das bin ich", "btn_no": "Nicht ich", "btn_add": "Hinzufügen", "btn_remove": "Entfernen", "illust": "Illustrationsbild", "conf_hi": "Hohe Sicherheit", "conf_mid": "Mittlere Sicherheit", "cart_title": "Ihr Warenkorb", "cart_lead": "Fotos vor der Zahlung prüfen. Keine echte Zahlung in diesem Mockup.", "cart_empty_title": "Ihr Warenkorb ist leer", "cart_empty_lead": "Fügen Sie Fotos aus den Resultaten hinzu oder finden Sie zuerst Ihren Event.", "cart_browse": "Event finden", "cart_clear": "Warenkorb leeren", "cart_format_hd": "Digital HD", "cart_format_print": "Druck", "cart_print_ex": "Druckpreis = Beispiel", "cart_qty": "Anz.", "cart_subtotal": "Zwischensumme", "cart_pack_title": "Paket «alle meine Fotos»", "cart_pack_ex": "Beispiel", "cart_pack_save": "Ersparnis", "cart_pack_suggest": "Das Paket ist für Ihre Auswahl günstiger — Wechsel vorgeschlagen.", "cart_pack_apply": "Paket anwenden", "cart_promo": "Promo-Code", "cart_promo_apply": "Einlösen", "cart_promo_ok": "Code DEMO10 angewendet (−10 %).", "cart_promo_bad": "Code unbekannt. Versuchen Sie DEMO10 (Beispiel).", "cart_vat": "Schweizer MwSt. 8,1 % inkl. (Beispielrechnung)", "cart_total": "Total", "cart_checkout": "Zur Zahlung", "cart_unit": "CHF 12.00 / Foto HD", "chk_title": "Ihre Angaben", "chk_lead": "Für den Download-Link (Simulation — keine echte E-Mail).", "lbl_name": "Vollständiger Name", "lbl_email": "E-Mail", "err_name": "Bitte Namen angeben.", "err_email": "Bitte gültige E-Mail angeben.", "pay_title": "Zahlungsart wählen", "pay_lead": "Auf alphafoto.com genannte Methoden — keine echte Zahlung.", "pay_twint": "TWINT", "pay_twint_rec": "Empfohlen in der Schweiz", "pay_card": "Visa / Mastercard", "pay_pf": "PostFinance / Rechnung", "pay_paypal": "PayPal", "pay_card_na": "Kartenzahlung in der Demo nicht verfügbar (keine Kartendaten).", "pay_other_na": "Nur zur Demo angezeigt — Flow nicht simuliert. Bitte TWINT wählen.", "pay_continue": "Weiter", "twint_title": "Mit TWINT bezahlen", "twint_lead_desk": "Öffnen Sie die TWINT-App und scannen Sie den QR (fiktiv — nur Demo).", "twint_lead_mob": "Öffnen Sie TWINT zur Bestätigung (Simulation).", "twint_open": "TWINT öffnen", "twint_demo": "Demo-QR — keine echte Zahlung", "twint_timer": "Läuft ab in", "twint_sim": "Bestätigung simulieren", "twint_wait": "Warte auf Bestätigung…", "conf_title": "Zahlung bestätigt", "conf_lead": "Simulation erfolgreich. Hier Ihre fiktive Bestellübersicht.", "conf_order": "Bestellnr.", "conf_download": "HD herunterladen", "conf_share": "Teilen", "conf_notify": "Bei neuen Fotos benachrichtigen", "conf_email_preview": "Vorschau Bestätigungs-E-Mail (simuliert)", "conf_home": "Zur Startseite", "footer_how": "So funktioniert die Suche", "footer_credits": "Bildnachweise", "footer_legal": "Unabhängiges Konzept-Mockup — nicht mit Alpha Foto GmbH verbunden. Kein Scraping. Keine echte Zahlung. v3.2.2 — 27.10.2026.", "step_events": "Event", "step_bib": "Startnr.", "step_times": "Zeiten", "step_pos": "Position", "step_out": "Outfit", "step_agent": "Agent", "step_res": "Resultate", "step_cart": "Warenkorb", "step_chk": "Angaben", "step_pay": "Zahlung", "step_twint": "TWINT", "step_conf": "Bestätigung", "tag_demo": "Demo · voller Pfad", "tag_listed": "Name auf Alphafoto gesehen", "tag_example": "Beispiel", "bib_err": "Bitte gültige Startnummer (Ziffern).", "bib_hint_lm": "Demo Lausanne vorausgefüllt: 30370 (Fall «nicht gefunden»).", "bib_hint_found": "Beispiel-Startnummer für den Schnellweg versuchen.", "bib_hint_gen": "Startnummer eingeben.", "point_generic": "Fotopunkt", "why_hi": "Zeitfenster", "why_hi2": "ähnliches Outfit", "why_mid": "Breites Zeitfenster", "ag_s1": "Fotos Punkt Ouchy", "ag_s2": "Nach Zeitfenster", "ag_s3": "Startnummern-OCR", "ag_s4": "Outfit-Filter", "ag_s5": "Endgültige Rangfolge", "ag_s1f": "Bereits verknüpfte Fotos", "ag_s2f": "Outfit-Filter", "ag_s3f": "Endgültige Rangfolge", "found_count": "12 Fotos bereits indexiert (simuliert)", "notify_ok": "Benachrichtigung aktiviert (Simulation).", "share_ok": "Freigabelink kopiert (Simulation).", "lang_label": "Sprache", "cart_bar_view": "Warenkorb ansehen", "cart_added": "Zum Warenkorb", "cart_pack_hint": "Paket alle Ihre Fotos (Beispiel): {price}, lohnt sich ab {n} Fotos", "cart_pack_on": "Paket aktiv · {price}", "times_fetched": "Zeiten geladen (Simulation) für {name} — öffentliches Datasport, nur Demo.", "times_prod_note": "In Produktion: über Vereinbarung / API mit dem Zeitnehmer — hier kein echter Abruf.", "th_point": "Punkt", "th_distance": "Distanz", "th_net": "Nettozeit", "th_clock": "Uhrzeit", "split_start": "Start", "split_finish": "Ziel", "split_near_finish": "100 m vor dem Ziel", "race_half": "Halbmarathon", "race_marathon": "Marathon", "race_10k": "10 km", "race_classic": "Klassiker", "race_gravel": "Gravel", "race_tri": "Triathlon", "race_trail": "Trail", "manual_time_lbl": "Endzeit", "manual_time_note": "In der Demo werden nach Bestätigung die öffentlichen Beispiel-Zwischenzeiten verwendet.", "demo_suffix": "Demo", "neigh_linked": "Ouchy · verknüpftes Foto", "neigh_clock": "Ouchy · Zeitreferenz", "neigh_finish": "Ziel · Referenz", "color_black": "Schwarz", "color_white": "Weiss", "color_red": "Rot", "color_blue": "Blau", "color_green": "Grün", "color_yellow": "Gelb", "color_grey": "Grau", "color_orange": "Orange", "extra_cap": "Kappe", "extra_glasses": "Brille", "extra_belt": "Gürtel", "point_finish": "Ziel", "point_hyp": "Hypothese", "win_center": "≈ {center}", "win_range": "{lo}–{hi}", "pack_short": "Paket", "how_title": "So funktioniert die Suche", "how_back": "← Zurück", "how_intro": "Nüchterne Version der Suche — für alle Alphafoto-Events. An den Sport angepasst (Laufen, Velo, Triathlon…).", "how_1": "Zeit und Ort — aus dem Timing (wenn Vereinbarung / API besteht) und den Fotopunkten des Events schätzen wir ein Zeitfenster an jedem Spot.", "how_2": "Startnummern-OCR — automatisches Lesen sichtbarer Nummern auf den Fotos, wenn lesbar.", "how_3": "Outfit und Beschreibung — Farben und Accessoires zur Unterscheidung, besonders wenn die Startnummer fehlt oder unleserlich ist (z. B. manche Wintersportarten).", "how_4": "Gesicht — nur mit ausdrücklicher Einwilligung (sensible biometrische Daten, nDSG). Standardmässig aus.", "how_note": "Diese Seite beschreibt ein Konzept. Kein echter Abruf bei Zeitnehmern oder Fotokatalogen in diesem Mockup. Die gezeigten Bilder sind lizenzfreie Illustrationen."}, "en": {"banner": "Conceptual mockup — not affiliated with Alpha Foto — sample data", "brand_sub": "Sports event photography", "cart_aria": "Cart", "hero_title": "Find your race photos", "hero_lead": "Pick your event. We handle the rest.", "events_title": "Find my event", "events_lead": "Browse events — running, cycling, triathlon and more.", "events_empty": "No matching events. Try another filter.", "lbl_search": "Search", "lbl_sport": "Sport", "sport_all": "All", "lbl_year": "Year", "year_all": "All", "lbl_region": "Region", "region_all": "Switzerland", "bib_title": "Your race & bib", "bib_lead": "Select the distance and enter your bib number.", "lbl_race": "Race", "lbl_bib": "Bib number", "back": "Back", "next": "Continue", "next_search": "Search my photos", "next_times": "Use these times", "next_search_agent": "Start search", "next_refine": "Refine with outfit", "restart": "Another event", "nf_title": "No photos linked to this bib", "nf_lead": "It happens. Your race times can still find you.", "nf_status": "No OCR match in the catalogue (example).", "nf_a_t": "Enter my finish time", "nf_a_d": "Estimate passage windows from your finish time.", "nf_b_t": "Fetch my times", "nf_b_d": "By name and year — simulated official timing.", "nf_c_t": "Paste my result link", "nf_c_d": "Timing profile (Datasport or similar) — simulated demo.", "found_banner": "Good news: photos are already linked to this bib (sample fast path).", "found_title": "Bib recognised", "found_lead": "Refine with your outfit, then the agent ranks your best photos.", "found_note": "Mockup example — simulated catalogue.", "pos_title": "Runners around you", "pos_lead": "Estimated passage windows at each photo point, aligned with already identified bibs.", "pos_note": "Photo points and windows = demo example / hypothesis. Positions are hypothetical.", "pos_neighbors": "Nearby bibs (fictional)", "out_title": "What were you wearing?", "out_lead": "A few colour chips are enough.", "out_top": "Top", "out_bottom": "Bottom", "out_extra": "Extras", "out_desc": "Describe yourself (optional)", "out_face": "Face option: add a selfie and explicitly consent to sensitive biometric processing (nLPD). Off by default.", "out_selfie": "Selfie (local file, not uploaded)", "ag_title": "The agent is finding your photos", "ag_lead": "Time filter → bib OCR → outfit → ranking.", "ag_count_lbl": "candidates kept", "res_title": "Your likely photos", "res_lead": "Best match first. Illustration images only.", "res_notify": "Notify me of new photos", "res_all_points": "All points", "btn_yes": "That's me", "btn_no": "Not me", "btn_add": "Add", "btn_remove": "Remove", "illust": "Illustration image", "conf_hi": "High confidence", "conf_mid": "Medium confidence", "cart_title": "Your cart", "cart_lead": "Review your photos before paying. No real payment in this mockup.", "cart_empty_title": "Your cart is empty", "cart_empty_lead": "Add photos from results, or start by finding your event.", "cart_browse": "Find my event", "cart_clear": "Clear cart", "cart_format_hd": "Digital HD", "cart_format_print": "Print", "cart_print_ex": "print price = example", "cart_qty": "Qty", "cart_subtotal": "Subtotal", "cart_pack_title": "“All my photos” pack", "cart_pack_ex": "example", "cart_pack_save": "You save", "cart_pack_suggest": "The pack is better value for your selection — switch suggested.", "cart_pack_apply": "Apply pack", "cart_promo": "Promo code", "cart_promo_apply": "Apply", "cart_promo_ok": "Code DEMO10 applied (−10%).", "cart_promo_bad": "That code isn’t recognised. Try DEMO10 (example).", "cart_vat": "Swiss VAT 8.1% included (example calculation)", "cart_total": "Total", "cart_checkout": "Proceed to payment", "cart_unit": "CHF 12.00 / HD photo", "chk_title": "Your details", "chk_lead": "To receive the download link (simulation — no real email).", "lbl_name": "Full name", "lbl_email": "Email", "err_name": "Please enter your name.", "err_email": "Please enter a valid email.", "pay_title": "Choose payment", "pay_lead": "Methods listed on alphafoto.com — no real payment here.", "pay_twint": "TWINT", "pay_twint_rec": "Recommended in Switzerland", "pay_card": "Visa / Mastercard", "pay_pf": "PostFinance / invoice", "pay_paypal": "PayPal", "pay_card_na": "Card payment not available in the demo (no card fields).", "pay_other_na": "Shown for the demo — flow not simulated. Please choose TWINT.", "pay_continue": "Continue", "twint_title": "Pay with TWINT", "twint_lead_desk": "Open the TWINT app and scan the QR (fake — demo only).", "twint_lead_mob": "Open TWINT to confirm payment (simulation).", "twint_open": "Open TWINT", "twint_demo": "Demo QR — no real payment", "twint_timer": "Expires in", "twint_sim": "Simulate confirmation", "twint_wait": "Waiting for confirmation…", "conf_title": "Payment confirmed", "conf_lead": "Simulation succeeded. Here is your fictional order summary.", "conf_order": "Order no.", "conf_download": "Download HD", "conf_share": "Share", "conf_notify": "Notify me of new photos", "conf_email_preview": "Confirmation email preview (simulated)", "conf_home": "Back to home", "footer_how": "How the search works", "footer_credits": "Image credits", "footer_legal": "Independent conceptual mockup — not affiliated with Alpha Foto GmbH. No scraping. No real payment. v3.2.2 — 27.10.2026.", "step_events": "Event", "step_bib": "Bib", "step_times": "Times", "step_pos": "Position", "step_out": "Outfit", "step_agent": "Agent", "step_res": "Results", "step_cart": "Cart", "step_chk": "Details", "step_pay": "Payment", "step_twint": "TWINT", "step_conf": "Confirmation", "tag_demo": "Demo · full path", "tag_listed": "name seen on Alphafoto", "tag_example": "example", "bib_err": "Enter a valid bib number (digits).", "bib_hint_lm": "Lausanne demo prefilled: 30370 (“bib not found” case).", "bib_hint_found": "Try the sample bib for the fast path.", "bib_hint_gen": "Enter your bib number.", "point_generic": "Photo point", "why_hi": "Window", "why_hi2": "similar outfit", "why_mid": "Wide window", "ag_s1": "Ouchy point photos", "ag_s2": "After time window", "ag_s3": "Bib OCR", "ag_s4": "Outfit filter", "ag_s5": "Final ranking", "ag_s1f": "Photos already linked to bib", "ag_s2f": "Outfit filter", "ag_s3f": "Final ranking", "found_count": "12 photos already indexed (simulated)", "notify_ok": "Notification enabled (simulation).", "share_ok": "Share link copied (simulation).", "lang_label": "Language", "cart_bar_view": "View cart", "cart_added": "Added to cart", "cart_pack_hint": "All your photos pack (example): {price}, better value from {n} photos", "cart_pack_on": "Pack applied · {price}", "times_fetched": "Times fetched (simulation) for {name} — public Datasport, demo only.", "times_prod_note": "In production: via agreement / API with the timer — no real call here.", "th_point": "Point", "th_distance": "Distance", "th_net": "Net time", "th_clock": "Clock", "split_start": "Start", "split_finish": "Finish", "split_near_finish": "100 m before finish", "race_half": "Half marathon", "race_marathon": "Marathon", "race_10k": "10 km", "race_classic": "Classic race", "race_gravel": "Gravel", "race_tri": "Triathlon", "race_trail": "Trail", "manual_time_lbl": "Finish time", "manual_time_note": "For the demo, detailed splits use the sample public times once confirmed.", "demo_suffix": "demo", "neigh_linked": "Ouchy · linked photo", "neigh_clock": "Ouchy · clock anchor", "neigh_finish": "Finish · anchor", "color_black": "Black", "color_white": "White", "color_red": "Red", "color_blue": "Blue", "color_green": "Green", "color_yellow": "Yellow", "color_grey": "Grey", "color_orange": "Orange", "extra_cap": "Cap", "extra_glasses": "Glasses", "extra_belt": "Belt", "point_finish": "Finish", "point_hyp": "hypothesis", "win_center": "≈ {center}", "win_range": "{lo}–{hi}", "pack_short": "pack", "how_title": "How the search works", "how_back": "← Back", "how_intro": "A sober search engine — for every Alphafoto event. Adapted to the sport (running, cycling, triathlon…).", "how_1": "Time and place — from timing (when an agreement / API exists) and the event's photo points, we estimate a passage window at each spot.", "how_2": "Bib OCR — automatic reading of visible numbers on shots, when readable.", "how_3": "Outfit and description — colours and accessories to separate candidates, especially if the bib is missing or unreadable (e.g. some winter sports).", "how_4": "Face — only with explicit consent (sensitive biometric data, nLPD). Off by default.", "how_note": "This page describes a concept. No real calls to timers or photo catalogues in the mockup. Images shown are royalty-free illustrations."}};
 (function(){
 'use strict';
 const IMG='assets/img/';
@@ -511,33 +518,43 @@ const LS_CART='pf_cart_v32';
 const LS_LANG='pf_lang_v32';
 const I18N=window.__I18N__;
 
+const RACE_KEYS={
+  'Semi-marathon':'race_half','Halbmarathon':'race_half','Half':'race_half','Half marathon':'race_half',
+  'Marathon':'race_marathon','10 km':'race_10k',
+  'Course classique':'race_classic','Klassiker':'race_classic','Classic race':'race_classic',
+  'Gravel':'race_gravel','Triathlon':'race_tri','Trail':'race_trail'
+};
 const EVENTS=[
-  {id:'lm2026',name:'Lausanne Marathon',date:'25.10.2026',sport:'run',region:'vd',img:'hero.jpg',featured:true,verified:true,races:['Semi-marathon','Marathon','10 km'],
+  {id:'lm2026',name:'Lausanne Marathon',date:'25.10.2026',sport:'run',region:'vd',img:'hero.jpg',featured:true,verified:true,races:['race_half','race_marathon','race_10k'],
     points:[
-      {id:'guisan',label:'Av. Général-Guisan',t:'09:18–09:26'},
-      {id:'lutry',label:'Lutry',t:'09:18–09:28'},
-      {id:'cully',label:'Cully',t:'09:48–09:58'},
-      {id:'ouchy',label:'Ouchy',t:'10:35–10:48'},
-      {id:'arrivee',label:'Arrivée',t:'10:48–10:55'}
+      // Distances hypothétiques pour points photo hors chronométrage ; fenêtres recalculées depuis les temps Datasport de Romain Magnin
+      {id:'guisan',label:'Av. Général-Guisan',distKm:2.5,center:'09:09',lo:'09:04',hi:'09:13',hyp:true},
+      {id:'lutry',label:'Lutry',distKm:4.9,center:'09:21',lo:'09:18',hi:'09:24',hyp:false},
+      {id:'cully',label:'Cully',distKm:10.5,center:'09:51',lo:'09:48',hi:'09:54',hyp:false},
+      {id:'ouchy',label:'Ouchy',distKm:19.0,center:'10:40',lo:'10:35',hi:'10:45',hyp:true},
+      {id:'arrivee',labelKey:'point_finish',distKm:21.1,center:'10:52',lo:'10:49',hi:'10:55',hyp:false}
     ],
     chrono:'Datasport',demoBib:'30370',bibFound:false},
-  {id:'scm2026',name:'Swiss City Marathon',date:'2026',sport:'run',region:'zh',img:'event-crowd.jpg',verified:true,races:['Marathon','Half'],points:[],chrono:'Datasport',demoBib:'242',bibFound:true},
-  {id:'jf2026',name:'Jungfrau Marathon',date:'2026',sport:'run',region:'vs',img:'city-run.jpg',verified:true,races:['Marathon'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
-  {id:'mf2026',name:'Morat-Fribourg',date:'2026',sport:'run',region:'be',img:'road-run.jpg',verified:true,races:['Course classique'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
-  {id:'gf2026',name:'Gravel-Festival Bern',date:'2026',sport:'bike',region:'be',img:'lakeside.jpg',verified:true,races:['Gravel'],points:[],chrono:'autre',demoBib:'',bibFound:false},
-  {id:'inf2026',name:'Inferno Triathlon',date:'2026',sport:'tri',region:'vs',img:'group.jpg',verified:true,races:['Triathlon'],points:[],chrono:'autre',demoBib:'',bibFound:false},
-  {id:'gre2026',name:'Greifenseelauf',date:'2026',sport:'run',region:'zh',img:'crowd2.jpg',verified:true,races:['Halbmarathon','10 km'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
-  {id:'napf2026',name:'Napf Marathon',date:'2026',sport:'run',region:'be',img:'run-pack.jpg',verified:true,races:['Marathon'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
-  {id:'ex001',name:'Lake Trail Night',date:'',sport:'run',region:'vd',img:'dusk-run.jpg',verified:false,example:true,races:['Trail'],points:[],chrono:'exemple',demoBib:'1001',bibFound:true}
+  {id:'scm2026',name:'Swiss City Marathon',date:'2026',sport:'run',region:'zh',img:'event-crowd.jpg',verified:true,races:['race_marathon','race_half'],points:[],chrono:'Datasport',demoBib:'242',bibFound:true},
+  {id:'jf2026',name:'Jungfrau Marathon',date:'2026',sport:'run',region:'vs',img:'city-run.jpg',verified:true,races:['race_marathon'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
+  {id:'mf2026',name:'Morat-Fribourg',date:'2026',sport:'run',region:'be',img:'road-run.jpg',verified:true,races:['race_classic'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
+  {id:'gf2026',name:'Gravel-Festival Bern',date:'2026',sport:'bike',region:'be',img:'lakeside.jpg',verified:true,races:['race_gravel'],points:[],chrono:'autre',demoBib:'',bibFound:false},
+  {id:'inf2026',name:'Inferno Triathlon',date:'2026',sport:'tri',region:'vs',img:'group.jpg',verified:true,races:['race_tri'],points:[],chrono:'autre',demoBib:'',bibFound:false},
+  {id:'gre2026',name:'Greifenseelauf',date:'2026',sport:'run',region:'zh',img:'crowd2.jpg',verified:true,races:['race_half','race_10k'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
+  {id:'napf2026',name:'Napf Marathon',date:'2026',sport:'run',region:'be',img:'run-pack.jpg',verified:true,races:['race_marathon'],points:[],chrono:'Datasport',demoBib:'',bibFound:false},
+  {id:'ex001',name:'Lake Trail Night',date:'',sport:'run',region:'vd',img:'dusk-run.jpg',verified:false,example:true,races:['race_trail'],points:[],chrono:'exemple',demoBib:'1001',bibFound:true}
 ];
-const ROMAIN={name:'Romain Magnin',bib:'30370',race:'Semi-marathon',splits:[
-  {label:'Départ',dist:'0 km',net:'0:00:00',clock:'08:56:01,8'},
-  {label:'Lutry',dist:'4,9 km',net:'24:32,3',clock:'09:20:34'},
-  {label:'Cully',dist:'10,5 km',net:'54:51,7',clock:'09:50:53'},
-  {label:'100 m avant arrivée',dist:'~21 km',net:'1:55:22,2',clock:'10:51:24'},
-  {label:'Arrivée',dist:'21,1 km',net:'1:56:15,9',clock:'10:52:17'}
+const ROMAIN={name:'Romain Magnin',bib:'30370',raceKey:'race_half',splits:[
+  {labelKey:'split_start',distKm:0,net:'0:00:00',clock:'08:56:01,8'},
+  {label:'Lutry',distKm:4.9,net:'24:32,3',clock:'09:20:34'},
+  {label:'Cully',distKm:10.5,net:'54:51,7',clock:'09:50:53'},
+  {labelKey:'split_near_finish',distKm:21.0,net:'1:55:22,2',clock:'10:51:24',approx:true},
+  {labelKey:'split_finish',distKm:21.1,net:'1:56:15,9',clock:'10:52:17'}
 ]};
-const COLORS=[['#111111','Noir'],['#FFFFFF','Blanc'],['#c6322a','Rouge'],['#1B4D9E','Bleu'],['#2F6F3E','Vert'],['#F2C94C','Jaune'],['#E8E8EA','Gris'],['#E85D04','Orange']];
+const COLOR_DEFS=[
+  ['#111111','color_black'],['#FFFFFF','color_white'],['#c6322a','color_red'],['#1B4D9E','color_blue'],
+  ['#2F6F3E','color_green'],['#F2C94C','color_yellow'],['#E8E8EA','color_grey'],['#E85D04','color_orange']
+];
 const GALS=['gal-u00.jpg','gal-u01.jpg','gal-u02.jpg','gal-u03.jpg','gal-u04.jpg','gal-u05.jpg','gal-u06.jpg','gal-u07.jpg','gal-u08.jpg','gal-u09.jpg','gal-u10.jpg','gal-u11.jpg','gal-bib-safe.jpg'];
 
 const SCREENS=['events','bib','notfound','found','position','outfit','agent','results','cart','checkout','pay','twint','confirm'];
@@ -587,6 +604,47 @@ function trf(k, vars){
   Object.keys(vars||{}).forEach(key=>{ s=s.split('{'+key+'}').join(String(vars[key])); });
   return s;
 }
+
+function dec(n, digits=1){
+  const s = Number(n).toFixed(digits);
+  return lang==='en' ? s : s.replace('.', ',');
+}
+function fmtDist(km, approx){
+  if(km==null) return '—';
+  const body = (Math.abs(km-Math.round(km))<1e-9) ? String(Math.round(km)) : dec(km,1);
+  return (approx?'~':'')+body+' km';
+}
+function fmtClock(raw){
+  if(!raw) return '—';
+  // raw may use comma decimals (FR/DE Datasport style)
+  if(lang==='en') return String(raw).replace(',', '.');
+  return String(raw).replace('.', ',');
+}
+function fmtNet(raw){ return fmtClock(raw); }
+function raceLabel(keyOrName){
+  if(!keyOrName) return '';
+  if(String(keyOrName).startsWith('race_')) return tr(keyOrName);
+  return tr(RACE_KEYS[keyOrName]||'') || keyOrName;
+}
+function pointLabel(p){
+  if(!p) return tr('point_generic');
+  if(p.labelKey) return tr(p.labelKey);
+  return p.label || tr('point_generic');
+}
+function splitLabel(s){
+  if(s.labelKey) return tr(s.labelKey);
+  return s.label;
+}
+function formatWin(p){
+  if(!p || (!p.lo && !p.t)) return '<span class="win-center">—</span>';
+  if(p.lo && p.hi){
+    const center = p.center ? ('≈ '+p.center) : '';
+    const range = p.lo+'–'+p.hi;
+    if(center) return `<span class="win-center">${center}</span><span class="win-range">${range}</span>`;
+    return `<span class="win-range">${range}</span>`;
+  }
+  return `<span class="win-center">${p.t||'—'}</span>`;
+}
 function applyI18n(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.dataset.i18n;
@@ -600,10 +658,37 @@ function applyI18n(){
   document.documentElement.lang=lang;
   localStorage.setItem(LS_LANG, lang);
   updateProgress();
+  // Re-localize race select if on bib
+  if(event){
+    const race=document.getElementById('race');
+    if(race){
+      const cur=race.value;
+      const keys=event.races||[];
+      race.innerHTML=keys.map(r=>{
+        const lab=raceLabel(r);
+        return `<option value="${lab}">${lab}</option>`;
+      }).join('');
+      if([...race.options].some(o=>o.value===cur)) race.value=cur;
+    }
+    const nf=document.getElementById('nfEvent');
+    if(nf && nf.textContent){
+      const bibRace=document.getElementById('race');
+      nf.textContent=(event.name||'')+' · '+(bibRace?bibRace.value:'');
+    }
+  }
+  renderOutfitControls();
+  if(screen==='notfound'){
+    const panel=document.getElementById('pathPanel');
+    if(panel && !panel.classList.contains('hidden') && panel.querySelector('table')){
+      showTimes(trf('times_fetched',{name:ROMAIN.name}));
+    }
+  }
+  if(screen==='position') renderPosition();
   renderCartScreen();
   updateCartChrome();
-  if(screen==='results') renderResults();
+  if(screen==='results'){ galleryItems=[]; renderResults(); }
   if(screen==='twint') setupTwintUI();
+  if(screen==='confirm') renderConfirm();
 }
 function loadCart(){
   try{
@@ -740,7 +825,7 @@ function selectEvent(e){
   event=e; bibFoundPath=false;
   document.getElementById('eventPill').textContent=e.name+(e.date?(' · '+e.date):'')+(e.example?' · '+tr('tag_example'):'');
   const race=document.getElementById('race');
-  race.innerHTML=(e.races||['Race']).map(r=>`<option>${r}</option>`).join('');
+  race.innerHTML=(e.races||['race_half']).map(r=>{ const lab=raceLabel(r); return `<option value="${lab}">${lab}</option>`; }).join('');
   document.getElementById('bib').value=e.demoBib||'';
   document.getElementById('bibHint').textContent = e.id==='lm2026' ? tr('bib_hint_lm') : (e.bibFound ? tr('bib_hint_found') : tr('bib_hint_gen'));
   document.getElementById('bibErr').textContent='';
@@ -774,11 +859,14 @@ document.getElementById('bibForm').addEventListener('submit', e=>{
 function showTimes(msg){
   const panel=document.getElementById('pathPanel');
   panel.classList.remove('hidden');
-  const rows=ROMAIN.splits.map(s=>`<tr><td>${s.label}</td><td>${s.dist}</td><td>${s.net}</td><td>${s.clock}</td></tr>`).join('');
+  const rows=ROMAIN.splits.map(s=>{
+    const dist=fmtDist(s.distKm, !!s.approx);
+    return `<tr><td>${splitLabel(s)}</td><td>${dist}</td><td>${fmtNet(s.net)}</td><td>${fmtClock(s.clock)}</td></tr>`;
+  }).join('');
   panel.innerHTML=`<p><b>${msg}</b></p>
-    <p class="note">En production : via accord / API avec le chronométreur — aucun appel réel ici.</p>
-    <div style="overflow:auto"><table style="width:100%;font-size:13px;border-collapse:collapse">
-      <thead><tr><th>Point</th><th>Distance</th><th>Temps net</th><th>Heure</th></tr></thead>
+    <p class="note">${tr('times_prod_note')}</p>
+    <div style="overflow:auto"><table class="times-table" style="width:100%;font-size:13px;border-collapse:collapse">
+      <thead><tr><th>${tr('th_point')}</th><th>${tr('th_distance')}</th><th>${tr('th_net')}</th><th>${tr('th_clock')}</th></tr></thead>
       <tbody>${rows}</tbody></table></div>`;
   document.getElementById('btnTimesOk').classList.remove('hidden');
 }
@@ -786,8 +874,8 @@ document.querySelectorAll('[data-path]').forEach(b=>b.addEventListener('click',(
   path=b.dataset.path;
   if(path==='manual'){
     document.getElementById('pathPanel').classList.remove('hidden');
-    document.getElementById('pathPanel').innerHTML=`<div class="field"><label>Temps final</label><input id="manualTime" value="1:56:15" /></div>
-      <p class="note" style="margin-top:8px">Pour la démo, les splits détaillés utilisent les temps publics d'exemple une fois validés.</p>`;
+    document.getElementById('pathPanel').innerHTML=`<div class="field"><label>${tr('manual_time_lbl')}</label><input id="manualTime" value="${fmtNet('1:56:15,9')}" /></div>
+      <p class="note" style="margin-top:8px">${tr('manual_time_note')}</p>`;
     document.getElementById('btnTimesOk').classList.remove('hidden');
     document.getElementById('btnTimesOk').onclick=()=>{ showTimes(tr('nf_a_t')); };
   } else if(path==='robot'){
@@ -796,10 +884,10 @@ document.querySelectorAll('[data-path]').forEach(b=>b.addEventListener('click',(
     panel.innerHTML='<p class="note">…</p>';
     let n=0; const iv=setInterval(()=>{
       n++; panel.innerHTML=`<p>${'●'.repeat(n%3+1)} ${tr('nf_b_t')}</p>`;
-      if(n>8){ clearInterval(iv); showTimes('Temps récupérés (simulation) pour '+ROMAIN.name+' — Datasport public, démo uniquement.'); }
+      if(n>8){ clearInterval(iv); showTimes(trf('times_fetched',{name:ROMAIN.name})); }
     }, 280);
   } else {
-    showTimes(tr('nf_c_t')+' — démo');
+    showTimes(tr('nf_c_t')+' — '+tr('demo_suffix'));
   }
 }));
 document.getElementById('btnTimesOk').addEventListener('click',()=>go('position'));
@@ -807,21 +895,32 @@ document.getElementById('btnFoundNext').addEventListener('click',()=>go('outfit'
 
 function renderPosition(){
   const pts=(event&&event.points&&event.points.length)?event.points:[
-    {id:'a',label:'Point A',t:'—'},{id:'b',label:'Point B',t:'—'},{id:'c',label:'Point C',t:'—'}
+    {id:'a',labelKey:'point_generic',t:'—'},{id:'b',labelKey:'point_generic',t:'—'},{id:'c',labelKey:'point_generic',t:'—'}
   ];
-  document.getElementById('trackPoints').innerHTML=pts.map((p,i)=>`
-    <div class="pt ${p.id==='ouchy'||i===Math.min(3,pts.length-1)?'you':''}">
-      <div class="pin"></div><div><strong>${p.label}</strong></div><div class="win">${p.t||'—'}</div>
-    </div>`).join('');
+  document.getElementById('trackPoints').innerHTML=pts.map((p,i)=>{
+    const name=pointLabel(p);
+    const hyp=p.hyp ? ` <span class="pill ex" style="font-size:10px">${tr('point_hyp')}</span>` : '';
+    const dist=p.distKm!=null ? `<div class="note">${fmtDist(p.distKm, !!p.hyp)}</div>` : '';
+    return `<div class="pt ${p.id==='ouchy'||i===Math.min(3,pts.length-1)?'you':''}">
+      <div class="pin"></div>
+      <div class="pt-body">
+        <div class="pt-name"><strong>${name}</strong>${hyp}</div>
+        ${dist}
+        <div class="win" title="${p.center ? (p.center+' · '+p.lo+'–'+p.hi) : (p.t||'')}">${formatWin(p)}</div>
+      </div>
+    </div>`;
+  }).join('');
   document.getElementById('neighbors').innerHTML=[
-    ['30358','Ouchy · photo liée'],['30366','Ouchy · ancre horloge'],['30381','Arrivée · ancre']
+    ['30358',tr('neigh_linked')],['30366',tr('neigh_clock')],['30381',tr('neigh_finish')]
   ].map(([b,l])=>`<div class="neighbor"><b>${b}</b><div class="note">${l}</div></div>`).join('');
 }
 
 const stateOutfit={top:'#1B4D9E', bottom:'#111111'};
+const extraState={};
 function mkSwatches(el,key){
   el.innerHTML='';
-  COLORS.forEach(([c,name])=>{
+  COLOR_DEFS.forEach(([c,ck])=>{
+    const name=tr(ck);
     const b=document.createElement('button');
     b.type='button'; b.className='swatch'; b.style.background=c; b.title=name; b.setAttribute('aria-label',name);
     b.setAttribute('aria-pressed', stateOutfit[key]===c?'true':'false');
@@ -829,13 +928,29 @@ function mkSwatches(el,key){
     el.appendChild(b);
   });
 }
-mkSwatches(document.getElementById('swTop'),'top');
-mkSwatches(document.getElementById('swBottom'),'bottom');
-['Casquette','Lunettes','Ceinture'].forEach(label=>{
-  const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=label;
-  b.addEventListener('click',()=>b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'));
-  document.getElementById('extras').appendChild(b);
-});
+function renderOutfitControls(){
+  const top=document.getElementById('swTop');
+  const bot=document.getElementById('swBottom');
+  const extras=document.getElementById('extras');
+  if(!top||!bot||!extras) return;
+  // preserve pressed extras
+  extras.querySelectorAll('.chip').forEach(ch=>{ extraState[ch.dataset.ek]=ch.getAttribute('aria-pressed')==='true'; });
+  mkSwatches(top,'top');
+  mkSwatches(bot,'bottom');
+  extras.innerHTML='';
+  ['extra_cap','extra_glasses','extra_belt'].forEach(ek=>{
+    const b=document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.ek=ek;
+    b.textContent=tr(ek);
+    b.setAttribute('aria-pressed', extraState[ek]?'true':'false');
+    b.addEventListener('click',()=>{
+      const on=b.getAttribute('aria-pressed')!=='true';
+      b.setAttribute('aria-pressed', on?'true':'false');
+      extraState[ek]=on;
+    });
+    extras.appendChild(b);
+  });
+}
+renderOutfitControls();
 document.getElementById('faceOpt').addEventListener('change',e=>document.getElementById('selfieBox').classList.toggle('hidden', !e.target.checked));
 
 function runAgent(){
@@ -876,8 +991,8 @@ function buildGallery(){
       const idx=items.length;
       const conf= idx%3===1 ? 'mid' : 'hi';
       items.push({
-        id:'ph'+idx, point:p.id, pointLabel:p.label, src:GALS[gi], conf,
-        why: conf==='hi' ? (tr('why_hi')+' '+p.label+' · '+tr('why_hi2')) : (tr('why_mid')+' · '+p.label),
+        id:'ph'+idx, point:p.id, pointLabel:pointLabel(p), src:GALS[gi], conf,
+        why: conf==='hi' ? (tr('why_hi')+' '+pointLabel(p)+' · '+tr('why_hi2')) : (tr('why_mid')+' · '+pointLabel(p)),
         score:96-idx*6
       });
     }
@@ -892,7 +1007,7 @@ function renderResults(){
   const pts=(event&&event.points&&event.points.length)?event.points:[{id:'p1',label:tr('point_generic')}];
   const sel=document.getElementById('pointFilter');
   const cur=sel.value;
-  sel.innerHTML=`<option value="all">${tr('res_all_points')}</option>`+pts.map(p=>`<option value="${p.id}">${p.label}</option>`).join('');
+  sel.innerHTML=`<option value="all">${tr('res_all_points')}</option>`+pts.map(p=>`<option value="${p.id}">${pointLabel(p)}</option>`).join('');
   if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
   const filter=sel.value;
   const gal=document.getElementById('gallery');
@@ -1130,7 +1245,7 @@ function renderConfirm(){
   document.getElementById('orderId').textContent=orderId;
   document.getElementById('confRecap').innerHTML =
     `<div>${customer.name||'—'} · ${customer.email||'—'}</div>
-     <div>${cart.length} ${photoLabel(cart.length)}${packOn?' · pack':''} · <b>${chf(total())}</b></div>
+     <div>${cart.length} ${photoLabel(cart.length)}${packOn?' · '+tr('pack_short'):''} · <b>${chf(total())}</b></div>
      <div>${tr('cart_vat')}</div>`;
   document.getElementById('emailPreview').textContent =
 `From: photos@alphafoto.example
@@ -1142,7 +1257,7 @@ ${customer.name||''}
 ${cart.length} ${photoLabel(cart.length)} · ${chf(total())}
 TWINT · ${tr('twint_demo')}
 
-— PhotoFlow v3.2 demo`;
+— PhotoFlow v3.2.2 · ${tr('demo_suffix')}`;
 }
 
 document.getElementById('btnDlHd').addEventListener('click',()=>{
